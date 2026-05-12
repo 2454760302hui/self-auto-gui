@@ -1,0 +1,26 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 客服发送消息
+  request:
+    method: POST
+    url: /text/chat-kwb/message/send.action
+    data:
+      tid: xOh8P5f7pLDPHW5kyWJscuzHfKg8v3Wj5TWF2jP6WShHF5Q1r9A2GCXYF8Kk/xLt #值，怎么来的,目前写死-可以跑通
+      cid: ${get_cid}
+      uid: ${get_uid}
+      msgType: 0
+      content: ${fake.text()}
+      objMsgType:
+      docId:
+      replyId:
+      fileName:
+      msgId: 9508377660ff46a0874e08611f380f491689077648403 #值，怎么来的
+      title:
+      answerId:
+      resend:
+  validate:
+    - eq: [status_code, 200]

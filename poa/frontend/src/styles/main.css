@@ -1,0 +1,32 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body, #app { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+
+.layout { height: 100%; }
+.sidebar { background: #304156; }
+.sidebar .el-menu { border-right: none; }
+.sidebar .el-menu-item, .sidebar .el-sub-menu__title { color: #bfcbd9; }
+.sidebar .el-menu-item:hover, .sidebar .el-sub-menu__title:hover { background: #263445; }
+.sidebar .el-menu-item.is-active { color: #409EFF; background: #263445; }
+
+.main-header { background: #fff; border-bottom: 1px solid #e6e6e6; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
+.main-header h2 { font-size: 18px; color: #303133; }
+.main-content { padding: 20px; background: #f5f7fa; overflow: auto; }
+
+.api-editor { display: flex; gap: 20px; height: 100%; }
+.api-editor-left { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+.api-editor-right { width: 400px; display: flex; flex-direction: column; gap: 15px; }
+
+.method-select { width: 100px; }
+.url-input { flex: 1; }
+
+.card-section { background: #fff; border-radius: 4px; padding: 15px; }
+.card-section h4 { margin-bottom: 10px; font-size: 14px; color: #303133; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+
+.response-viewer pre { background: #f5f7fa; padding: 10px; border-radius: 4px; overflow: auto; max-height: 300px; font-size: 12px; }
+
+.tree-item { display: flex; align-items: center; gap: 8px; }
+.tree-item .method-tag { font-size: 11px; padding: 2px 6px; border-radius: 3px; }
+.method-get { background: #e1f3d8; color: #67c23a; }
+.method-post { background: #e9f3ff; color: #409eff; }
+.method-put { background: #fdf6ec; color: #e6a23c; }
+.method-delete { background: #fef0f0; color: #f56c6c; }

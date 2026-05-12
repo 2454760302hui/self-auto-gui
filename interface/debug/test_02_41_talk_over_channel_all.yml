@@ -1,0 +1,30 @@
+config:
+  name: 在线_v6
+  parameters: #卡迪尔 参数
+     y: ["1", "2","3","4","5","8","10","15","30","45","60"]
+
+
+teststeps:
+-
+  name: 会话结束-整体渠道
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/doc/updateCompanyConfigDoc/4
+
+    data:
+      id: 24088 #不清楚何来，先固定验证流程
+      configId:
+      type: 1
+      chatEndScope: 0
+      serviceEndDoc: ${fake.random_int(1,99)}
+      customerOffTimes: ${y}
+      customerOffDoc: ${fake.text()}
+      serviceEndPushFlag: 1
+      customerOffPushFlag: 1
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

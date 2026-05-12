@@ -1,0 +1,33 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 默认桌面网站-开启网站详情设置
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/rest/updateConfigInSettings/4
+    data:
+      channelScene: 0
+      operateFlag: 0
+      channelType: 0
+      configId: b781e06ab97b46ce9a22d3188ca6b4c4 #先写死，默认桌面渠道
+      id: ${get_id}
+      channelName: ${fake.text(max_nb_chars=100)} #${fake.sentence()}
+      channelMark: ${fake.text(max_nb_chars=999)}
+      managerType: 1
+      isTraceFlag: 1
+
+  extract:
+    get_config_id: $..configId
+
+  export:
+    - get_config_id
+
+  validate:
+    - eq: [ $..retMsg, '成功' ]
+    - eq: [ $..retCode,'000000' ]
+#
+#

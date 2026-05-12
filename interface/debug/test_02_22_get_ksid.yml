@@ -1,0 +1,40 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: [ "4","2","1","3" ] #人工优先，仅人工，仅机器人,机器人优先
+
+
+teststeps:
+-
+  name: 获取关键词ksid
+#  skip: 不清楚ksId 从何来-添加时没有返回-修改和删除是必填项-转人工列表也没返回
+  request:
+    method: post
+    url: /text/chat-set/keyword/getKeywordList/4?keyword=&pageNo=1&pageSize=15&robotFlag=1
+    headers:
+      temp-id: ${get_temp_id}
+    json:
+      "pageNo": "1"
+      "pageSize": "15"
+      "robotFlag": "1"
+#      pageNo: 1
+#      pageSize: 15
+#      robotFlag: 1
+
+#      keyword: ''
+#      pageNo: '1'
+#      pageSize: '15'
+#      robotFlag: '1'
+
+  extract:
+#    keyword: body.data.keyword
+    get_ksid: $..ksId
+
+  export:
+#    - keyword
+    - get_ksid
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']
+    - eq: [$..ksId,'${get_ksid}']
+

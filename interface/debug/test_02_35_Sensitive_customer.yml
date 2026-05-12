@@ -1,0 +1,80 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 客户敏感词-开启
+#  skip: 跑完接口-再次查看超时转接-系统异常
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/sensitiveWords/updateCustomerSensitiveByCompanyId
+
+    data:
+      sensitiveSwitch: 1
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+
+-
+  name: 会话设置-客户敏感词-添加
+#  skip: 跑完接口-再次查看超时转接-系统异常
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/sensitiveWords/addSensitiveWords/4
+
+    data:
+      words: '["${fake.text(max_nb_chars=100)}"]'
+      wordsType: 2
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+
+-
+  name: 查询wordId
+#  skip: 跑完接口-再次查看超时转接-系统异常
+  request:
+    method: get
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/sensitiveWords/getSensitiveWords/4?pageNo=1&pageSize=15&wordsType=2
+    data:
+      pageNo: 1
+      pageSize: 15
+      wordsType: 2
+  extract: 
+    get_wordId: $.items.0.wordsId
+  export: 
+    - get_wordId
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+
+-
+  name: 删除客户敏感词
+#  skip: 跑完接口-再次查看超时转接-系统异常
+  request:
+    method: post
+    headers:
+      temp-id: ${get_temp_id}
+      content-type: application/x-www-form-urlencoded
+    url: /text/chat-set/sensitiveWords/deleteSensitiveWords/4
+    data:
+      wordsId: '["${get_wordId}"]'
+  # extract: 
+  #   get_wordId: $.items.0.wordsId
+  # export: 
+  #   - get_wordId
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表

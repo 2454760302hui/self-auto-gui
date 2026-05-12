@@ -1,0 +1,60 @@
+config:
+  name: 在线_v6
+
+  variables:
+    user: ten_api@zhichi.com
+    passowrd: QGxpdXloMTIz
+    # key: 8ac16623-d031-41ac-9208-94fcc0ac3a80
+
+teststeps:
+-
+  name: 在线_v6_登录
+  request:
+    method: POST
+    url: /text/basic-login/account/consoleLogin/4
+    json:
+      loginUser: ${user}
+      loginPwd: ${passowrd}
+      # randomKey: ${key}
+      loginFlag: 1
+      terminalCode: 02
+    headers:
+      Content-Type: application/json
+
+  extract:
+    get_temp_id: $..item # 就是登录的token
+
+  export:
+    - get_temp_id
+  validate:
+    - eq: [status_code, 200]
+
+
+#-
+#  name: 获取客服id，公司id，角色，编码，创建时间，公司名称
+#  request:
+#    method: GET
+#    url: https://api-c.soboten.com/text/basic-login/getHintFlag/4
+#    headers:
+#      temp-id: ${get_temp_id}
+#
+#  extract:
+#    get_server_id: $..createServiceId # 客服id
+#    get_companyName: $..companyName #公司名称
+#    get_companyId: $..companyId #公司id
+#    get_cusRoleName: $..cusRoleName #客服角色
+#    get_cusRoleId: $..cusRoleId #客服编码
+#    get_createTime: $..createTime #创建时间
+#    get_temp-id: headers
+#
+#  export:
+#    - get_server_id
+#    - get_companyName
+#    - get_companyId
+#    - get_cusRoleName
+#    - get_cusRoleId
+#    - get_createTime
+#    - get_temp-id
+#  validate:
+#    - eq: [retCode, '000000']
+#    - eq: [retMsg, '操作成功']

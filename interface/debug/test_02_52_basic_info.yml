@@ -1,0 +1,45 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 基础信息-勾选显示地区+客户，显示客服昵称，开启锁定会话，开启创建工单，开启会话消息提醒，开启客户进线消息，点击客户消息直接触发智能回复检索，勾选全部排队客户
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/chat/config/updateWbConfig/4
+
+    data:
+      nickFlag: 0
+      showStaffNameFlag: 0
+      chatSessionLockFlag: 1
+      hideTicketFlag: 0
+      openSummaryFlag: 0
+      transferAuditFlag: 0
+      chatOverTimeFlag: 0
+      msgRemindFlag: 1
+      firstMsgFlag: 0
+      msgRevokeFlag: 0
+      scanPathFlag: 0
+      windowFlag: 1
+      sysMsgFlag: 0
+      translateFlag: 0
+      waitUserFlag: 0
+      autoReplyCheckFlag: 0
+      voiceToTextFlag: 0
+      chatSessionAutoLockFlag: 0
+      displaySerialFlag: 0
+#  extract:
+#    get_iframeId: $..iframeId
+#  export:
+#    - get_iframeId
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..iframeId,'${get_iframeId}']
+
+

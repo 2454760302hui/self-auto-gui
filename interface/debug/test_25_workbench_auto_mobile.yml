@@ -1,0 +1,36 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+
+-
+  name: 客服工作台-自动应答设置-移动网站-随机内容
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/modifyAdminChannelConfig.action
+    data:
+      channelType: 4
+      adminHelloWord: ${fake.text()}
+      serviceOutDoc: ${fake.text()} #${fake.paragraph()}
+      serviceEndPushMsg: ${fake.text()}
+      serviceOutTime: 1
+      tid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rJfCGna2OBTktbCSwpye18k
+  validate:
+    - eq: [ $..status,1 ]
+
+
+-
+  name: 客服工作台-自动应答设置-移动网站-内容为空
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/modifyAdminChannelConfig.action
+    data:
+      channelType: 4
+      adminHelloWord: ''
+      serviceOutDoc: ''
+      serviceEndPushMsg: ''
+      serviceOutTime: 1
+      tid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rJfCGna2OBTktbCSwpye18k
+  validate:
+    - eq: [ $..status,1 ]

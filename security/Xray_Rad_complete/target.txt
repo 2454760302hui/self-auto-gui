@@ -1,0 +1,11 @@
+
+
+
+https://test.console.sobot.com/am/ipBlackList
+https://test.console.sobot.com/am/operationLog
+https://test.console.sobot.com/am/clientinfoauth
+https://test.console.sobot.com/am/account
+https://test.console.sobot.com/am/satisfacEvaluation
+https://test.console.sobot.com/am/apiManagement
+
+http://testphp.vulnweb.com/

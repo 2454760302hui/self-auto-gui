@@ -1,0 +1,29 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name:  客服在线
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/aci.action
+#    headers:
+#      tempId: ${get_temp_id}
+    data:
+      uid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rLybd1Ut1T8826zCDAK3PY3 #是tid，写死即可
+      way: 1
+      st: 1
+      lt: 1730222914354
+      token: ${get_temp_id}
+      ack: 1
+      isNew: 1
+
+
+
+
+  # extract:
+  #   get_temp-id: $..item # 就是登录的token
+  # export:
+  #   - get_temp-id
+  validate:
+    - eq: [status_code, 200]

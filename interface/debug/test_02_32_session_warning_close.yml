@@ -1,0 +1,31 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 会话设置-会话报警-关闭
+#  skip: 跑完接口-再次查看超时转接-系统异常
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/sessionWarning/updateSessionWarning/4
+
+    data:
+      firstRepsOutFlag: 0
+      firstRepsOutTime:
+      markFlag: 0
+      repsOutFlag: 0
+      sessionOutFlag: 0
+      repsOutTime:
+      sessionOutTime:
+
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

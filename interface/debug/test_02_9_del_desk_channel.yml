@@ -1,0 +1,38 @@
+config:
+  name: 在线_v6
+  variables:
+     head_office: 9e6df20cd49a4166b59787f77fd223dc
+teststeps:
+-
+  name: 删除桌面渠道-架构为总公司-有departmentId
+  request:
+    method: POST
+    url: /text/chat-set/rest/delConfigInfo/4
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      configId: ${get_configId}
+      channelFlag: ${get_channelFlag}
+
+
+  # extract:
+  #   get_configId: $.item.configId
+  #   get_channelName: $.item.channelName
+  #   get_channelType: $.item.channelType
+  #   get_channelScene: $.item.channelScene
+  #   get_departmentId: $.item.departmentId
+  #   get_channelMark: $.item.channelMark
+  #   get_channelFlag: $.item.channelFlag
+
+  # export:
+  #   - get_configId
+  #   - get_channelName
+  #   - get_channelType
+  #   - get_channelScene
+  #   - get_departmentId
+  #   - get_channelMark
+  #   - get_channelFlag
+
+
+  validate:
+    - eq: [ $..retCode, '000000']

@@ -1,0 +1,39 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 用户转人工
+  request:
+    method: POST
+    url: /text/chat-web/user/chatconnect.action
+    data:
+      sysNum: e2f181dfa5214ad0aab9909b7e262e31
+      #赋值引用
+      uid: ${get_uid}
+      cid: ${get_cid}
+      chooseAdminId:
+      tranFlag: 0
+      current: false
+      groupId:
+      transferType: 0
+      summaryParams:
+      transferAction:
+      flowType:
+      flowCompanyId:
+      flowGroupId:
+      activeTransfer: 1
+      unknownQuestion:
+      docId:
+      adminHelloWord: v6用户进线
+#      partnerid: ${fake.random_int(0,100)}
+
+  # extract: # 将引入的值-提取
+  #    get_uid: ${get_uid}
+
+  # export: #将引入的值-导出
+  #   - get_uid
+
+  validate:
+    - eq: [status_code, 200]

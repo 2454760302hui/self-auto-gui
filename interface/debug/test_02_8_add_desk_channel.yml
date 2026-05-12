@@ -1,0 +1,81 @@
+config:
+  name: 在线_v6
+  variables:
+     head_office: 9e6df20cd49a4166b59787f77fd223dc
+teststeps:
+-
+  name: 添加桌面渠道-架构为总公司-有departmentId
+  request:
+    method: POST
+    url: /text/chat-set/rest/insertConfigInfo/4
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      departmentId: ${head_office} 
+      channelName: ${fake.text(max_nb_chars=100)}
+      channelType: 0
+      channelMark: ${fake.text(max_nb_chars=100)}
+      channelScene: 0
+
+
+  extract:
+    get_configId: $.item.configId
+    get_channelName: $.item.channelName
+    get_channelType: $.item.channelType
+    get_channelScene: $.item.channelScene
+    get_departmentId: $.item.departmentId
+    get_channelMark: $.item.channelMark
+    get_channelFlag: $.item.channelFlag
+
+  export:
+    - get_configId
+    - get_channelName
+    - get_channelType
+    - get_channelScene
+    - get_departmentId
+    - get_channelMark
+    - get_channelFlag
+
+
+  validate:
+    - eq: [ $..retCode, '000000']
+  
+
+-
+  name: 添加咨询白名单
+  sleep: 2
+  request:
+    method: POST
+    url: /text/chat-set/updateConfigDomain/4
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      channelScene: ${get_channelScene}
+      channelType:  ${get_channelType}
+      configId:   ${get_configId}
+      domainWhiteList: ${fake.uri()}
+    
+
+  validate:
+    - eq: [ $..retCode, '000000']
+  
+
+# -
+#   name: 置顶通告
+#   sleep: 3
+#   request:
+#     method: POST
+#     url: /text/chat-set/updateConfigDomain/4
+#     headers:
+#       temp-id: ${get_temp_id}
+#     data:
+#       channelScene: ${get_channelScene}
+#       channelType:  ${get_channelType}
+#       configId:   ${get_configId}
+#       domainWhiteList: ${fake.uri()}
+    
+
+#   validate:
+#     - eq: [ $..retCode, '000000']
+  
+

@@ -1,0 +1,50 @@
+# 通过 Chrome 插件快速体验
+
+通过使用 Midscene.js Chrome 插件，你可以快速在任意网页上体验 Midscene 的主要功能，而无需编写任何代码。
+
+该扩展与 npm `@midscene/` 包共享了相同的代码，因此你可以将其视为 Midscene 的一个 Playground 或调试工具。
+
+![](/midscene-extension.jpg)
+
+
+## 准备工作
+
+请先准备好 OpenAI 的 API 密钥，我们稍后将用到。
+
+## 安装与配置
+
+前往 Chrome 扩展商店安装 Midscene 扩展：[Midscene](https://chromewebstore.google.com/detail/midscene/gbldofcpkknbggpkmbdaefngejllnief)
+
+启动扩展（可能默认是折叠的），通过粘贴 Key=Value 格式配置插件环境：
+
+```shell
+OPENAI_API_KEY="sk-replace-by-your-own"
+```
+
+## 开始体验
+
+配置完成后，你可以立即开始使用 Midscene。你可以通过 Action 与网页进行交互，利用 Query 提取 JSON 数据，或通过 Assert 进行断言。
+
+同时，你会发现插件会提供操作回放功能以及一份报告文件供查看。这份报告与你从自动化脚本所得的报告是相同的。
+
+快来试试吧！
+
+## 想将 Midscene 集成到代码？
+
+插件体验结束后，你可能想将 Midscene 集成到代码中。这里有几种不同集成形式的文档：
+
+* [使用 YAML 格式的自动化脚本](./automate-with-scripts-in-yaml)
+* [集成到 Puppeteer](./integrate-with-puppeteer)
+* [集成到 Playwright](./integrate-with-playwright)
+
+## FAQ
+
+* 插件运行失败，提示 'Cannot access a chrome-extension:// URL of different extension'
+
+这一般是与其他插件冲突所致，如页面已经被其他插件注入了 `<iframe />` 或 `<script />`。
+
+找到可疑插件：
+
+1. 打开页面的调试器，找到被其他插件注入的 `<iframe />` 或 `<script />`，一般 URL 是 `chrome-extension://{这串就是ID}/...` 格式，复制其 ID。
+2. 打开 chrome://extensions/ ，找到相同 ID 的插件，禁用它。
+3. 刷新页面，再次尝试。

@@ -1,0 +1,59 @@
+# Android 登录测试示例
+
+config:
+  name: Android 登录测试
+  platform: android
+  device: "127.0.0.1:5555"
+  app: com.example.app
+
+locators:
+  用户名输入框:
+    primary: "rid=com.example:id/et_username"
+    fallback:
+      - "text=用户名"
+      - "className=android.widget.EditText"
+  密码输入框:
+    primary: "rid=com.example:id/et_password"
+    fallback:
+      - "text=密码"
+  登录按钮:
+    primary: "rid=com.example:id/btn_login"
+    fallback:
+      - "text=登录"
+  首页标题:
+    primary: "rid=com.example:id/tv_title"
+    fallback:
+      - "text=首页"
+
+aliases:
+  用户名: 用户名输入框
+  密码: 密码输入框
+
+test_login:
+  - name: 启动应用
+    launch_app:
+      package: com.example.app
+      activity: .MainActivity
+
+  - name: 输入用户名
+    input:
+      element: 用户名输入框
+      value: test@example.com
+
+  - name: 输入密码
+    input:
+      element: 密码输入框
+      value: password123
+
+  - name: 点击登录
+    tap:
+      element: 登录按钮
+
+  - name: 验证登录成功
+    assert:
+      element: 首页标题
+      visible: true
+
+  - name: 关闭应用
+    close_app:
+      package: com.example.app

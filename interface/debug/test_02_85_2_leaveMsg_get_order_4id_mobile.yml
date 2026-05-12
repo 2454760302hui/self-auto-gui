@@ -1,0 +1,32 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 获取4位留言id-移动渠道
+  request:
+    method: get
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/chat/config/getLeaveMsgToTicketConfig/4?leaveType=1&channelType=0&channelFlag=1
+
+    data:
+      leaveType: 1
+      channelType: 1
+      channelFlag: 1
+  extract:
+    get_4order_id_mobile: $..id
+  export:
+    - get_4order_id_mobile
+
+  validate:
+
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [$..id,'${get_4order_id_mobile}' ]
+
+
+
+

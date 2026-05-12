@@ -1,0 +1,54 @@
+# 安全扫描配置
+
+# Xray 和 Rad 二进制路径（留空则自动从 Xray_Rad_complete/ 目录推断）
+xray_path: ""
+rad_path: ""
+xray_config: ""
+rad_config: ""
+
+# 代理地址
+proxy: "127.0.0.1:7777"
+
+# 扫描目标（留空则从 targets_file 读取）
+targets: []
+targets_file: ""
+
+# 输出目录
+output_dir: "reports"
+
+# 等待时间
+xray_startup_wait: 5.0
+scan_interval: 3.0
+result_wait: 10.0
+
+# 并发扫描数
+max_concurrent: 3
+
+# 启用的漏洞检测插件
+enabled_plugins:
+  - baseline
+  - brute-force
+  - cmd-injection
+  - sqldet
+  - xss
+  - xxe
+
+# 认证配置（用于需要登录的页面）
+auth:
+  enabled: false
+  login_url: ""
+  username: ""
+  password: ""
+  username_selector: ""
+  password_selector: ""
+  submit_selector: ""
+  cookie_domain: ""
+
+# 漏洞阈值（用于断言，CI/CD 用）
+max_critical: 0
+max_high: 0
+max_medium: -1  # -1 表示不限制
+
+# CA 证书路径（留空则自动推断）
+ca_cert: ""
+ca_key: ""

@@ -1,0 +1,22 @@
+services:
+  browser-use:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9242:9242"
+    env_file:
+      - .env
+    environment:
+      ANTHROPIC_AUTH_TOKEN: ${ANTHROPIC_AUTH_TOKEN}
+      ANTHROPIC_BASE_URL: ${ANTHROPIC_BASE_URL}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL}
+      BROWSER_USE_LOGGING_LEVEL: ${BROWSER_USE_LOGGING_LEVEL:-info}
+      PYTHONIOENCODING: utf-8
+      PYTHONUNBUFFERED: "1"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    entrypoint: ["browser-use"]
+    command: ["serve", "--host", "0.0.0.0", "--port", "9242"]
+    restart: unless-stopped
+    shm_size: "2gb"

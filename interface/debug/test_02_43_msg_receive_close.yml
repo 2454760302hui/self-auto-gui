@@ -1,0 +1,23 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 消息接收-关闭
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/modifyComConfig/4
+
+    data:
+      offlineFlag: 0
+      userLeaveFlag: 0
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

@@ -1,0 +1,2 @@
+1.实现 andorid，ios，harmony 手机 自动化 
+2.不使用appium 来实现，使用 更好的方式来实现

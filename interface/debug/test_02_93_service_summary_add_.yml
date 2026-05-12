@@ -1,0 +1,29 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 服务总结-添加
+  request:
+    method: post
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/basic-config-service/insertChatUnitInfo/4
+
+    data:
+      unitName: ${fake.text(max_nb_chars=100)}
+      unitStatus: 1
+  extract:
+    get_unitId: $..unitId
+  export:
+    - get_unitId
+
+
+  validate:
+
+#    - eq: [ $..retCode,'000000' ]
+    - eq: [ $..unitId, '${get_unitId}']
+

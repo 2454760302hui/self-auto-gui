@@ -1,0 +1,31 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 新版console-删除关键词
+  request:
+    method: GET
+    url: /text/chat-set/keyword/deleteKeyword/4?&ksId=${get_ksid}&robotFlag=1
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      robotFlag: '1'
+      ksId: ${get_ksid}
+
+  extract:
+#    keyword: body.data.keyword
+#    get_ksid: body.data.ksId
+    del_keyWord: $..keyword
+
+  export:
+#    - keyword
+    - del_keyWord
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']
+    - eq: [ $..keyword, '${del_keyWord}']
+

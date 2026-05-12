@@ -1,0 +1,42 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 获取组id
+  request:
+    method: get
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/basic-public/group/queryCusGroupByDepart?pageNo=1&pageSize=20&allVisibleFlag=&departIdsEquals=&queryContent=
+
+    data:
+      pageNo: 1
+      pageSize: 20
+      allVisibleFlag:
+      departIdsEquals:
+      queryContent:
+  extract:
+    get_group_id_0: $.item.0.groupId
+    get_group_id_1: $.item.1.groupId
+
+
+  export:
+    - get_group_id_0
+    - get_group_id_1
+
+  validate:
+
+    - eq: [ $..retCode,'000000' ]
+    - eq: [ $.item.0.groupId, '${get_group_id_0}']
+    - eq: [ $.item.1.groupId, '${get_group_id_1}']
+#    - eq: [ $..groupId, '${get_group_id_1}' ]
+
+
+
+
+
+

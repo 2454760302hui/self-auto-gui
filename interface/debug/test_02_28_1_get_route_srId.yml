@@ -1,0 +1,30 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name:  获取srId
+  request:
+    method: GET
+    url: /text/chat-set/smartRoute/getAllRouteList/4?srStatus=1
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      srStatus: '1'
+  extract:
+    get_srId: $.items.0.srId
+#    get_companyId: $.items.0.companyId #bdbe5660b2eb45758739527fda974091
+#    get_departId:  $.items.0.departId #b9078ee2d9904891bcfda744d97a81c7
+  export:
+    - get_srId
+#    - get_companyId
+#    - get_departId
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

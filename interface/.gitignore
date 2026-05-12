@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.tox/
+.coverage
+htmlcov/
+.env
+.venv
+venv/
+*.log
+*.db
+report/
+report_html/
+ allure-results/
+allure-report/
+.idea/
+.vscode/

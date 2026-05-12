@@ -1,0 +1,21 @@
+config:
+  name: 在线_v6
+  parameters: #卡迪尔 参数
+    x: [ "4","2","1","3" ] #人工优先，仅人工，仅机器人,机器人优先
+
+teststeps:
+-
+  name: 接待方案设置-默认桌面网站-客服接待模式-机器人优先
+#  sleep: 1
+  request:
+    method: POST
+    url: /text/chat-set/reception/updateScheme
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      joinType: ${x}
+      serviceReceptionEditFlag: '1'
+      id: 1800441960215793664 #不清楚从何来
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']

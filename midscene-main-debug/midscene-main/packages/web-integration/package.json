@@ -1,0 +1,126 @@
+{
+  "name": "@midscene/web",
+  "description": "An AI-powered automation SDK can control the page, perform assertions, and extract data in JSON format using natural language. See https://midscenejs.com/ for details.",
+  "version": "0.8.12",
+  "repository": "https://github.com/web-infra-dev/midscene",
+  "homepage": "https://midscenejs.com/",
+  "jsnext:source": "./src/index.ts",
+  "main": "./dist/lib/index.js",
+  "types": "./dist/types/index.d.ts",
+  "bin": {
+    "midscene-playground": "./bin/midscene-playground",
+    "midscene-control-server": "./bin/midscene-control-server"
+  },
+  "exports": {
+    ".": "./dist/lib/index.js",
+    "./utils": "./dist/lib/utils.js",
+    "./ui-utils": "./dist/lib/ui-utils.js",
+    "./puppeteer": "./dist/lib/puppeteer.js",
+    "./playwright": "./dist/lib/playwright.js",
+    "./playwright-report": "./dist/lib/playwright-report.js",
+    "./playground": "./dist/lib/playground.js",
+    "./debug": "./dist/lib/debug.js",
+    "./constants": "./dist/lib/constants.js",
+    "./html-element": "./dist/lib/html-element/index.js",
+    "./chrome-extension": "./dist/lib/chrome-extension.js",
+    "./yaml": "./dist/lib/yaml.js",
+    "./server": "./dist/lib/server.js"
+  },
+  "typesVersions": {
+    "*": {
+      ".": ["./dist/types/index.d.ts"],
+      "utils": ["./dist/types/utils.d.ts"],
+      "ui-utils": ["./dist/types/ui-utils.d.ts"],
+      "puppeteer": ["./dist/types/puppeteer.d.ts"],
+      "playwright": ["./dist/types/playwright.d.ts"],
+      "playwright-report": ["./dist/types/playwright-report.d.ts"],
+      "playground": ["./dist/types/playground.d.ts"],
+      "debug": ["./dist/types/debug.d.ts"],
+      "constants": ["./dist/types/constants.d.ts"],
+      "html-element": ["./dist/types/html-element/index.d.ts"],
+      "chrome-extension": ["./dist/types/chrome-extension.d.ts"],
+      "yaml": ["./dist/types/yaml.d.ts"],
+      "server": ["./dist/types/server.d.ts"]
+    }
+  },
+  "scripts": {
+    "dev": "modern dev",
+    "dev:server": "npm run build && ./bin/midscene-playground",
+    "dev:control-server": "npm run build && ./bin/midscene-control-server",
+    "build": "npm run build:pkg && npm run build:script",
+    "build:pkg": "modern build -c ./modern.config.ts",
+    "build:script": "modern build -c ./modern.inspect.config.ts",
+    "build:watch": "modern build -w -c ./modern.config.ts & modern build -w -c ./modern.inspect.config.ts",
+    "test": "vitest --run",
+    "test:u": "vitest --run -u",
+    "test:ai": "AI_TEST_TYPE=web npm run test",
+    "test:ai:cache": "MIDSCENE_CACHE=true AI_TEST_TYPE=web npm run test",
+    "test:ai:all": "npm run test:ai:web && npm run test:ai:native",
+    "test:ai:native": "MIDSCENE_CACHE=true AI_TEST_TYPE=native npm run test",
+    "upgrade": "modern upgrade",
+    "prepublishOnly": "npm run build",
+    "e2e": "playwright test --config=playwright.config.ts",
+    "e2e:report": "MIDSCENE_REPORT=true playwright test --config=playwright.config.ts",
+    "e2e:cache": "MIDSCENE_CACHE=true playwright test --config=playwright.config.ts",
+    "e2e:ui": "playwright test --config=playwright.config.ts --ui",
+    "e2e:ui:cache": "MIDSCENE_CACHE=true playwright test --config=playwright.config.ts --ui",
+    "e2e:generate-test-data": "GENERATE_TEST_DATA=true playwright test ./tests/ai/web/playwright/generate-test-data.spec.ts",
+    "e2e:generate-test-data:headed": "GENERATE_TEST_DATA=true playwright test ./tests/ai/web/playwright/generate-test-data.spec.ts --headed"
+  },
+  "files": ["static", "dist", "README.md", "bin"],
+  "dependencies": {
+    "@midscene/core": "workspace:*",
+    "@midscene/shared": "workspace:*",
+    "@xmldom/xmldom": "0.8.10",
+    "cors": "2.8.5",
+    "express": "4.21.1",
+    "inquirer": "10.1.5",
+    "openai": "4.57.1"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "4.0.9",
+    "js-yaml": "4.1.0",
+    "@modern-js/module-tools": "2.60.6",
+    "@playwright/test": "1.44.1",
+    "@types/chrome": "0.0.279",
+    "@types/cors": "2.8.12",
+    "@types/express": "4.17.14",
+    "@types/fs-extra": "11.0.4",
+    "@types/node": "^18.0.0",
+    "@wdio/types": "9.0.4",
+    "devtools-protocol": "0.0.1380148",
+    "dotenv": "16.4.5",
+    "fs-extra": "11.2.0",
+    "js-sha256": "0.11.0",
+    "playwright": "1.44.1",
+    "puppeteer": "23.0.2",
+    "typescript": "~5.0.4",
+    "vitest": "^1.6.0",
+    "webdriverio": "9.0.6"
+  },
+  "peerDependencies": {
+    "@playwright/test": "^1.44.1",
+    "playwright": "^1.44.1",
+    "puppeteer": ">=20.0.0",
+    "webdriverio": ">=9.0.6"
+  },
+  "peerDependenciesMeta": {
+    "@playwright/test": {
+      "optional": true
+    },
+    "puppeteer": {
+      "optional": true
+    },
+    "webdriverio": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,25 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 移除成员
+  # skip: deleteUserInGroup-移除技能组成员-异常-处理中
+  # sleep: 5
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+      content-type: application/x-www-form-urlencoded
+    url: /text/basic-public/group/deleteUserInGroup
+    data:
+      groupId:  ${get_items_0_groupId}
+      serviceId:  ${get_items_0_createServiceId}
+      # groupName: 特需
+      # flag: 1
+
+  validate:
+    - eq: [ $..retMsg,'操作成功' ]
+
+

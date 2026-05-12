@@ -1,0 +1,53 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 获取渠道id
+  request:
+    method: get
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/rest/selectConfigInfo/4?channelType=0
+  extract:
+    get_desk_configId: $.list.0.configId
+    get_desk_configId_name: $.list.0.channelName
+    get_desk_id: $.list.0.id
+ 
+
+  export:
+    - get_desk_configId_name
+    - get_desk_configId
+    - get_desk_id
+
+
+-
+  name: 按渠道设置-超时提示-桌面网站和移动网站
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/doc/updateCompanyConfigDoc/4
+
+    data:
+      id:
+      configId: ${get_desk_id} 
+      type: 0
+      serviceCustomerOutTimesScope: 1
+      customerOutTimes: ${fake.random_int(1,4)}
+      customerOutDoc: ${fake.text()}
+      serviceOutTimes: ${fake.random_int(1,4)}
+      serviceOutDoc: ${fake.text()}
+      customerOutTimesFlag: 1
+      serviceOutTimesFlag: 1
+      serviceOutCountRule: 0
+
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

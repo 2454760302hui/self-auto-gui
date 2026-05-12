@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m compileall \"C:/Users/Administrator/Desktop/browser-use-main-debug/browser-use-main/browser_use/skill_cli/http_server.py\")",
+      "Bash(curl -s http://127.0.0.1:9242/)",
+      "Bash(curl -sS http://127.0.0.1:9242/health)",
+      "Bash(curl -sS http://127.0.0.1:9242/)",
+      "Bash(curl -i -sS -X POST http://127.0.0.1:9242/open -H \"content-type: application/json\" -d '{\"\"url\"\":\"\"https://www.soso.com\"\"}')",
+      "Bash(python -:*)",
+      "Bash(python -c \"import sys; html=sys.stdin.read\\(\\); print\\(''''Refreshing state after open'''' in html\\); print\\(''''async function loadState\\(\\)'''' in html\\)\")",
+      "Bash(python -m compileall \"C:/Users/Administrator/Desktop/browser-use-main-debug/browser-use-main/browser_use/skill_cli/http_server.py\" \"C:/Users/Administrator/Desktop/browser-use-main-debug/browser-use-main/browser_use/skill_cli/commands/browser.py\")",
+      "Bash(python -c \"import sys; html=sys.stdin.read\\(\\); print\\(''''Open in new tab'''' in html\\); print\\(''''openInNewTab'''' in html\\); print\\(''''Opening $body.url'''' in html\\)\")",
+      "Bash(curl -sS -X POST http://127.0.0.1:9242/open -H \"content-type: application/json\" -d '{\"\"url\"\":\"\"https://example.com\"\",\"\"new_tab\"\":true}')",
+      "Bash(python -c \"import sys; html=sys.stdin.read\\(\\); print\\(''''Refresh tabs'''' in html\\); print\\(''''switch-tab'''' in html\\); print\\(''''Step 1/3'''' in html\\); print\\(''''Open in new tab'''' in html\\)\")",
+      "Bash(curl -sS -X POST http://127.0.0.1:9242/connect)",
+      "Bash(curl -sS http://127.0.0.1:9242/state)",
+      "Read(//mnt/c/Users/Administrator/Desktop/browser-use-main-debug/**)",
+      "Bash(docker exec:*)",
+      "Bash(curl -sS -X POST http://127.0.0.1:9242/connect -H 'content-type: application/json' -d '{}')",
+      "Bash(git -C \"/c/Users/Administrator/Desktop/browser-use-main-debug/browser-use-main\" diff -- Dockerfile.fast Dockerfile browser_use/skill_cli/http_server.py browser_use/skill_cli/commands/browser.py docker/README.md docker/docker-entrypoint.sh)",
+      "Bash(git diff:*)",
+      "Bash(git --no-pager diff -- browser_use/skill_cli/http_server.py docker/README.md)",
+      "Bash(python -m py_compile \"C:/Users/Administrator/Desktop/browser-use-main-debug/browser-use-main/browser_use/skill_cli/http_server.py\")",
+      "Bash(docker build:*)",
+      "Bash(docker rm:*)",
+      "Bash(\"C:/Program Files/Google/Chrome/Application/chrome.exe\" --remote-debugging-port=9222)",
+      "Bash(docker run:*)",
+      "Bash(curl -s http://127.0.0.1:9242/health)"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
+    ]
+  }
+}

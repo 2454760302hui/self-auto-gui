@@ -1,0 +1,4 @@
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:135 执行文件-> test_02_30_timeOut_trans.yml
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:136 base_url-> https://api-c.soboten.com
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:137 config variables-> {}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:139 运行用例-> teststeps

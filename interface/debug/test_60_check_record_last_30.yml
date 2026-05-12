@@ -1,0 +1,104 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 会话记录-查看上月
+  sleep: 5
+  request:
+    method: POST
+    url: /text/chat-statistics/sessionRecordMsg/querySessionListVer2
+    headers:
+      temp-id: ${get_temp_id}
+    json:
+#      cid: ${get_cid}
+#      uid: ${get_uid}
+#      fieldId: "[ ]"
+#      fieldName: "[ ]"
+#      fieldValue: "[ ]"
+#      invalidSession: 0
+#      operationId:
+#      operationName:
+#      questionDescribe:
+#      questionStatus: 1
+#      reqTypeIdPath:
+#      reqTypeNamePath:
+#      unitDoc:
+#      unitId:
+#      unitName:
+#      updateServiceId: ${get_lastStaffId} #客服id
+      aiClassificationStates: null
+      page: 1
+      size: 15
+      searchWay: 2
+      allViewFlag:
+      startDateTs: ${old_30_start()}
+      endDateTs: ${old_30_over()}
+      departIdsParam:
+      recordCustomScreen: uname
+      recordCustomScreenValue:
+      area:
+      urlSearchValue:
+      urlSearchKey: landPagePreUrl
+      hitKeyword:
+      recordSessionDuration: gte
+      recordSessionDurationValue: 0
+      recordSessionAvgDuration: gte
+      recordSessionAvgDurationValue: 0
+      recordSessionFirstDuration: gte
+      recordSessionFirstDurationValue: 0
+      recordChatScreen: content
+      recordChatScreenValue:
+      groupSearchKey: lastGroupId
+      groupSearchValue:
+      staffSearchKey: lastStaffId
+      staffSearchValue:
+      cid:
+      solvedOneTime24H:
+      robotEffectiveness:
+      effectiveness:
+      sessionHumanTransfer:
+      queueStatus:
+      revokeFlag:
+      robotReceptionFlag:
+      offlineType:
+      summaryFlag: 0
+      questionStatus:
+      invalidSession:
+      operationId:
+      reqType:
+      summaryFieldValue:
+      summaryFieldId:
+      summaryClassifyCodes:
+      summaryHandleProgresses:
+      summaryTemplateIds:
+      summaryRemark:
+      isEvaluated:
+      isResovled:
+      resetFlag: 0
+      scoreFlag:
+      score:
+      npsScore:
+      isRobotEvaluated:
+      isRobotResovled:
+
+
+  extract:
+#    get_uname: $.item.0.uname
+#    get_realname: $.item.0.realname
+#    get_cid: $.item.0.cid
+    get_total: $..totalCount
+  export:
+#    - get_uname
+#    - get_realname
+#    - get_cid
+    - get_total
+  print: ${get_total}
+
+  validate:
+#    - eq: [$..status,1]
+    - eq: [$..retCode, "000000" ]
+    - eq: [$..totalCount, "${get_total}"]
+
+

@@ -1,0 +1,95 @@
+config:
+  name: 在线_v6
+  variables:
+    x: e2f181dfa5214ad0aab9909b7e262e31 #公司id
+
+teststeps:
+-
+  name: 用户初始化-获取cid，uid,pid,companyId  #腾讯云初始化
+  request:
+    method: post
+    url: /text/chat-visit/user/init/v6
+
+    data:
+      ack: 1
+      sysNum: ${x}
+      lanFlag:
+      locale:
+      robotFlag:
+      enterpriseName:
+      source: 0
+      chooseAdminId:
+      groupId:
+      partnerId: ${fake.random_int(min=0, max=10000)}
+      tel:
+      email:
+      uname:
+      visitTitle:
+      visitUrl:
+      face:
+      realname:
+      weibo:
+      weixin:
+      qq:
+      sex:
+      birthday:
+      remark:
+      params:
+      customerFields:
+      sign:
+      newFlag:
+      flowType:
+      flowCompanyId:
+      flowGroupId:
+
+      isReComment: 1
+      customerFields:
+      visitStartTime:
+      agid: af7b75dc1d584f6ebaef584041569e55
+      multiParams:
+      summaryParams:
+      channelFlag:
+      schemeId:
+      ruleId:
+      lan:
+      aid:
+      uid:
+      tranFlag:
+      toTiao_clickId:
+      platformUnionCode:
+      faqId:
+      sogou_logidUrl:
+      isVip:
+      vipLevel:
+      userLabel:
+      xst: af7b75dc1d584f6ebaef584041569e55
+      isJs: 0
+      joinType:
+      shopifyDomain: 
+      countryName: 
+      timezoneId: 
+      uname: 
+      visitTitle: 
+      realname: 
+      enterpriseName: 
+      
+    
+  
+
+  extract:
+    get_cid: $..cid
+    get_uid: $..uid
+    get_pid: $..pid
+    # get_sys: body.sysNum
+    get_puid: $..puid
+  # 导出
+  export:
+    - get_uid
+    - get_cid
+    - get_pid
+    - get_puid
+
+
+
+  validate:
+    - eq: [status_code, 200]

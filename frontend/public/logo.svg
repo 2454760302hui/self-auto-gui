@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="xgrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="outerGlow">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feFlood flood-color="#00e5ff" flood-opacity="0.3" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Breathing glow animation -->
+    <style>
+      .breathing-glow {
+        animation: breathe 2.5s ease-in-out infinite;
+      }
+      @keyframes breathe {
+        0%, 100% { opacity: 0.15; filter: url(#glow); }
+        50% { opacity: 0.4; filter: url(#glowStrong); }
+      }
+      .x-main {
+        animation: pulse 2.5s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { filter: url(#outerGlow); }
+        50% { filter: url(#outerGlowStrong); }
+      }
+    </style>
+    <filter id="glowStrong">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="outerGlowStrong">
+      <feGaussianBlur stdDeviation="24" result="blur"/>
+      <feFlood flood-color="#00e5ff" flood-opacity="0.5" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#0a0e1a"/>
+  <!-- Breathing glow layer -->
+  <g class="breathing-glow">
+    <path d="M140 120 L256 256 L140 392" stroke="#00e5ff" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M372 120 L256 256 L372 392" stroke="#a855f7" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <!-- Main X with pulse -->
+  <g class="x-main">
+    <path d="M140 120 L256 256 L140 392" stroke="url(#xgrad)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M372 120 L256 256 L372 392" stroke="url(#xgrad)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>

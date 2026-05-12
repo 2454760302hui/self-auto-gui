@@ -1,0 +1,38 @@
+# Fast Dockerfile using pre-built base images
+ARG REGISTRY=browseruse
+ARG BASE_TAG=latest
+FROM ${REGISTRY}/base-python-deps:${BASE_TAG}
+
+LABEL name="browseruse" description="Browser automation for AI agents"
+
+ENV BROWSERUSE_USER="browseruse" DEFAULT_PUID=911 DEFAULT_PGID=911 DATA_DIR=/data IN_DOCKER=True BROWSER_USE_DISABLE_EXTENSIONS=1 PATH="/app/.venv/bin:$PATH"
+
+# Install Xvfb runtime helpers needed by xvfb-run
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends xauth && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create user and directories
+RUN groupadd --system $BROWSERUSE_USER && \
+    useradd --system --create-home --gid $BROWSERUSE_USER --groups audio,video $BROWSERUSE_USER && \
+    usermod -u "$DEFAULT_PUID" "$BROWSERUSE_USER" && \
+    groupmod -g "$DEFAULT_PGID" "$BROWSERUSE_USER" && \
+    mkdir -p /data /home/$BROWSERUSE_USER/.config && \
+    ln -s $DATA_DIR /home/$BROWSERUSE_USER/.config/browseruse && \
+    mkdir -p "/home/$BROWSERUSE_USER/.config/chromium/Crash Reports/pending/" && \
+    mkdir -p "$DATA_DIR/profiles/default" && \
+    chown -R "$BROWSERUSE_USER:$BROWSERUSE_USER" "/home/$BROWSERUSE_USER" "$DATA_DIR"
+
+WORKDIR /app
+COPY . /app
+RUN chmod +x /app/docker/docker-entrypoint.sh
+
+# Install browser-use
+RUN --mount=type=cache,target=/root/.cache/uv,sharing=locked \
+    uv sync --all-extras --locked --no-dev --compile-bytecode
+
+USER "$BROWSERUSE_USER"
+VOLUME "$DATA_DIR"
+EXPOSE 9242 9222
+ENTRYPOINT ["/app/docker/docker-entrypoint.sh"]
+CMD ["--headed", "serve", "--host", "0.0.0.0", "--port", "9242"]

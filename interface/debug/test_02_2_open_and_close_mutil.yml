@@ -1,0 +1,47 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 开启技能组工作时间-整体客服工作时间
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/updateCommuteFlag/4
+    data:
+      configType: '0'
+      commuteFlag: '1'
+  extract:
+    get_config_id: $..configId
+
+  export:
+    - get_config_id
+
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..workStartTime,'00:00']
+
+-
+  name: 关闭技能组工作时间-整体客服工作时间
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/updateCommuteFlag/4
+    data:
+      configType: '0'
+      commuteFlag: '0'
+  extract:
+    get_config_id: $..configId
+
+  export:
+    - get_config_id
+
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..workStartTime,'00:00']
+

@@ -1,0 +1,35 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+  variables:
+    typeName: ${fake.text(max_nb_chars=100)}
+
+
+
+teststeps:
+-
+  name: 服务总结-添加-分类
+  request:
+    method: post
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/basic-config-service/addChatUnitTypeInfo/4
+
+    data:
+      unitId: ${get_unitId}
+      typeName: ${typeName} #${fake.text(max_nb_chars=100)}
+  extract:
+    get_unitId: $..unitId
+    get_typeName: ${typeName}
+
+  export:
+    - get_unitId
+    - get_typeName
+
+
+  validate:
+
+    - eq: [ $..retCode,'000000' ]
+    - eq: [ $..unitId, '${get_unitId}']
+

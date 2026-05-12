@@ -1,0 +1,55 @@
+{
+  "testDataPath": "test-data/taobao",
+  "testCases": [
+    {
+      "prompt": "商品搜索框",
+      "multi": false,
+      "response": [
+        {
+          "id": "ae4cc7d4",
+          "indexId": 32
+        }
+      ]
+    },
+    {
+      "prompt": "搜索按钮",
+      "multi": false,
+      "response": [
+        {
+          "id": "7aeee704",
+          "indexId": 31
+        }
+      ]
+    },
+    {
+      "prompt": "产品分类里面的：男鞋（文字）",
+      "multi": false,
+      "response": [
+        {
+          "id": "1740ea75",
+          "indexId": 99
+        }
+      ]
+    },
+    {
+      "prompt": "收藏的店ICON",
+      "multi": false,
+      "response": [
+        {
+          "id": "6c3b9cb6",
+          "indexId": 212
+        }
+      ]
+    },
+    {
+      "prompt": "右侧”官方客服“按钮文字",
+      "multi": false,
+      "response": [
+        {
+          "id": "456c7931",
+          "indexId": 271
+        }
+      ]
+    }
+  ]
+}

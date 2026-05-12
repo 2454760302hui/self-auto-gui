@@ -1,0 +1,27 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 留言规则设置-关闭自动分配
+  request:
+    method: post
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/chat/config/updateRestLeaveMsgConfigById/4
+
+    data:
+      configId: 903e189ab6ab4155b911984198743780 #固定值
+      frequentVisitorFirstFlag: 0
+      smartRoutingFlag: 0
+
+
+  validate:
+
+    - eq: [ $..retCode,'000000' ]
+
+
+

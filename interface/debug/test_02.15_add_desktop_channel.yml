@@ -1,0 +1,31 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 客服设置-新增桌面渠道
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/rest/insertConfigInfo/4
+    data:
+      departmentId: ''
+      channelName: ${fake.company_prefix()} #随机公司短名称
+      channelType: 0
+      channelMark: ${fake.text(max_nb_chars=100)}
+      managerType: 1
+      channelScene: 0
+
+
+  extract:
+    get_config_id: $..configId
+    get_channelName: $..channelName #取新增桌面渠道名称
+    get_channelFlag: $..channelFlag
+
+  export:
+    - get_config_id
+    - get_channelFlag
+
+  validate:
+    - eq: [ $..retCode,'000000' ]

@@ -1,0 +1,77 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 开启留言-自有渠道设置，方式为留言转离线，留言内容为整体
+  request:
+    method: post
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/chat/config/updateRestLeaveMsgConfigById/4
+
+    data:
+      configId:  903e189ab6ab4155b911984198743780 #固定值
+      leaveToOfflineConfigId: ${get_leave_id}
+      msgFlag: 0
+      msgToTicketFlag: 2
+      leaveType: 0
+      msgLeaveTxt: ${fake.text(max_nb_chars=100)} #说明是1000字符，有bug已提
+      msgLeaveContentTxt: ${fake.text(max_nb_chars=100)}
+#  extract:
+#    get_leave_id: $..id
+#    get_ticketDeployName: $..ticketDeployName
+#  export:
+#    - get_leave_id
+#    - get_ticketDeployName
+
+  validate:
+
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [$..id,'${get_leave_id}' ]
+#    - eq: [ $..ticketDeployId, '${get_ticketDeployId}']
+#    - eq: [ $..ticketDeployName,'默认插件' ]
+#    - eq: [ $.items.0.fieldName,"客户标签"]
+#    - eq: [ $..iframeId,'${get_iframeId}']
+
+
+-
+  name: 开启留言-自有渠道设置-留言转工单-整体设置
+  request:
+    method: post
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/chat/config/updateRestLeaveMsgConfigById/4
+
+    data:
+      configId:  903e189ab6ab4155b911984198743780 #固定值
+      leaveToOfflineConfigId: ${get_leave_id}
+      leaveToTicketConfigId: 6838
+      msgFlag: 0
+      msgToTicketFlag: 1
+      leaveType: 0
+      ticketShowFlag: 1
+      ticketDeployId: e81973995fbe422d8d60777c7cce29ab
+      ticketDeployName: 默认插件
+      agentId: 
+#  extract:
+#    get_leave_id: $..id
+#    get_ticketDeployName: $..ticketDeployName
+#  export:
+#    - get_leave_id
+#    - get_ticketDeployName
+
+  validate:
+
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [$..id,'${get_leave_id}' ]
+#    - eq: [ $..ticketDeployId, '${get_ticketDeployId}']
+#    - eq: [ $..ticketDeployName,'默认插件' ]
+#    - eq: [ $.items.0.fieldName,"客户标签"]
+#    - eq: [ $..iframeId,'${get_iframeId}']
+
+
+

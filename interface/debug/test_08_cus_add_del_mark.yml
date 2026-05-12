@@ -1,0 +1,33 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 工作台点击星标
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/add_marklist.action
+    data:
+      sender: xOh8P5f7pLDPHW5kyWJscuzHfKg8v3Wj5TWF2jP6WSi2r9+tyImf24JkRd5QmQRA #是tid
+      receiver: ${get_uid}
+
+#  extract:
+#    get_item: $..item # 就是登录的token
+
+  validate:
+    - eq: [status_code, 200]
+
+-
+  name: 工作台取消星标
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/delete_marklist.action
+    data:
+      sender: xOh8P5f7pLDPHW5kyWJscuzHfKg8v3Wj5TWF2jP6WSi2r9+tyImf24JkRd5QmQRA #是tid
+      receiver: ${get_uid}
+
+#  extract:
+#    get_item: $..item # 就是登录的token
+
+  validate:
+    - eq: [status_code, 200]

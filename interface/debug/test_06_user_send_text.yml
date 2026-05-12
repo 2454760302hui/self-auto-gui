@@ -1,0 +1,20 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 用户发送文本消息
+  request:
+    method: POST
+    url: /text/chat-web/message/user/send.action
+    data:
+      puid: ${get_puid}
+      cid: ${get_cid}
+      uid: ${get_uid}
+      content: ${fake.text()}
+      objMsgType:
+      msgType: 0
+      fileName: undefinded
+
+  validate:
+    - eq: [ status_code, 200 ]

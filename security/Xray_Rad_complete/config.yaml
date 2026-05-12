@@ -1,0 +1,73 @@
+version: 4.0
+
+parallel: 30
+
+http:
+  proxy: ""
+  proxy_rule: []
+  dial_timeout: 5
+  read_timeout: 10
+  max_conns_per_host: 50
+  enable_http2: false
+  fail_retries: 0
+  max_redirect: 5
+  max_resp_body_size: 2097152
+  max_qps: 500
+  allow_methods:
+    - HEAD
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTIONS
+  headers: {}
+
+plugins:
+  baseline:
+    enabled: true
+  brute-force:
+    enabled: true
+    username_dictionary: ""
+    password_dictionary: ""
+  cmd-injection:
+    enabled: true
+  sqldet:
+    enabled: true
+    boolean_based_detection: true
+    error_based_detection: true
+    time_based_detection: true
+  xss:
+    enabled: true
+  xxe:
+    enabled: true
+
+reverse:
+  db_file_path: ""
+  token: ""
+  http:
+    enabled: false
+    listen_ip: "0.0.0.0"
+    listen_port: ""
+  dns:
+    enabled: false
+    listen_ip: "0.0.0.0"
+    domain: ""
+  client:
+    remote_server: false
+    http_base_url: ""
+    dns_server_ip: ""
+
+mitm:
+  ca_cert: "./ca.crt"
+  ca_key: "./ca.key"
+  basic_auth:
+    username: ""
+    password: ""
+  allow_ip_range: []
+
+basic-crawler:
+  max_depth: 0
+  max_count_of_links: 0
+  allow_visit_parent_path: false
+
+

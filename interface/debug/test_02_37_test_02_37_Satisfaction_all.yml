@@ -1,0 +1,24 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 满意度评价-使用模板模板-整体客服生效
+#  skip: 跑完接口-再次查看超时转接-系统异常
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-satisfaction/saticfaction/updateSettingMethod
+
+    data:
+      settingMethod: 1
+      templateId: 12a8acec5cb848e28504a2256f1f424d #不知从合何来，先写死
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

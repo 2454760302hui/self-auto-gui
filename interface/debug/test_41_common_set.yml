@@ -1,0 +1,25 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 会话风格设定-护眼模式
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/modifyAdminConfig.action
+    data:
+      chatStyleFlag: 1 #护眼模式
+      tid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rI0hoH5dRpzblhA9rIQ135n
+  validate:
+    - eq: [$..status,1]
+
+-
+  name: 会话风格设定-标准模式
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/modifyAdminConfig.action
+    data:
+      chatStyleFlag: 0 #标准模式
+      tid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rI0hoH5dRpzblhA9rIQ135n
+  validate:
+    - eq: [$..status,1]

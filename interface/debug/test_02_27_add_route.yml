@@ -1,0 +1,25 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 会话设置-客户分配策略-添加智能路由
+  request:
+    method: POST
+    url: /text/chat-set/smartRoute/addSmartRouteInfo/4
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      routeInfo: '{ "srName": "${fake.text(max_nb_chars=100)}","srDesc": "${fake.text(max_nb_chars=1000)}","srStatus": 1 }'
+      allCondRel: '[{ "condId": "2","deciId": "21","condType": "channel","optionId": "-1","optionValue": "全部" }]'
+      anyCondRel: '[ ]'
+      actionRel: '[{ "actionId": "1","actionType": "to_service","spillId": "1","spillValue": "客服不在线","optionId": "2","optionValue": "不溢出","deciId": "${get_serverId}","deciValue": "api" }]'
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

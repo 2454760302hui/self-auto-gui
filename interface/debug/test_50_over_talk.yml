@@ -1,0 +1,17 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 客服结束会话
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/leaveUser.action
+    data:
+      uid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rI0hoH5dRpzblhA9rIQ135n  #是tid
+      userId:  ${get_uid} #是uid
+      cid: ${get_cid}
+  validate:
+    - eq: [status_code, 200]
+

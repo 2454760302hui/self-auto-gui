@@ -1,0 +1,7 @@
+packages:
+  - apps/site
+  - packages/cli
+  - packages/shared
+  - packages/midscene
+  - packages/visualizer
+  - packages/web-integration

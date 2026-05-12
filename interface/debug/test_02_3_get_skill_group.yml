@@ -1,0 +1,36 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 获取技能组信息
+  request:
+    method: get
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/basic-public/group/queryCusGroupByDepart?pageNo=1&pageSize=20&allVisibleFlag=&departIdsEquals=&queryContent=
+    json:
+      pageNo: 1
+      pageSize: 20
+      allVisibleFlag: 
+      departIdsEquals: 
+      queryContent: 
+  
+  extract:
+    get_items_0_createServiceId: $.items.0.createServiceId
+    get_items_1_createServiceId: $.items.1.createServiceId
+    get_items_0_groupId: $.items.0.groupId
+    get_items_1_groupId: $.items.1.groupId
+
+
+
+  export:
+    - get_items_0_createServiceId
+    - get_items_1_createServiceId
+    - get_items_0_groupId
+    - get_items_1_groupId
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..workStartTime,'00:00']

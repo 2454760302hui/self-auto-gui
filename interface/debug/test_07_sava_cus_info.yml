@@ -1,0 +1,166 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: [ "4","2","1","3" ] #人工优先，仅人工，仅机器人,机器人优先
+
+teststeps:
+
+#-
+#  name: 修改客户信息
+#  request:
+#    method: POST
+#    url: ${env.user_url}/chat/admin/modify_userinfo.action
+#    data:
+#      customerFields:
+#      sender: xOh8P5f7pLDPHW5kyWJscuzHfKg8v3Wj5TWF2jP6WShb1ygtx6kk/EVtZ1Yx4IjQ
+#      uid: 44dd91bd419148f589364836d33992c5
+#  #    userId: ef2627dafe6743abac2a1a91fcd84f91
+#      tel:
+#      email:
+#      uname: 刘？
+#      realname:
+#      qq:
+#      remark:
+#      face:
+#      weixin:
+#      weibo:
+#      sex:
+#      age:
+#      birthday:
+#      partnerId:
+#      createSource: 0
+#      tid: xOh8P5f7pLDPHW5kyWJscuzHfKg8v3Wj5TWF2jP6WShb1ygtx6kk/EVtZ1Yx4IjQ
+#      proviceId:
+#      proviceName:
+#      cityId:
+#      cityName:
+#      areaId:
+#      areaName:
+#      enterpriseId:
+#      enterpriseName:
+#      isVip: 0
+#      vipLevel:
+#      userLabel:
+
+# '${to_json(你前面设置的变量)}'
+
+
+#-
+#  name: 保存客户信息
+#  request:
+#    method: POST
+#    url: ${env.user_url}/chat/admin/addCustomerInfo.action
+#    data:
+#      customerFields: ''
+#      sender: xOh8P5f7pLDPHW5kyWJscuzHfKg8v3Wj5TWF2jP6WShMHmTtx1xy8fkF0qmbU+MR
+#      uid: ${get_uid}
+#      userId: ''
+#      tel: '[{"encrypt":"","desensitization":"","unDesensitization":""}]'
+#      email: ''
+#      uname: ${fake.name()}
+#      realname: ''
+#      qq: ''
+#      remark: ''
+#      face: ''
+#      weixin: ''
+#      weibo: ''
+#      sex: ''
+#      age: ''
+#      birthday: ''
+#      partnerId: ''
+#      createSource: 0
+#      tid: xOh8P5f7pLDPHW5kyWJscuzHfKg8v3Wj5TWF2jP6WShMHmTtx1xy8fkF0qmbU+MR
+#      proviceId: ''
+#      proviceName: ''
+#      cityId: ''
+#      cityName: ''
+#      areaId: ''
+#      areaName: ''
+#      enterpriseId: ''
+#      enterpriseName: ''
+#      isVip: ''
+#      vipLevel: ''
+#      userLabel: ''
+
+-
+  name: 保存客户信息，其中手机号添加10个
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/addCustomerInfo.action
+    data:
+      customerFields: ''
+      sender: xOh8P5f7pLDPHW5kyWJscuzHfKg8v3Wj5TWF2jP6WShMHmTtx1xy8fkF0qmbU+MR
+      uid: ${get_uid}
+      userId: ''
+      #添加多个手机号 10个
+      tel: '[{"encrypt":"${fake.phone_number()}","desensitization":"${fake.phone_number()}","unDesensitization":"${fake.phone_number()}"},
+            {"encrypt":"${fake.phone_number()}","desensitization":"${fake.phone_number()}","unDesensitization":"${fake.phone_number()}"},
+             {"encrypt":"${fake.phone_number()}","desensitization":"${fake.phone_number()}","unDesensitization":"${fake.phone_number()}"},
+              {"encrypt":"${fake.phone_number()}","desensitization":"${fake.phone_number()}","unDesensitization":"${fake.phone_number()}"},
+               {"encrypt":"${fake.phone_number()}","desensitization":"${fake.phone_number()}","unDesensitization":"${fake.phone_number()}"},
+                {"encrypt":"${fake.phone_number()}","desensitization":"${fake.phone_number()}","unDesensitization":"${fake.phone_number()}"},
+                 {"encrypt":"${fake.phone_number()}","desensitization":"${fake.phone_number()}","unDesensitization":"${fake.phone_number()}"},
+                  {"encrypt":"${fake.phone_number()}","desensitization":"${fake.phone_number()}","unDesensitization":"${fake.phone_number()}"},
+                   {"encrypt":"${fake.phone_number()}","desensitization":"${fake.phone_number()}","unDesensitization":"${fake.phone_number()}"},
+                    {"encrypt":"${fake.phone_number()}","desensitization":"${fake.phone_number()}","unDesensitization":"${fake.phone_number()}"}
+      
+      
+      
+      ]'
+      email: ${fake.email()};${fake.email()};${fake.email()};${fake.email()};${fake.email()};${fake.email()};${fake.email()};${fake.email()};${fake.email()};${fake.email()};
+      uname: ${fake.name()}
+      realname: ${fake.name()}
+      qq: ${fake.random_int()}
+      remark: ${fake.text()}
+      face: ''
+      weixin: ${fake.name()}
+      weibo: ''
+      sex: ''
+      age: ''
+      birthday: ''
+      partnerId: ''
+      createSource: 0
+      tid: xOh8P5f7pLDPHW5kyWJscuzHfKg8v3Wj5TWF2jP6WShMHmTtx1xy8fkF0qmbU+MR
+      proviceId: ''
+      proviceName: ''
+      cityId: ''
+      cityName: ${fake.country()}
+      areaId: ''
+      areaName: ''
+      enterpriseId: ''
+      enterpriseName: ''
+#      isVip: 0 #0表示普通客户
+      isVip: 1 #1表示vip
+      vipLevel: ea529c84c089402089f124913933bd4b #写死，从其他设置项获取
+
+      userLabel: 7044d0baa3a247088a55566819b4ef70 # 从crm 取值
+
+  # extract:
+  #   get_userId: $..userId
+
+  # export:
+  #   - get_userId
+  validate:
+    - eq: [ status_code, 200 ]
+
+
+-
+  name: 客服工作台-保存服务总结-ing
+  request:
+    method: POST
+    url: /text/chat-kwb/conversation/summarySubmitVer2.action
+    data:
+      updateServiceId: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rJfRgfsSLgew3RN8eUNAwU6 #使用的是tid
+      uid: ${get_uid}
+      cid: ${get_cid}
+      pid: ${get_pid}
+      questionStatus: 1
+      operationId: 1718765461883
+      operationName: 咨询
+      reqTypeIdPath: 1718765470739
+      reqTypeNamePath: 售前咨询
+      questionDescribe: ${fake.text(max_nb_chars=1000)}
+      fields:
+
+  validate:
+    - eq: [ status_code, 200 ]

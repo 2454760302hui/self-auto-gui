@@ -1,0 +1,50 @@
+# HarmonyOS 登录测试示例
+
+config:
+  name: HarmonyOS 登录测试
+  platform: harmony
+  device: "FMR0223C13000649"
+  app: com.example.hmapp
+
+locators:
+  用户名输入框:
+    primary: "rid=com.example:id/username"
+    fallback:
+      - "text=用户名"
+  登录按钮:
+    primary: "rid=com.example:id/login_btn"
+    fallback:
+      - "text=登录"
+  首页标题:
+    primary: "rid=com.example:id/home_title"
+    fallback:
+      - "text=首页"
+
+test_login:
+  - name: 启动应用
+    launch_app:
+      package: com.example.hmapp
+      activity: EntryAbility
+
+  - name: 输入用户名
+    input:
+      locator: "rid=com.example:id/username"
+      value: test@example.com
+
+  - name: 输入密码
+    input:
+      locator: "rid=com.example:id/password"
+      value: password123
+
+  - name: 点击登录
+    tap:
+      locator: "text=登录"
+
+  - name: 验证成功
+    assert:
+      element: 首页标题
+      visible: true
+
+  - name: 关闭应用
+    close_app:
+      package: com.example.hmapp

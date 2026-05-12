@@ -1,0 +1,27 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 删除对接页面
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/basic-config-service/deleteIframeConfig
+
+    data:
+      iframeId: ${get_iframeId}
+#  extract:
+#    get_iframeId: $..iframeId
+#  export:
+#    - get_iframeId
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..iframeId,'${get_iframeId}']
+
+

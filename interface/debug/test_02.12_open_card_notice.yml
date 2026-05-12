@@ -1,0 +1,32 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 默认桌面网站-开启卡片通告
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/rest/updateConfigInSettings/4
+    data:
+      operateFlag: 3
+      channelType: 0
+      configId: b781e06ab97b46ce9a22d3188ca6b4c4 #先写死
+      id: ${get_id}
+      announceMsgFlag: 1
+      announceTopFlag: 0
+      announceMsg: ${fake.text(max_nb_chars=100)} #${fake.text()}
+
+  extract:
+    get_config_id: $..configId
+
+  export:
+    - get_config_id
+
+  validate:
+    - eq: [ $..retMsg, '成功' ]
+    - eq: [ $..retCode,'000000' ]
+#
+#

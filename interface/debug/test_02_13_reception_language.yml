@@ -1,0 +1,22 @@
+config:
+  name: 在线_v6
+  parameters: #卡迪尔 参数
+    x: [ "1", "2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","0" ]
+
+teststeps:
+-
+  name: 接待方案设置-默认桌面网站-访客端语言-切换英文，繁体，阿拉伯，法语，葡萄牙，韩语，西班牙，意大利，日语，德语，马来西亚，印尼，俄语，泰语，越南，土耳其，简体
+#  sleep: 1
+  request:
+    method: POST
+    url: /text/chat-set/reception/updateScheme
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      lan: ${x} #引入
+      visitLanEditFlag: '1'
+      id: 1800441960215793664 #不清楚从何来
+#      skillNum: ${fake.random_int(1,20)}
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']

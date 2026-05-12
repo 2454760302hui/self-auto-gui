@@ -1,0 +1,44 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 接待方案设置-客户分配规则-添加分组接待-文本样式-添加分组名称为专家,特需
+  # skip: 有bug-已提处理中-相关场景暂时忽略
+  request:
+    method: POST
+    url: /text/chat-set/reception/updateCusReceiveGroupInfo
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      schemeId: ${get_scheme_id_1}
+      groupStyle: '0'
+      groupGuideDoc: 请选择要咨询的业务
+      groupConfig: '[{"recGroupName":"特需","groupName":"特需","description":"","groupPic":null,"groupId":"67ff981a42bb4743ba6573687b9cc01f","channelFlag":1,"sortId":1},{"recGroupName":"专家","groupName":"专家","description":"","groupPic":null,"groupId":"719596005bda4ce7b228461468ee4883","channelFlag":1,"sortId":2}]'
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']
+#    - eq: [ $..keyword, '${del_keyWord}']
+
+
+-
+  name: 接待方案设置-客户分配规则-删除分组接待-专家,特需
+  # skip: 有bug-已提处理中-相关场景暂时忽略
+  request:
+    method: POST
+    url: /text/chat-set/reception/updateCusReceiveGroupInfo
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      schemeId: ${get_scheme_id_1}
+      groupStyle: 0
+      groupGuideDoc: 请选择要咨询的业务
+      groupConfig: []
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']
+#    - eq: [ $..keyword, '${del_keyWord}']
+

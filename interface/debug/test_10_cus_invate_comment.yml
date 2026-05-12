@@ -1,0 +1,16 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 客服发送邀请评价
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/reComment.action
+    data:
+      tid: xOh8P5f7pLDPHW5kyWJscuzHfKg8v3Wj5TWF2jP6WShHF5Q1r9A2GCXYF8Kk/xLt
+      cid: ${get_cid}
+      uid: ${get_uid}
+
+  validate:
+    - eq: [status_code, 200]

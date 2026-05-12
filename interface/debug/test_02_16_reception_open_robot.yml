@@ -1,0 +1,35 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: [ "4","2","1","3" ] #人工优先，仅人工，仅机器人,机器人优先
+
+teststeps:
+-
+  name: 接待方案设置-默认桌面网站-机器人接待-开启机器人回答顶踩【点踩后显示转人工】-开启未知回答说辞-开启机器人欢迎语-开启机器人名称
+#  sleep: 1
+  request:
+    method: POST
+    url: /text/chat-set/reception/updateScheme
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      robotFlag: '1'
+      switchRobotFlag: '0'
+      robotNickFlag: '1'
+      helloWordFlag: '1'
+      helloWordType: '1'
+      helloWord: ${fake.text()}
+      unknownWord: ${fake.text()}
+      realuateFlag: '1'
+      realuateTransferFlag: '1'
+      imageWord: ${fake.text()}
+      videoWord: ${fake.text()}
+      fileWord: ${fake.text()}
+      emojiWord: ${fake.text()}
+      robotReceptionEditFlag: '1'
+      id: 1800441960215793664 #不清楚从何来
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']
+
+

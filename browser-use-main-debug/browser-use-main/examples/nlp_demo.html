@@ -1,0 +1,705 @@
+));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .demo-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .demo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        .demo-card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .demo-card p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.95em;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .input-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .result-box {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .result-box.show {
+            display: block;
+        }
+        .result-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        .result-content {
+            background: white;
+            padding: 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            color: #333;
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status.loading {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        .feature-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+        .feature-list li {
+            padding: 8px 0;
+            color: #666;
+            font-size: 0.9em;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .feature-list li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+        .loading-spinner.show {
+            display: block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .example-section {
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+        .example-section h4 {
+            color: #667eea;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+        }
+        .example-item {
+            background: white;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            color: #666;
+            border-left: 3px solid #667eea;
+            transition: background 0.2s;
+        }
+        .example-item:hover {
+            background: #f0f0f0;
+        }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .tab-button.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Browser-Use NLP 演示</h1>
+            <p>自然语言处理与自动化操作集成演示</p>
+        </div>
+
+        <!-- 标签页 -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('intent')">意图识别</button>
+            <button class="tab-button" onclick="switchTab('entity')">实体提取</button>
+            <button class="tab-button" onclick="switchTab('command')">命令解析</button>
+            <button class="tab-button" onclick="switchTab('dsl')">DSL解析</button>
+            <button class="tab-button" onclick="switchTab('pipeline')">完整管道</button>
+        </div>
+
+        <!-- 意图识别 -->
+        <div id="intent" class="tab-content active">
+            <div class="demo-card">
+                <h2>🎯 意图识别</h2>
+                <p>识别用户输入的自动化意图</p>
+                
+                <div class="input-group">
+                    <label>输入自然语言命令</label>
+                    <textarea id="intentInput" placeholder="例如：点击登录按钮，然后输入用户名"></textarea>
+                </div>
+
+                <div class="example-section">
+                    <h4>📝 示例命令</h4>
+                    <div class="example-item" onclick="setIntentExample('点击登录按钮')">点击登录按钮</div>
+                    <div class="example-item" onclick="setIntentExample('输入用户名和密码')">输入用户名和密码</div>
+                    <div class="example-item" onclick="setIntentExample('等待页面加载完成')">等待页面加载完成</div>
+                    <div class="example-item" onclick="setIntentExample('选择下拉菜单中的选项')">选择下拉菜单中的选项</div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="analyzeIntent()">分析意图</button>
+                    <button onclick="clearIntentResult()">清空</button>
+                </div>
+
+                <div class="loading-spinner" id="intentSpinner"></div>
+                <div class="result-box" id="intentResult">
+                    <h3>识别结果</h3>
+                    <div class="result-content" id="intentContent"></div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <h2>📊 支持的意图类型</h2>
+                <ul class="feature-list">
+                    <li>CLICK - 点击操作</li>
+                    <li>INPUT - 输入操作</li>
+                    <li>SELECT - 选择操作</li>
+                    <li>SUBMIT - 提交操作</li>
+                    <li>WAIT - 等待操作</li>
+                    <li>VERIFY - 验证操作</li>
+                    <li>NAVIGATE - 导航操作</li>
+                    <li>EXTRACT - 提取操作</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 实体提取 -->
+        <div id="entity" class="tab-content">
+            <div class="demo-card">
+                <h2>🏷️ 实体提取</h2>
+                <p>从文本中提取关键实体信息</p>
+                
+                <div class="input-group">
+                    <label>输入文本</label>
+                    <textarea id="entityInput" placeholder="例如：点击ID为login-btn的按钮，然后在用户名字段输入admin"></textarea>
+                </div>
+
+                <div class="example-section">
+                    <h4>📝 示例文本</h4>
+                    <div class="example-item" onclick="setEntityExample('点击ID为submit的按钮')">点击ID为submit的按钮</div>
+                    <div class="example-item" onclick="setEntityExample('在class为input-field的输入框输入密码')">在class为input-field的输入框输入密码</div>
+                    <div class="example-item" onclick="setEntityExample('选择name为category的下拉菜单中的第一个选项')">选择name为category的下拉菜单中的第一个选项</div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="extractEntity()">提取实体</button>
+                    <button onclick="clearEntityResult()">清空</button>
+                </div>
+
+                <div class="loading-spinner" id="entitySpinner"></div>
+                <div class="result-box" id="entityResult">
+                    <h3>提取结果</h3>
+                    <div class="result-content" id="entityContent"></div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <h2>🔍 实体类型</h2>
+                <ul class="feature-list">
+                    <li>ELEMENT - 页面元素</li>
+                    <li>SELECTOR - CSS选择器</li>
+                    <li>VALUE - 输入值</li>
+                    <li>ATTRIBUTE - 属性</li>
+                    <li>CONDITION - 条件</li>
+                    <li>LOCATION - 位置信息</li>
+                    <li>TIMING - 时间信息</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 命令解析 -->
+        <div id="command" class="tab-content">
+            <div class="demo-card">
+                <h2>⚙️ 命令解析</h2>
+                <p>将自然语言转换为结构化命令</p>
+                
+                <div class="input-group">
+                    <label>输入命令</label>
+                    <textarea id="commandInput" placeholder="例如：点击登录按钮，输入用户名，然后提交表单"></textarea>
+                </div>
+
+                <div class="example-section">
+                    <h4>📝 示例命令</h4>
+                    <div class="example-item" onclick="setCommandExample('点击搜索按钮')">点击搜索按钮</div>
+                    <div class="example-item" onclick="setCommandExample('在搜索框输入关键词')">在搜索框输入关键词</div>
+                    <div class="example-item" onclick="setCommandExample('等待结果加载，然后点击第一个结果')">等待结果加载，然后点击第一个结果</div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="parseCommand()">解析命令</button>
+                    <button onclick="clearCommandResult()">清空</button>
+                </div>
+
+                <div class="loading-spinner" id="commandSpinner"></div>
+                <div class="result-box" id="commandResult">
+                    <h3>解析结果</h3>
+                    <div class="result-content" id="commandContent"></div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <h2>📋 命令类型</h2>
+                <ul class="feature-list">
+                    <li>CLICK - 点击元素</li>
+                    <li>TYPE - 输入文本</li>
+                    <li>SELECT - 选择选项</li>
+                    <li>SUBMIT - 提交表单</li>
+                    <li>WAIT - 等待条件</li>
+                    <li>VERIFY - 验证状态</li>
+                    <li>NAVIGATE - 页面导航</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- DSL解析 -->
+        <div id="dsl" class="tab-content">
+            <div class="demo-card">
+                <h2>📝 DSL解析</h2>
+                <p>解析特定领域语言（DSL）命令</p>
+                
+                <div class="input-group">
+                    <label>输入DSL命令</label>
+                    <textarea id="dslInput" placeholder="例如：CLICK #login-btn | INPUT #username 'admin' | SUBMIT"></textarea>
+                </div>
+
+                <div class="example-section">
+                    <h4>📝 DSL语法示例</h4>
+                    <div class="example-item" onclick="setDSLExample('CLICK #submit-btn')">CLICK #submit-btn</div>
+                    <div class="example-item" onclick="setDSLExample('INPUT .username-field \"admin\"')">INPUT .username-field "admin"</div>
+                    <div class="example-item" onclick="setDSLExample('WAIT 3000 | CLICK #next')">WAIT 3000 | CLICK #next</div>
+                    <div class="example-item" onclick="setDSLExample('SELECT [name=category] \"option1\"')">SELECT [name=category] "option1"</div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="parseDSL()">解析DSL</button>
+                    <button onclick="clearDSLResult()">清空</button>
+                </div>
+
+                <div class="loading-spinner" id="dslSpinner"></div>
+                <div class="result-box" id="dslResult">
+                    <h3>解析结果</h3>
+                    <div class="result-content" id="dslContent"></div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <h2>🔧 DSL操作符</h2>
+                <ul class="feature-list">
+                    <li>CLICK - 点击操作</li>
+                    <li>INPUT - 输入操作</li>
+                    <li>SELECT - 选择操作</li>
+                    <li>SUBMIT - 提交操作</li>
+                    <li>WAIT - 等待操作</li>
+                    <li>VERIFY - 验证操作</li>
+                    <li>| - 管道操作符</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 完整管道 -->
+        <div id="pipeline" class="tab-content">
+            <div class="demo-card">
+                <h2>🔄 完整NLP管道</h2>
+                <p>从自然语言到可执行命令的完整处理流程</p>
+                
+                <div class="input-group">
+                    <label>输入自然语言</label>
+                    <textarea id="pipelineInput" placeholder="例如：我想登录系统，请点击登录按钮，输入用户名和密码，然后提交"></textarea>
+                </div>
+
+                <div class="example-section">
+                    <h4>📝 示例场景</h4>
+                    <div class="example-item" onclick="setPipelineExample('登录到系统')">登录到系统</div>
+                    <div class="example-item" onclick="setPipelineExample('搜索产品并添加到购物车')">搜索产品并添加到购物车</div>
+                    <div class="example-item" onclick="setPipelineExample('填写表单并提交')">填写表单并提交</div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="runPipeline()">运行管道</button>
+                    <button onclick="clearPipelineResult()">清空</button>
+                </div>
+
+                <div class="loading-spinner" id="pipelineSpinner"></div>
+                <div class="result-box" id="pipelineResult">
+                    <h3>处理结果</h3>
+                    <div class="result-content" id="pipelineContent"></div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <h2>📊 管道流程</h2>
+                <ul class="feature-list">
+                    <li>1. 意图识别 - 识别用户意图</li>
+                    <li>2. 实体提取 - 提取关键信息</li>
+                    <li>3. 语义解析 - 理解语义</li>
+                    <li>4. 命令生成 - 生成可执行命令</li>
+                    <li>5. 验证 - 验证命令有效性</li>
+                    <li>6. 执行 - 执行自动化操作</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 标签页切换
+        function switchTab(tabName) {
+            // 隐藏所有标签页
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // 移除所有按钮的active类
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // 显示选中的标签页
+            document.getElementById(tabName).classList.add('active');
+            
+            // 添加active类到点击的按钮
+            event.target.classList.add('active');
+        }
+
+        // 意图识别
+        function setIntentExample(text) {
+            document.getElementById('intentInput').value = text;
+        }
+
+        function analyzeIntent() {
+            const input = document.getElementById('intentInput').value.trim();
+            if (!input) {
+                alert('请输入命令');
+                return;
+            }
+
+            const spinner = document.getElementById('intentSpinner');
+            const resultBox = document.getElementById('intentResult');
+            const resultContent = document.getElementById('intentContent');
+
+            spinner.classList.add('show');
+            resultBox.classList.remove('show');
+
+            // 模拟API调用
+            setTimeout(() => {
+                const result = {
+                    input: input,
+                    intent: 'CLICK',
+                    confidence: 0.95,
+                    entities: [
+                        { type: 'ELEMENT', value: '登录按钮', confidence: 0.92 }
+                    ],
+                    timestamp: new Date().toISOString()
+                };
+
+                resultContent.textContent = JSON.stringify(result, null, 2);
+                spinner.classList.remove('show');
+                resultBox.classList.add('show');
+            }, 500);
+        }
+
+        function clearIntentResult() {
+            document.getElementById('intentInput').value = '';
+            document.getElementById('intentResult').classList.remove('show');
+        }
+
+        // 实体提取
+        function setEntityExample(text) {
+            document.getElementById('entityInput').value = text;
+        }
+
+        function extractEntity() {
+            const input = document.getElementById('entityInput').value.trim();
+            if (!input) {
+                alert('请输入文本');
+                return;
+            }
+
+            const spinner = document.getElementById('entitySpinner');
+            const resultBox = document.getElementById('entityResult');
+            const resultContent = document.getElementById('entityContent');
+
+            spinner.classList.add('show');
+            resultBox.classList.remove('show');
+
+            setTimeout(() => {
+                const result = {
+                    input: input,
+                    entities: [
+                        { type: 'SELECTOR', value: '#submit', confidence: 0.98 },
+                        { type: 'ACTION', value: '点击', confidence: 0.95 }
+                    ],
+                    timestamp: new Date().toISOString()
+                };
+
+                resultContent.textContent = JSON.stringify(result, null, 2);
+                spinner.classList.remove('show');
+                resultBox.classList.add('show');
+            }, 500);
+        }
+
+        function clearEntityResult() {
+            document.getElementById('entityInput').value = '';
+            document.getElementById('entityResult').classList.remove('show');
+        }
+
+        // 命令解析
+        function setCommandExample(text) {
+            document.getElementById('commandInput').value = text;
+        }
+
+        function parseCommand() {
+            const input = document.getElementById('commandInput').value.trim();
+            if (!input) {
+                alert('请输入命令');
+                return;
+            }
+
+            const spinner = document.getElementById('commandSpinner');
+            const resultBox = document.getElementById('commandResult');
+            const resultContent = document.getElementById('commandContent');
+
+            spinner.classList.add('show');
+            resultBox.classList.remove('show');
+
+            setTimeout(() => {
+                const result = {
+                    input: input,
+                    commands: [
+                        { type: 'CLICK', target: '#search-btn', confidence: 0.95 },
+                        { type: 'INPUT', target: '.search-field', value: '关键词', confidence: 0.92 }
+                    ],
+                    timestamp: new Date().toISOString()
+                };
+
+                resultContent.textContent = JSON.stringify(result, null, 2);
+                spinner.classList.remove('show');
+                resultBox.classList.add('show');
+            }, 500);
+        }
+
+        function clearCommandResult() {
+            document.getElementById('commandInput').value = '';
+            document.getElementById('commandResult').classList.remove('show');
+        }
+
+        // DSL解析
+        function setDSLExample(text) {
+            document.getElementById('dslInput').value = text;
+        }
+
+        function parseDSL() {
+            const input = document.getElementById('dslInput').value.trim();
+            if (!input) {
+                alert('请输入DSL命令');
+                return;
+            }
+
+            const spinner = document.getElementById('dslSpinner');
+            const resultBox = document.getElementById('dslResult');
+            const resultContent = document.getElementById('dslContent');
+
+            spinner.classList.add('show');
+            resultBox.classList.remove('show');
+
+            setTimeout(() => {
+                const result = {
+                    input: input,
+                    parsed: true,
+                    operations: [
+                        { op: 'CLICK', selector: '#submit-btn' },
+                        { op: 'INPUT', selector: '.username-field', value: 'admin' }
+                    ],
+                    timestamp: new Date().toISOString()
+                };
+
+                resultContent.textContent = JSON.stringify(result, null, 2);
+                spinner.classList.remove('show');
+                resultBox.classList.add('show');
+            }, 500);
+        }
+
+        function clearDSLResult() {
+            document.getElementById('dslInput').value = '';
+            document.getElementById('dslResult').classList.remove('show');
+        }
+
+        // 完整管道
+        function setPipelineExample(text) {
+            document.getElementById('pipelineInput').value = text;
+        }
+
+        function runPipeline() {
+            const input = document.getElementById('pipelineInput').value.trim();
+            if (!input) {
+                alert('请输入自然语言');
+                return;
+            }
+
+            const spinner = document.getElementById('pipelineSpinner');
+            const resultBox = document.getElementById('pipelineResult');
+            const resultContent = document.getElementById('pipelineContent');
+
+            spinner.classList.add('show');
+            resultBox.classList.remove('show');
+
+            setTimeout(() => {
+                const result = {
+                    input: input,
+                    pipeline: {
+                        step1_intent: { type: 'LOGIN', confidence: 0.96 },
+                        step2_entities: [
+                            { type: 'ELEMENT', value: '登录按钮' },
+                            { type: 'FIELD', value: '用户名' },
+                            { type: 'FIELD', value: '密码' }
+                        ],
+                        step3_semantic: { understood: true, complexity: 'medium' },
+                        step4_commands: [
+                            { type: 'CLICK', target: '#login-btn' },
+                            { type: 'INPUT', target: '#username', value: 'user' },
+                            { type: 'INPUT', target: '#password', value: 'pass' },
+                            { type: 'SUBMIT', target: '#submit-btn' }
+                        ],
+                        step5_validation: { valid: true, errors: [] },
+                        step6_ready: true
+                    },
+                    timestamp: new Date().toISOString()
+                };
+
+                resultContent.textContent = JSON.stringify(result, null, 2);
+                spinner.classList.remove('show');
+                resultBox.classList.add('show');
+            }, 800);
+        }
+
+        function clearPipelineResult() {
+            document.getElementById('pipelineInput').value = '';
+            document.getElementById('pipelineResult').classList.remove('show');
+        }
+
+        // 初始化
+        window.addEventListener('load', () => {
+            console.log('NLP Demo loaded successfully');
+        });
+    </script>
+</body>
+</html>

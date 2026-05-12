@@ -1,0 +1,41 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 满意度评价-使用模板模板-全选-按咨询渠道
+  skip: 跳过-重复-未处理1
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-satisfaction/saticfaction/updateScheme
+
+    data:
+      templateId: 12a8acec5cb848e28504a2256f1f424d
+      groupIds: 67ff981a42bb4743ba6573687b9cc01f,719596005bda4ce7b228461468ee4883
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+
+
+-
+  name: 满意度评价-使用模板模板-全选-删除
+  skip: 跳过-重复-未处理2
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-satisfaction/saticfaction/deleteScheme
+
+    data:
+      id: c6af72b7718f45919b747378ac64583e
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

@@ -1,0 +1,27 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 客服设置-删除-新增桌面渠道
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/rest/delConfigInfo/4
+    data:
+      configId: ${get_config_id}
+      channelFlag: ${get_channelFlag}
+
+#
+#  extract:
+#    get_config_id: $..configId
+#    get_channelName: $..channelName #取新增桌面渠道名称
+#    get_channelFlag: $..channelFlag
+#
+#  export:
+#    - get_config_id
+#    - get_channelFlag
+
+  validate:
+    - eq: [ $..retCode,'000000' ]

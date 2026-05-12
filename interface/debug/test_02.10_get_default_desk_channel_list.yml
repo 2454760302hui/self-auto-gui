@@ -1,0 +1,30 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 查看对接渠道设置列表-并获取configId和id
+  request:
+    method: GET
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/rest/selectConfigInfo/4?channelType=0
+    data:
+      channelType: 0
+
+  extract:
+    get_config_id: item.configId #取多值，可以这样写
+    get_id: $.item.id #取多值，可以这样写
+
+
+  export:
+    - get_config_id
+    - get_id
+
+
+#  validate:
+#    - eq: [ $..configId, '${get_config_id}' ]
+#    - eq: [ $..id,'${get_id}' ]
+
+

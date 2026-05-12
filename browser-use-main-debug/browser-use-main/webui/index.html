@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Self - Browser Use</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f0f5;color:#222;min-height:100vh}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;background:#fff;border-bottom:1px solid #e8e8e8;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.logo{display:flex;align-items:center}
+.llm-badge{background:#e6f9f0;color:#1a9e5c;border:1px solid #a8e6c8;border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600}
+.llm-badge.warn{background:#fff8e1;color:#e65100;border-color:#ffcc80}
+.main{max-width:900px;margin:24px auto;padding:0 16px}
+.card{background:#fff;border-radius:12px;box-shadow:0 1px 8px rgba(0,0,0,.08);padding:22px;margin-bottom:18px}
+.card-title{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:7px}
+.tabs{display:flex;border-radius:10px;overflow:hidden;border:1px solid #e0e0e0;margin-bottom:18px}
+.tab{flex:1;padding:11px;text-align:center;cursor:pointer;font-size:14px;font-weight:600;background:#f8f8f8;border:none;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+.tab.active{background:#7c3aed;color:#fff}
+.tab:not(.active):hover{background:#f0eeff;color:#7c3aed}
+.llm-info-box{background:#f0eeff;border:1px solid #d4c5ff;border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:13.5px;line-height:1.8;color:#3d1f8a}
+.llm-info-box .row{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px}
+.llm-demo-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
+.llm-demo-label{font-weight:700;color:#3d1f8a;font-size:13px;flex-shrink:0}
+.llm-demo-btn{padding:4px 10px;border-radius:5px;border:1px solid #c4b0ff;background:#fff;cursor:pointer;font-size:12px;color:#5b21b6;transition:all .15s}
+.llm-demo-btn:hover{background:#7c3aed;color:#fff;border-color:#7c3aed}
+.llm-task{width:100%;padding:11px 13px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none;min-height:90px;resize:vertical;line-height:1.6}
+.llm-task:focus{border-color:#7c3aed}
+.nlp-info{background:#eef4ff;border:1px solid #c7d9ff;border-radius:10px;padding:13px 16px;margin-bottom:14px;font-size:13px;line-height:1.7;color:#2d4a8a}
+.nlp-info b{color:#1a2e6b}
+.demo-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;align-items:center}
+.demo-label{font-weight:700;color:#333;font-size:13px;flex-shrink:0}
+.demo-btn{padding:4px 10px;border-radius:5px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:12px;color:#444;transition:all .15s}
+.demo-btn:hover{background:#7c3aed;color:#fff;border-color:#7c3aed}
+.doc-btn{padding:4px 13px;border-radius:5px;background:#7c3aed;color:#fff;border:none;cursor:pointer;font-size:12px;font-weight:600}
+.record-box{background:#f0fff4;border:1px solid #b2e8cc;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.record-title{font-size:13.5px;font-weight:700;color:#1a6e3c;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.record-row{display:flex;gap:9px}
+.record-input{flex:1;padding:9px 13px;border:1px solid #ccc;border-radius:7px;font-size:13.5px;outline:none}
+.record-input:focus{border-color:#1a9e5c}
+.record-btn{padding:9px 18px;background:#1a9e5c;color:#fff;border:none;border-radius:7px;cursor:pointer;font-size:13.5px;font-weight:600;white-space:nowrap}
+.record-btn:hover{background:#157a48}
+.nlp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.nlp-label{font-size:13.5px;color:#666}
+.nlp-actions{display:flex;gap:7px}
+.action-btn{padding:4px 11px;border-radius:5px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:12.5px;color:#555;display:flex;align-items:center;gap:4px}
+.action-btn:hover{background:#f0eeff;border-color:#7c3aed;color:#7c3aed}
+textarea{width:100%;border:1px solid #ddd;border-radius:8px;padding:11px 12px;font-size:13.5px;font-family:monospace;resize:vertical;outline:none;min-height:150px;line-height:1.7}
+textarea:focus{border-color:#7c3aed}
+.cheatsheet{background:#fffbf0;border:1px solid #ffe0a0;border-radius:10px;padding:13px 16px;margin-top:13px;font-size:12.5px}
+.cheatsheet b{color:#7c4a00;display:block;margin-bottom:7px;font-size:13px}
+.cheat-line{color:#555;margin-bottom:5px;line-height:1.6}
+.cheat-line span{color:#7c3aed;font-weight:600}
+.btn-row{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap;align-items:center}
+.btn-exec{padding:11px 26px;background:#7c3aed;color:#fff;border:none;border-radius:9px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;gap:7px;transition:all .2s}
+.btn-exec:hover{background:#6d28d9}
+.btn-exec:disabled{background:#bbb;cursor:not-allowed}
+.btn-secondary{padding:11px 18px;background:#fff;color:#555;border:1px solid #ddd;border-radius:9px;cursor:pointer;font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:5px}
+.btn-secondary:hover{background:#f5f5f5}
+.model-card,.history-card{background:#fff;border-radius:12px;box-shadow:0 1px 8px rgba(0,0,0,.08);padding:18px 22px;margin-bottom:18px}
+.model-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.model-title,.history-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:7px}
+.model-arrow{font-size:14px;color:#999;transition:transform .2s}
+.model-arrow.open{transform:rotate(90deg)}
+.model-body{margin-top:14px;display:none}
+.model-body.open{display:block}
+.model-ok{color:#1a9e5c;font-size:13px;font-weight:600;margin-top:8px}
+.model-ok a{color:#1a9e5c}
+.model-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.model-field label{display:block;font-size:12px;color:#888;margin-bottom:4px}
+.model-field input{width:100%;padding:8px 11px;border:1px solid #ddd;border-radius:6px;font-size:13px;outline:none}
+.model-field input:focus{border-color:#7c3aed}
+.model-field.full{grid-column:1/-1}
+.history-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.history-actions{display:flex;gap:8px}
+.btn-sm{padding:5px 13px;border-radius:6px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:12.5px;color:#555;font-weight:600}
+.btn-sm:hover{background:#f5f5f5}
+.btn-sm.danger{border-color:#ffb3b3;color:#c0392b}
+.btn-sm.danger:hover{background:#fff5f5}
+.history-list{max-height:340px;overflow-y:auto}
+.history-item{padding:11px 14px;border:1px solid #eee;border-radius:8px;margin-bottom:8px;cursor:pointer;transition:all .15s}
+.history-item:hover{border-color:#c4b0ff;background:#faf8ff}
+.history-item .task-text{font-size:13.5px;color:#333;margin-bottom:5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-item .meta{display:flex;align-items:center;gap:8px;font-size:12px;color:#999}
+.badge{padding:2px 8px;border-radius:4px;font-size:11.5px;font-weight:700}
+.badge.pass{background:#e6f9f0;color:#1a9e5c}
+.badge.fail{background:#ffe8e8;color:#c0392b}
+.gif-link{color:#7c3aed;text-decoration:none;font-size:12px}
+.gif-link:hover{text-decoration:underline}
+.gif-preview-btn{color:#7c3aed;font-size:12px;cursor:pointer;text-decoration:none;padding:2px 6px;border:1px solid #c4b0ff;border-radius:4px;background:#f8f5ff}
+.gif-preview-btn:hover{background:#7c3aed;color:#fff;border-color:#7c3aed}
+#gifPreviewModal .modal-box{max-width:960px;text-align:center}
+#gifPreviewModal img{max-width:100%;max-height:70vh;border-radius:8px;border:1px solid #ddd;display:block;margin:0 auto}
+#gifPreviewModal .gif-caption{font-size:12px;color:#999;margin-top:8px}
+.result-box{margin-top:14px;background:#f8f8f8;border:1px solid #e0e0e0;border-radius:10px;padding:14px;font-size:13px;font-family:monospace;white-space:pre-wrap;max-height:300px;overflow-y:auto;display:none;line-height:1.6}
+.result-box.show{display:block}
+.result-box.success{border-color:#b2e8cc;background:#f0fff4}
+.result-box.error{border-color:#ffb3b3;background:#fff5f5}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:flex-start;justify-content:center;padding-top:30px;overflow-y:auto}
+.modal.show{display:flex}
+.modal-box{background:#fff;border-radius:14px;padding:26px;width:92%;max-width:860px;max-height:88vh;overflow-y:auto;position:relative;margin-bottom:30px}
+.modal-title{font-size:16px;font-weight:700;margin-bottom:4px;padding-right:60px}
+.modal-subtitle{font-size:13px;color:#888;margin-bottom:18px}
+.modal-close{position:absolute;top:18px;right:20px;cursor:pointer;font-size:14px;color:#666;background:#f0f0f0;border:none;border-radius:6px;padding:4px 10px;font-weight:600}
+.modal-close:hover{background:#e0e0e0}
+.doc-section{margin-bottom:24px}
+.doc-section-title{font-size:14px;font-weight:700;color:#7c3aed;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #f0eeff;display:flex;align-items:center;gap:6px}
+.doc-table{width:100%;border-collapse:collapse;font-size:13px}
+.doc-table th{text-align:left;padding:7px 10px;background:#f8f8f8;color:#666;font-weight:600;border-bottom:1px solid #eee}
+.doc-table td{padding:7px 10px;border-bottom:1px solid #f5f5f5;vertical-align:top}
+.doc-table tr:hover td{background:#faf8ff}
+.doc-table td:first-child{color:#7c3aed;font-weight:600;font-family:monospace;white-space:nowrap;width:200px}
+.doc-table td:nth-child(2){color:#888;font-family:monospace;font-size:12px;width:220px}
+.doc-table td:nth-child(3){color:#555}
+.doc-table td:last-child{width:80px;text-align:center}
+.use-btn{padding:3px 10px;border-radius:4px;border:1px solid #c4b0ff;background:#f8f5ff;cursor:pointer;font-size:11.5px;color:#7c3aed;white-space:nowrap}
+.use-btn:hover{background:#7c3aed;color:#fff}
+.export-preview{width:100%;min-height:280px;padding:12px;border:1px solid #ddd;border-radius:8px;font-family:monospace;font-size:12.5px;background:#f8f8f8;resize:vertical;outline:none}
+.export-actions{display:flex;gap:10px;margin-top:12px}
+.param-row,.adv-row{margin-bottom:12px}
+.param-row label,.adv-row label{display:block;font-size:13px;color:#666;margin-bottom:4px}
+.param-row input,.adv-row input{width:100%;padding:8px 11px;border:1px solid #ddd;border-radius:6px;font-size:13.5px;outline:none}
+.param-row input:focus,.adv-row input:focus{border-color:#7c3aed}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">
+    <svg width="110" height="30" viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(0,0) scale(0.48)">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.411091 50.172C-0.214959 49.4087 -0.078008 48.2852 0.691787 47.6671L7.98408 41.8121C8.62017 41.3013 9.55015 41.4167 10.0688 42.0463C15.022 48.0597 20.278 50.8436 26.0957 50.8436C31.8732 50.8436 36.9859 48.0991 41.7222 42.1525C42.2305 41.5142 43.1582 41.3822 43.8035 41.8816L51.1954 47.6021C51.976 48.2062 52.1332 49.3269 51.5203 50.1005C44.5175 58.9399 35.9435 63.5972 26.0957 63.5972C16.2766 63.5972 7.62609 58.969 0.411091 50.172Z" fill="url(#p0)"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M26.4487 17.1675C26.1739 16.9241 25.7606 16.924 25.4855 17.1672L9.62895 31.1882C9.02279 31.7242 8.09562 31.662 7.56651 31.0498L1.38195 23.8944C0.860213 23.2907 0.922623 22.3793 1.52177 21.8525L25.0072 1.19963C25.5562 0.716868 26.3783 0.716976 26.9271 1.19988L50.4178 21.8683C51.0173 22.3958 51.079 23.3081 50.556 23.9115L44.3565 31.0634C43.8267 31.6745 42.9001 31.7357 42.2946 31.1995L26.4487 17.1675Z" fill="url(#p1)"/>
+        <defs>
+          <linearGradient id="p0" x1="-0.692871" y1="32.1384" x2="52.5993" y2="32.1384" gradientUnits="userSpaceOnUse"><stop offset="0.225962" stop-color="#6647F0"/><stop offset="0.793269" stop-color="#0091FF"/></linearGradient>
+          <linearGradient id="p1" x1="-0.692871" y1="31.621" x2="52.5993" y2="31.621" gradientUnits="userSpaceOnUse"><stop stop-color="#FF02F0"/><stop offset="0.778846" stop-color="#F76808"/><stop offset="1" stop-color="#F76808"/></linearGradient>
+        </defs>
+      </g>
+      <text x="34" y="22" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="17" font-weight="700" fill="#222">Self</text>
+    </svg>
+  </div>
+  <div class="llm-badge" id="llmBadge">⏳ 检测中...</div>
+</div>
+
+<div class="main">
+  <div class="card">
+    <div class="card-title">🤖 自动化任务</div>
+    <div class="tabs">
+      <button class="tab active" id="tabLLM" onclick="switchTab('llm')">🧠 LLM</button>
+      <button class="tab" id="tabNLP" onclick="switchTab('nlp')">📋 NLP</button>
+    </div>
+
+    <!-- LLM 面板 -->
+    <div id="panelLLM">
+      <div class="llm-info-box">
+        <div class="row"><span>ℹ️</span><span><b>使用说明：</b>用自然语言描述任务，AI 自动控制浏览器逐步执行。</span></div>
+        <div class="row"><span>✅</span><span><b>适合：</b>复杂动态场景、需要判断的任务。速度：每步 10-30s（需调用 LLM）。</span></div>
+        <div class="llm-demo-row">
+          <span class="llm-demo-label">Demo:</span>
+          <button class="llm-demo-btn" onclick="setLLMTask('打开必应，搜索耳机，查看前3个结果')">打开必应，搜索耳机，查看前3个结果</button>
+          <button class="llm-demo-btn" onclick="setLLMTask('打开 github.com，搜索 playwright，返回第一个仓库的 star 数')">搜索 github playwright</button>
+          <button class="llm-demo-btn" onclick="setLLMTask('打开百度，搜索今日天气，截图保存')">百度搜索天气截图</button>
+        </div>
+      </div>
+      <textarea class="llm-task" id="llmTask" placeholder="输入自然语言任务...">打开必应，搜索耳机，查看前3个结果</textarea>
+      <div class="btn-row">
+        <button class="btn-exec" id="btnRunLLM" onclick="runLLM()">▶ 开始执行</button>
+        <button class="btn-secondary" onclick="showAdvanced()">⚙ 高级选项</button>
+      </div>
+      <div class="result-box" id="llmResult"></div>
+    </div>
+
+    <!-- NLP 面板 -->
+    <div id="panelNLP" style="display:none">
+      <div class="nlp-info">
+        <b>使用说明：</b>每行一条自然语言指令，直接映射为 Playwright 操作，无需 LLM，执行速度快（1-5s）。<br>
+        <b>支持：</b>打开/点击/输入/按键/等待/截图/滚动/悬停/断言/获取/iframe/多标签页/表单/拖拽 等全部 Playwright API。
+        <div class="demo-row">
+          <span class="demo-label">Demo:</span>
+          <button class="demo-btn" onclick="loadDemo('【全操作】完整覆盖')">全操作覆盖</button>
+          <button class="demo-btn" onclick="loadDemo('【导航】多标签页操作')">多标签页</button>
+          <button class="demo-btn" onclick="loadDemo('【导航】浏览器控制')">浏览器控制</button>
+          <button class="demo-btn" onclick="loadDemo('【点击】单击双击右键悬停')">点击交互</button>
+          <button class="demo-btn" onclick="loadDemo('【表单】输入框完整流程')">表单填写</button>
+          <button class="demo-btn" onclick="loadDemo('【表单】下拉框单选多选')">下拉单选多选</button>
+          <button class="demo-btn" onclick="loadDemo('【表单】开关与文本操作')">开关文本操作</button>
+          <button class="demo-btn" onclick="loadDemo('【键盘】输入文字按键')">键盘操作</button>
+          <button class="demo-btn" onclick="loadDemo('【上传】文件上传')">文件上传</button>
+          <button class="demo-btn" onclick="loadDemo('【滚动】页面滚动截图')">页面滚动</button>
+          <button class="demo-btn" onclick="loadDemo('【iframe】嵌入框架操作')">iframe操作</button>
+          <button class="demo-btn" onclick="loadDemo('【断言】页面元素验证')">断言验证</button>
+          <button class="demo-btn" onclick="loadDemo('【获取】页面数据提取')">数据获取</button>
+          <button class="demo-btn" onclick="loadDemo('【JS】JavaScript执行')">JS执行</button>
+          <button class="demo-btn" onclick="loadDemo('【等待】页面加载策略')">等待策略</button>
+          <button class="demo-btn" onclick="loadDemo('【弹窗】JavaScript弹窗')">弹窗处理</button>
+          <button class="demo-btn" onclick="loadDemo('【实战】Bing搜索全流程')">Bing搜索</button>
+          <button class="demo-btn" onclick="loadDemo('【实战】表单提交全流程')">表单提交</button>
+          <button class="demo-btn" onclick="loadDemo('【实战】登录页面自动化')">登录自动化</button>
+          <button class="demo-btn" onclick="loadDemo('【实战】多页面数据采集')">多页面采集</button>
+          <button class="doc-btn" onclick="showDocs()">📖 查看文档</button>
+        </div>
+      </div>
+
+      <div class="record-box">
+        <div class="record-title">🎬 录制生成 DSL（可选）</div>
+        <div class="record-row">
+          <input class="record-input" id="recordUrl" placeholder="录制起始 URL（如 https://bing.com）">
+          <button class="record-btn" id="btnRecord" onclick="toggleRecord()">▶ 开始录制</button>
+        </div>
+      </div>
+
+      <div class="nlp-header">
+        <span class="nlp-label">NLP 指令（每行一条，# 开头为注释）</span>
+        <div class="nlp-actions">
+          <button class="action-btn" onclick="showParamModal()">📊 参数化</button>
+          <button class="action-btn" onclick="showConvertModal()">↩ 从PW转换</button>
+        </div>
+      </div>
+      <textarea id="nlpDsl" placeholder="打开 https://bing.com&#10;等待加载完成&#10;截图">打开 https://cn.bing.com
+等待加载完成
+输入 #sb_form_q 耳机
+按键 Enter
+等待加载完成
+截图</textarea>
+
+      <div class="cheatsheet">
+        <b>📋 指令速查:</b>
+        <div class="cheat-line"><span>打开</span> https://bing.com · <span>等待加载完成</span> · <span>返回</span> · <span>前进</span> · <span>刷新</span> · <span>截图</span></div>
+        <div class="cheat-line"><span>点击</span> #id · <span>点击</span> 文本=登录 · <span>双击</span> #el · <span>右键</span> #el · <span>悬停</span> #el · <span>拖拽</span> #a 到 #b</div>
+        <div class="cheat-line"><span>输入</span> #id 内容 · <span>清空</span> #id · <span>按键</span> Enter · <span>选择</span> #sel 值 · <span>勾选</span> #cb · <span>取消勾选</span> #cb</div>
+        <div class="cheat-line"><span>断言可见</span> #el · <span>断言文本</span> #el 期望 · <span>断言URL</span> keyword · <span>获取文本</span> h1 · <span>执行JS</span> document.title</div>
+        <div class="cheat-line"><span>新标签页</span> · <span>iframe</span> #frame · <span>iframe输入</span> body 文字 · <span>退出iframe</span> · <span>滚动</span> 下/上/底部/顶部</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-exec" id="btnRunNLP" onclick="runNLP()">▶ 执行指令</button>
+        <button class="btn-secondary" onclick="showAdvanced()">⚙ 高级选项</button>
+        <button class="btn-secondary" onclick="exportDSL('yaml')">📄 导出 YAML</button>
+        <button class="btn-secondary" onclick="exportDSL('pytest')">🧪 导出 pytest</button>
+      </div>
+      <div class="result-box" id="nlpResult"></div>
+    </div>
+  </div>
+
+  <!-- 模型配置 -->
+  <div class="model-card">
+    <div class="model-header" onclick="toggleModelCard()">
+      <div class="model-title">🔑 模型配置</div>
+      <span class="model-arrow" id="modelArrow">▶</span>
+    </div>
+    <div class="model-ok" id="modelOk"></div>
+    <div class="model-body" id="modelBody">
+      <div class="model-form">
+        <div class="model-field"><label>Provider</label><input id="cfgProvider" placeholder="anthropic / openai / google"></div>
+        <div class="model-field"><label>Model</label><input id="cfgModel" placeholder="glm-5.1 / gpt-4o"></div>
+        <div class="model-field full"><label>Base URL</label><input id="cfgBaseUrl" placeholder="https://mydamoxing.cn"></div>
+        <div class="model-field full"><label>Auth Token / API Key</label><input id="cfgToken" type="password" placeholder="sk-..."></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-exec" style="padding:9px 20px;font-size:13px" onclick="testLLM()">🔍 测试连接</button>
+      </div>
+      <div class="result-box" id="llmTestResult"></div>
+    </div>
+  </div>
+
+  <!-- 历史记录 -->
+  <div class="history-card">
+    <div class="history-header">
+      <div class="history-title">📋 历史记录</div>
+      <div class="history-actions">
+        <button class="btn-sm" onclick="loadHistory()">刷新</button>
+        <button class="btn-sm danger" onclick="clearHistory()">清空</button>
+      </div>
+    </div>
+    <div class="history-list" id="historyList"><div style="color:#aaa;font-size:13px;text-align:center;padding:20px">暂无记录</div></div>
+  </div>
+</div>
+
+<!-- 文档弹窗 -->
+<div class="modal" id="docsModal">
+<div class="modal-box">
+  <button class="modal-close" onclick="closeModal('docsModal')">✕ 关闭</button>
+  <div class="modal-title">📖 自然语言指令完整文档</div>
+  <div class="modal-subtitle">每行一条指令，直接映射为 Playwright API，无需 LLM，执行速度 1-5s。点击「使用」可回写到指令框。</div>
+
+  <div class="doc-section">
+    <div class="doc-section-title">🧭 导航</div>
+    <table class="doc-table"><thead><tr><th>指令语法</th><th>Playwright API</th><th>示例</th><th>操作</th></tr></thead><tbody>
+      <tr><td>打开 &lt;url&gt;</td><td>page.goto(url)</td><td>打开 https://bing.com</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n截图')">使用</button></td></tr>
+      <tr><td>返回</td><td>page.go_back()</td><td>返回</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n打开 https://github.com\n等待加载完成\n返回\n等待加载完成\n截图')">使用</button></td></tr>
+      <tr><td>前进</td><td>page.go_forward()</td><td>前进</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n打开 https://github.com\n等待加载完成\n返回\n等待加载完成\n前进\n等待加载完成\n截图')">使用</button></td></tr>
+      <tr><td>刷新</td><td>page.reload()</td><td>刷新</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n刷新\n等待加载完成\n截图')">使用</button></td></tr>
+      <tr><td>等待加载完成</td><td>wait_for_load_state("networkidle")</td><td>等待加载完成</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n截图')">使用</button></td></tr>
+      <tr><td>等待 &lt;毫秒&gt;</td><td>page.wait_for_timeout(ms)</td><td>等待 2000</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n等待 2000\n截图')">使用</button></td></tr>
+      <tr><td>等待可见 &lt;selector&gt;</td><td>locator.wait_for(state="visible")</td><td>等待可见 #result</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n等待可见 #sb_form_q\n截图')">使用</button></td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="doc-section">
+    <div class="doc-section-title">🖱 点击 / 交互</div>
+    <table class="doc-table"><thead><tr><th>指令语法</th><th>Playwright API</th><th>示例</th><th>操作</th></tr></thead><tbody>
+      <tr><td>点击 &lt;selector&gt;</td><td>locator.click()</td><td>点击 #login-btn</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n点击 #sb_form_q\n截图')">使用</button></td></tr>
+      <tr><td>点击 文本=&lt;text&gt;</td><td>get_by_text(t).click()</td><td>点击 文本=搜索</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n点击 文本=搜索\n截图')">使用</button></td></tr>
+      <tr><td>点击 role=&lt;role&gt;[name=&lt;n&gt;]</td><td>get_by_role(r,name=n).click()</td><td>点击 role=button[name=搜索]</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n点击 role=button[name=搜索]\n截图')">使用</button></td></tr>
+      <tr><td>点击 placeholder=&lt;p&gt;</td><td>get_by_placeholder(p).click()</td><td>点击 placeholder=搜索</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n点击 placeholder=输入搜索词\n截图')">使用</button></td></tr>
+      <tr><td>点击 label=&lt;l&gt;</td><td>get_by_label(l).click()</td><td>点击 label=用户名</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n点击 label=Customer name\n截图')">使用</button></td></tr>
+      <tr><td>点击 testid=&lt;id&gt;</td><td>get_by_test_id(id).click()</td><td>点击 testid=submit</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n点击 testid=sb_form_go\n截图')">使用</button></td></tr>
+      <tr><td>点击 xpath=&lt;xpath&gt;</td><td>locator("xpath=...").click()</td><td>点击 xpath=//button[@type="submit"]</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n点击 xpath=//input[@id=\"sb_form_q\"]\n截图')">使用</button></td></tr>
+      <tr><td>双击 &lt;selector&gt;</td><td>locator.dbl_click()</td><td>双击 #item</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n双击 #sb_form_q\n截图')">使用</button></td></tr>
+      <tr><td>右键 &lt;selector&gt;</td><td>locator.click(button="right")</td><td>右键 文本=文件</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n右键 #sb_form_q\n截图')">使用</button></td></tr>
+      <tr><td>悬停 &lt;selector&gt;</td><td>locator.hover()</td><td>悬停 文本=菜单</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n悬停 #sb_form_q\n截图')">使用</button></td></tr>
+      <tr><td>拖拽 &lt;src&gt; 到 &lt;dst&gt;</td><td>drag_and_drop(src, dst)</td><td>拖拽 #item1 到 #target</td><td><button class="use-btn" onclick="useExample('打开 https://the-internet.herokuapp.com/drag_and_drop\n等待加载完成\n截图\n拖拽 #column-a 到 #column-b\n等待 500\n截图')">使用</button></td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="doc-section">
+    <div class="doc-section-title">⌨️ 输入 / 键盘</div>
+    <table class="doc-table"><thead><tr><th>指令语法</th><th>Playwright API</th><th>示例</th><th>操作</th></tr></thead><tbody>
+      <tr><td>输入 &lt;selector&gt; &lt;text&gt;</td><td>locator.fill(value)</td><td>输入 #username 张三</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n输入 #sb_form_q 耳机\n截图')">使用</button></td></tr>
+      <tr><td>输入 文本=&lt;t&gt; &lt;v&gt;</td><td>get_by_text(t).fill(v)</td><td>输入 文本=搜索框 耳机</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n输入 文本=搜索 耳机\n截图')">使用</button></td></tr>
+      <tr><td>输入 placeholder=&lt;p&gt; &lt;v&gt;</td><td>get_by_placeholder(p).fill(v)</td><td>输入 placeholder=邮箱 test@test.com</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n输入 placeholder=Customer name 张三\n截图')">使用</button></td></tr>
+      <tr><td>清空 &lt;selector&gt;</td><td>locator.clear()</td><td>清空 #search</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n输入 #sb_form_q 耳机\n清空 #sb_form_q\n截图')">使用</button></td></tr>
+      <tr><td>按键 &lt;key&gt;</td><td>keyboard.press(key)</td><td>按键 Enter</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n输入 #sb_form_q 耳机\n按键 Enter\n等待加载完成\n截图')">使用</button></td></tr>
+      <tr><td>输入文字 &lt;text&gt;</td><td>keyboard.type(text)</td><td>输入文字 Hello World</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n点击 #sb_form_q\n输入文字 蓝牙耳机\n按键 Enter\n等待加载完成\n截图')">使用</button></td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="doc-section">
+    <div class="doc-section-title">📋 表单控件</div>
+    <table class="doc-table"><thead><tr><th>指令语法</th><th>Playwright API</th><th>示例</th><th>操作</th></tr></thead><tbody>
+      <tr><td>选择 &lt;selector&gt; &lt;value&gt;</td><td>locator.select_option(v)</td><td>选择 #city 北京</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n选择 [name=size] large\n截图')">使用</button></td></tr>
+      <tr><td>单选 &lt;selector&gt;</td><td>locator.check() / click()</td><td>单选 [value=small]</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n单选 [value=small]\n截图')">使用</button></td></tr>
+      <tr><td>多选 &lt;selector&gt;</td><td>locator.check() + is_checked</td><td>多选 [value=bacon]\n多选 [value=cheese]</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n多选 [value=bacon]\n多选 [value=cheese]\n截图')">使用</button></td></tr>
+      <tr><td>勾选 &lt;selector&gt;</td><td>locator.check() / click()</td><td>勾选 [name=bacon]</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n勾选 [value=bacon]\n勾选 [value=cheese]\n截图')">使用</button></td></tr>
+      <tr><td>取消勾选 &lt;selector&gt;</td><td>locator.uncheck()</td><td>取消勾选 [name=agree]</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n勾选 [value=bacon]\n截图\n取消勾选 [value=bacon]\n截图')">使用</button></td></tr>
+      <tr><td>全选 &lt;selector&gt;</td><td>locator.select_option()</td><td>全选 #multi-select</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n全选 [name=size]\n截图')">使用</button></td></tr>
+      <tr><td>取消全选 &lt;selector&gt;</td><td>locator.select_option(index=0)</td><td>取消全选 #multi-select</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n选择 [name=size] small\n截图\n取消全选 [name=size]\n截图')">使用</button></td></tr>
+      <tr><td>选中文字 &lt;selector&gt;</td><td>locator.select_text()</td><td>选中文字 #input</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n输入 [name=custname] 张三\n选中文字 [name=custname]\n截图')">使用</button></td></tr>
+      <tr><td>开关 &lt;selector&gt;</td><td>locator.click()</td><td>开关 .toggle</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n开关 [name=bacon]\n截图')">使用</button></td></tr>
+      <tr><td>上传 &lt;selector&gt; &lt;path&gt;</td><td>locator.set_input_files(path)</td><td>上传 #file ./test.pdf</td><td><button class="use-btn" onclick="useExample('# 上传文件示例\n打开 https://the-internet.herokuapp.com/upload\n等待加载完成\n截图')">使用</button></td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="doc-section">
+    <div class="doc-section-title">⌨ 键盘 / 文本</div>
+    <table class="doc-table"><thead><tr><th>指令语法</th><th>Playwright API</th><th>示例</th><th>操作</th></tr></thead><tbody>
+      <tr><td>输入 &lt;sel&gt; &lt;text&gt;</td><td>locator.fill(text)</td><td>输入 #name 张三</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n输入 [name=custname] 张三\n截图')">使用</button></td></tr>
+      <tr><td>清空 &lt;selector&gt;</td><td>locator.clear()</td><td>清空 #name</td><td><button class="use-btn" onclick="useExample('打开 https://httpbin.org/forms/post\n等待加载完成\n输入 [name=custname] 张三\n截图\n清空 [name=custname]\n截图')">使用</button></td></tr>
+      <tr><td>按键 &lt;key&gt;</td><td>page.keyboard.press(key)</td><td>按键 Enter</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n输入 #sb_form_q Python\n按键 Enter\n等待加载完成\n截图')">使用</button></td></tr>
+      <tr><td>按下 &lt;key&gt;</td><td>page.keyboard.press(key)</td><td>按下 Control+a</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n输入 #sb_form_q Python\n按下 Control+a\n截图')">使用</button></td></tr>
+      <tr><td>输入文字 &lt;text&gt;</td><td>page.keyboard.type(text)</td><td>输入文字 演示文字</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n输入文字 演示文字\n截图')">使用</button></td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="doc-section">
+    <div class="doc-section-title">📸 截图 / 滚动</div>
+    <table class="doc-table"><thead><tr><th>指令语法</th><th>Playwright API</th><th>示例</th><th>操作</th></tr></thead><tbody>
+      <tr><td>截图</td><td>page.screenshot(path=...)</td><td>截图</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n截图')">使用</button></td></tr>
+      <tr><td>滚动 下/上</td><td>evaluate("window.scrollBy(...)")</td><td>滚动 下</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n滚动 下\n等待 500\n截图')">使用</button></td></tr>
+      <tr><td>滚动 底部/顶部</td><td>evaluate("window.scrollTo(...)")</td><td>滚动 底部</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n滚动 底部\n等待 500\n截图\n滚动 顶部\n截图')">使用</button></td></tr>
+      <tr><td>滚动到 &lt;selector&gt;</td><td>locator.scroll_into_view_if_needed()</td><td>滚动到 #footer</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n滚动到 #b_footer\n截图')">使用</button></td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="doc-section">
+    <div class="doc-section-title">✅ 断言 / 获取</div>
+    <table class="doc-table"><thead><tr><th>指令语法</th><th>Playwright API</th><th>示例</th><th>操作</th></tr></thead><tbody>
+      <tr><td>断言可见 &lt;selector&gt;</td><td>locator.wait_for(state="visible")</td><td>断言可见 #result</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n断言可见 #sb_form_q\n截图')">使用</button></td></tr>
+      <tr><td>断言文本 &lt;selector&gt; &lt;text&gt;</td><td>assert text in inner_text()</td><td>断言文本 h1 必应</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n输入 #sb_form_q 耳机\n按键 Enter\n等待加载完成\n断言文本 #b_results 耳机\n截图')">使用</button></td></tr>
+      <tr><td>断言URL &lt;keyword&gt;</td><td>assert keyword in page.url</td><td>断言URL bing.com</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n断言URL bing.com\n截图')">使用</button></td></tr>
+      <tr><td>断言标题 &lt;keyword&gt;</td><td>assert keyword in page.title()</td><td>断言标题 必应</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n断言标题 必应\n截图')">使用</button></td></tr>
+      <tr><td>获取文本 &lt;selector&gt;</td><td>locator.inner_text()</td><td>获取文本 h1</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n获取文本 #b_header\n截图')">使用</button></td></tr>
+      <tr><td>获取URL</td><td>page.url</td><td>获取URL</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n获取URL\n截图')">使用</button></td></tr>
+      <tr><td>获取标题</td><td>page.title()</td><td>获取标题</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n获取标题\n截图')">使用</button></td></tr>
+      <tr><td>获取属性 &lt;selector&gt; &lt;attr&gt;</td><td>locator.get_attribute(attr)</td><td>获取属性 a href</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n获取属性 #sb_form_q placeholder\n截图')">使用</button></td></tr>
+      <tr><td>执行JS &lt;js代码&gt;</td><td>page.evaluate(js)</td><td>执行JS document.title</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n执行JS document.title\n执行JS document.querySelectorAll(\"a\").length\n截图')">使用</button></td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="doc-section">
+    <div class="doc-section-title">🗂 多标签页 / iframe</div>
+    <table class="doc-table"><thead><tr><th>指令语法</th><th>Playwright API</th><th>示例</th><th>操作</th></tr></thead><tbody>
+      <tr><td>新标签页</td><td>context.new_page()</td><td>新标签页</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n获取标题\n新标签页\n打开 https://github.com\n等待加载完成\n获取标题\n截图')">使用</button></td></tr>
+      <tr><td>关闭标签页</td><td>page.close()</td><td>关闭标签页</td><td><button class="use-btn" onclick="useExample('打开 https://cn.bing.com\n等待加载完成\n新标签页\n打开 https://github.com\n等待加载完成\n截图\n关闭标签页')">使用</button></td></tr>
+      <tr><td>iframe &lt;selector&gt;</td><td>page.frame_locator(sel)</td><td>iframe #myframe</td><td><button class="use-btn" onclick="useExample('打开 https://the-internet.herokuapp.com/iframe\n等待加载完成\n截图\niframe #mce_0_ifr\niframe输入 body 这是在iframe中输入的文字\n截图')">使用</button></td></tr>
+      <tr><td>iframe输入 &lt;sel&gt; &lt;text&gt;</td><td>_frame.locator(sel).fill(text)</td><td>iframe输入 body 文字</td><td><button class="use-btn" onclick="useExample('打开 https://the-internet.herokuapp.com/iframe\n等待加载完成\niframe #mce_0_ifr\niframe输入 body Hello iframe!\n截图')">使用</button></td></tr>
+      <tr><td>iframe点击 &lt;selector&gt;</td><td>_frame.locator(sel).click()</td><td>iframe点击 button</td><td><button class="use-btn" onclick="useExample('打开 https://the-internet.herokuapp.com/iframe\n等待加载完成\niframe #mce_0_ifr\niframe点击 body\n截图')">使用</button></td></tr>
+      <tr><td>退出iframe</td><td>（切回 page 操作）</td><td>退出iframe</td><td><button class="use-btn" onclick="useExample('打开 https://the-internet.herokuapp.com/iframe\n等待加载完成\niframe #mce_0_ifr\niframe输入 body 测试文字\n退出iframe\n截图')">使用</button></td></tr>
+    </tbody></table>
+  </div>
+</div>
+</div>
+
+<!-- 导出弹窗 -->
+<div class="modal" id="exportModal">
+<div class="modal-box" style="max-width:640px">
+  <button class="modal-close" onclick="closeModal('exportModal')">✕ 关闭</button>
+  <div class="modal-title" id="exportTitle">导出</div>
+  <textarea class="export-preview" id="exportContent" readonly></textarea>
+  <div class="export-actions">
+    <button class="btn-exec" style="padding:9px 20px;font-size:13px" onclick="copyExport()">📋 复制</button>
+    <button class="btn-secondary" style="padding:9px 18px;font-size:13px" onclick="downloadExport()">⬇ 下载</button>
+  </div>
+</div>
+</div>
+
+<!-- GIF 预览弹窗 -->
+<div class="modal" id="gifPreviewModal">
+<div class="modal-box" style="max-width:900px">
+  <button class="modal-close" onclick="closeModal('gifPreviewModal')">✕ 关闭</button>
+  <div class="modal-title" id="gifPreviewTitle">📹 录制回放</div>
+  <img id="gifPreviewImg" src="" alt="GIF 预览">
+  <div class="gif-caption" id="gifCaption"></div>
+</div>
+</div>
+
+<!-- 高级选项 -->
+<div class="modal" id="advModal">
+<div class="modal-box" style="max-width:480px">
+  <button class="modal-close" onclick="closeModal('advModal')">✕ 关闭</button>
+  <div class="modal-title">⚙ 高级选项</div>
+  <div class="adv-row"><label>CDP URL（浏览器调试地址）</label><input id="advCdpUrl" value="http://127.0.0.1:9222"></div>
+  <div class="adv-row"><label>任务 ID（留空自动生成）</label><input id="advTaskId" placeholder="如 my-task-001"></div>
+  <div class="adv-row"><label>最大步骤数（LLM 模式）</label><input id="advMaxSteps" type="number" value="20" min="1" max="100"></div>
+  <div class="btn-row"><button class="btn-exec" style="padding:9px 20px;font-size:13px" onclick="closeModal('advModal')">确定</button></div>
+</div>
+</div>
+
+<!-- 参数化 -->
+<div class="modal" id="paramModal">
+<div class="modal-box" style="max-width:440px">
+  <button class="modal-close" onclick="closeModal('paramModal')">✕ 关闭</button>
+  <div class="modal-title">📊 参数化</div>
+  <p style="font-size:13px;color:#888;margin-bottom:14px">将 DSL 中的固定值替换为变量，方便复用。</p>
+  <div class="param-row"><label>原始值</label><input id="paramOld" placeholder="如: 耳机"></div>
+  <div class="param-row"><label>变量名</label><input id="paramNew" placeholder="如: {keyword}"></div>
+  <div class="btn-row"><button class="btn-exec" style="padding:9px 20px;font-size:13px" onclick="applyParam()">替换</button></div>
+</div>
+</div>
+
+<!-- 从PW转换 -->
+<div class="modal" id="convertModal">
+<div class="modal-box" style="max-width:560px">
+  <button class="modal-close" onclick="closeModal('convertModal')">✕ 关闭</button>
+  <div class="modal-title">↩ 从 Playwright 脚本转换</div>
+  <p style="font-size:13px;color:#888;margin-bottom:12px">粘贴 Playwright Python 脚本，自动提取关键操作转为 NLP 指令。</p>
+  <textarea id="pwInput" style="min-height:180px" placeholder="粘贴 Playwright 脚本..."></textarea>
+  <div class="btn-row"><button class="btn-exec" style="padding:9px 20px;font-size:13px" onclick="convertPW()">转换</button></div>
+</div>
+</div>
+
+<script>
+const API = '';
+let demos = {};
+let recording = false;
+let exportFmt = 'yaml';
+
+async function init() {
+  try {
+    const r = await fetch(API + '/health');
+    const d = await r.json();
+    const llm = d.data?.llm || {};
+    const badge = document.getElementById('llmBadge');
+    if (llm.status === 'ready') {
+      badge.textContent = '✓ ' + (llm.model || 'LLM') + ' 已就绪';
+      badge.className = 'llm-badge';
+    } else {
+      badge.textContent = '⚠ LLM 未配置';
+      badge.className = 'llm-badge warn';
+    }
+    const r2 = await fetch(API + '/llm-status');
+    const d2 = await r2.json();
+    if (d2.success && d2.data?.configured) {
+      const cfg = d2.data;
+      document.getElementById('modelOk').innerHTML =
+        `✅ 已测试通过，可直接执行自动化任务。模型：<b>${cfg.model}</b>；地址：<a href="${cfg.base_url||''}" target="_blank">${cfg.base_url||''}</a>`;
+      document.getElementById('cfgModel').value = cfg.model || '';
+      document.getElementById('cfgProvider').value = cfg.provider || '';
+    }
+  } catch(e) {
+    document.getElementById('llmBadge').textContent = '⚠ 服务异常';
+    document.getElementById('llmBadge').className = 'llm-badge warn';
+  }
+  try {
+    const r = await fetch(API + '/dsl-demos');
+    const d = await r.json();
+    demos = d.demos || {};
+  } catch(e) {}
+  loadHistory();
+}
+
+function switchTab(tab) {
+  document.getElementById('panelLLM').style.display = tab === 'llm' ? '' : 'none';
+  document.getElementById('panelNLP').style.display = tab === 'nlp' ? '' : 'none';
+  document.getElementById('tabLLM').className = 'tab' + (tab === 'llm' ? ' active' : '');
+  document.getElementById('tabNLP').className = 'tab' + (tab === 'nlp' ? ' active' : '');
+}
+
+function setLLMTask(t) { document.getElementById('llmTask').value = t; }
+
+function loadDemo(name) {
+  // 精确匹配或模糊匹配
+  if (demos[name]) {
+    document.getElementById('nlpDsl').value = demos[name];
+    switchTab('nlp');
+    return;
+  }
+  // fallback: 遍历所有 key 模糊匹配
+  const keys = Object.keys(demos);
+  for (const k of keys) {
+    if (k.includes(name) || name.includes(k.replace(/【.+?】/, ''))) {
+      document.getElementById('nlpDsl').value = demos[k];
+      switchTab('nlp');
+      return;
+    }
+  }
+  alert('未找到 Demo: ' + name);
+}
+
+// 文档中点击「使用」回写到指令框
+function useExample(dsl) {
+  document.getElementById('nlpDsl').value = dsl;
+  closeModal('docsModal');
+  switchTab('nlp');
+  document.getElementById('nlpDsl').scrollIntoView({behavior:'smooth'});
+}
+
+function showResult(id, text, ok) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.className = 'result-box show ' + (ok ? 'success' : 'error');
+}
+
+async function runNLP() {
+  const dsl = document.getElementById('nlpDsl').value.trim();
+  if (!dsl) return alert('请输入 NLP 指令');
+  const btn = document.getElementById('btnRunNLP');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> 执行中...';
+  showResult('nlpResult', '⏳ 执行中，请稍候...', true);
+  try {
+    const cdp = document.getElementById('advCdpUrl')?.value || 'http://127.0.0.1:9222';
+    const taskId = document.getElementById('advTaskId')?.value || '';
+    const r = await fetch(API + '/run-task', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({task: dsl, mode: 'dsl', dsl, cdp_url: cdp, task_id: taskId})
+    });
+    const d = await r.json();
+    const data = d.data || {};
+    const ok = data.success;
+    let msg = ok ? '✅ 执行成功\n' : '❌ 执行失败\n';
+    msg += `耗时: ${data.elapsed_ms}ms\n`;
+    if (data.log) msg += '\n执行日志:\n' + data.log;
+    if (data.error) msg += '\n错误: ' + data.error;
+    if (data.stderr) msg += '\n\n详细错误:\n' + data.stderr;
+    showResult('nlpResult', msg, ok);
+    loadHistory();
+  } catch(e) {
+    showResult('nlpResult', '❌ 请求失败: ' + e.message, false);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '▶ 执行指令';
+  }
+}
+
+async function runLLM() {
+  const task = document.getElementById('llmTask').value.trim();
+  if (!task) return alert('请输入任务描述');
+  const btn = document.getElementById('btnRunLLM');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> 执行中...';
+  showResult('llmResult', '⏳ LLM 正在分析任务，请稍候（可能需要1-2分钟）...', true);
+  try {
+    const maxSteps = parseInt(document.getElementById('advMaxSteps')?.value || '20');
+    const r = await fetch(API + '/run-task', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({task, mode: 'llm', max_steps: maxSteps})
+    });
+    const d = await r.json();
+    const data = d.data || {};
+    const ok = data.success;
+    let msg = ok ? '✅ 任务完成\n' : '❌ 任务失败\n';
+    msg += `步骤数: ${data.steps || 0}  耗时: ${data.elapsed_ms}ms\n`;
+    if (data.final_result) msg += '\n结果:\n' + data.final_result;
+    if (data.error) msg += '\n错误: ' + data.error;
+    if (data.errors?.length) msg += '\n\n错误详情:\n' + data.errors.join('\n');
+    showResult('llmResult', msg, ok);
+    loadHistory();
+  } catch(e) {
+    showResult('llmResult', '❌ 请求失败: ' + e.message, false);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '▶ 开始执行';
+  }
+}
+
+async function testLLM() {
+  const btn = event.target;
+  btn.disabled = true; btn.textContent = '测试中...';
+  try {
+    const r = await fetch(API + '/test-llm', {method:'POST', headers:{'Content-Type':'application/json'}, body:'{}'});
+    const d = await r.json();
+    showResult('llmTestResult', d.success ? '✅ 连接成功: ' + (d.data?.status_text||'') : '❌ 失败: ' + (d.error||''), d.success);
+  } catch(e) {
+    showResult('llmTestResult', '❌ 请求失败: ' + e.message, false);
+  } finally { btn.disabled = false; btn.textContent = '🔍 测试连接'; }
+}
+
+function toggleModelCard() {
+  const body = document.getElementById('modelBody');
+  const arrow = document.getElementById('modelArrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open', body.classList.contains('open'));
+}
+
+async function loadHistory() {
+  try {
+    const r = await fetch(API + '/traces');
+    const d = await r.json();
+    const list = document.getElementById('historyList');
+    const runs = d.runs || [];
+    if (!runs.length) {
+      list.innerHTML = '<div style="color:#aaa;font-size:13px;text-align:center;padding:20px">暂无记录</div>';
+      return;
+    }
+    list.innerHTML = runs.map(run => {
+      const badge = run.success ? '<span class="badge pass">PASS</span>' : '<span class="badge fail">FAIL</span>';
+      const gifBtn = run.has_gif
+        ? `<span class="gif-preview-btn" onclick="event.stopPropagation();showGifPreview('${run.task_id}')">▶ GIF</span>`
+        : '<span style="color:#ddd;font-size:12px">GIF</span>';
+      const task = run.task || run.task_id;
+      return `<div class="history-item" onclick="loadTrace('${run.task_id}')">
+        <div class="task-text">${task}</div>
+        <div class="meta"><code style="font-size:11px;color:#aaa">${run.task_id}</code>${badge}<span>${run.steps||0} 步</span>${gifBtn}</div>
+      </div>`;
+    }).join('');
+  } catch(e) {}
+}
+
+async function loadTrace(taskId) {
+  try {
+    const r = await fetch(`/traces/${taskId}/trace.json`);
+    const d = await r.json();
+    const tab = d.mode === 'llm' ? 'llm' : 'nlp';
+    switchTab(tab);
+    if (tab === 'nlp' && d.dsl) document.getElementById('nlpDsl').value = d.dsl;
+    if (tab === 'llm' && d.task) document.getElementById('llmTask').value = d.task;
+    const resultId = tab === 'llm' ? 'llmResult' : 'nlpResult';
+    let msg = d.success ? '✅ 历史记录（成功）\n' : '❌ 历史记录（失败）\n';
+    msg += `task_id: ${d.task_id}\n耗时: ${d.elapsed_ms}ms\n`;
+    if (d.log) msg += '\n' + d.log;
+    if (d.final_result) msg += '\n结果: ' + d.final_result;
+    if (d.error) msg += '\n错误: ' + d.error;
+    showResult(resultId, msg, d.success);
+  } catch(e) {}
+}
+
+async function clearHistory() {
+  if (!confirm('确定清空所有历史记录？')) return;
+  await fetch(API + '/traces', {method: 'DELETE'});
+  loadHistory();
+}
+
+async function toggleRecord() {
+  const btn = document.getElementById('btnRecord');
+  const url = document.getElementById('recordUrl').value.trim();
+  if (!recording) {
+    if (!url) return alert('请输入录制起始 URL');
+    recording = true;
+    btn.textContent = '⏹ 停止录制';
+    btn.style.background = '#e53e3e';
+    await fetch(API + '/record/start', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({url})});
+  } else {
+    recording = false;
+    btn.textContent = '▶ 开始录制';
+    btn.style.background = '';
+    const r = await fetch(API + '/record/stop', {method:'POST', headers:{'Content-Type':'application/json'}, body:'{}'});
+    const d = await r.json();
+    if (d.data?.dsl) document.getElementById('nlpDsl').value = d.data.dsl;
+  }
+}
+
+async function exportDSL(fmt) {
+  const dsl = document.getElementById('nlpDsl').value.trim();
+  if (!dsl) return alert('请先输入 NLP 指令');
+  exportFmt = fmt;
+  const r = await fetch(API + '/export', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({dsl, format: fmt})
+  });
+  const d = await r.json();
+  if (d.success) {
+    document.getElementById('exportTitle').textContent = fmt === 'yaml' ? 'NLP → YAML' : 'NLP → pytest';
+    document.getElementById('exportContent').value = d.content;
+    document.getElementById('exportModal').className = 'modal show';
+  }
+}
+
+function copyExport() {
+  navigator.clipboard.writeText(document.getElementById('exportContent').value)
+    .then(() => alert('已复制到剪贴板'));
+}
+
+function downloadExport() {
+  const content = document.getElementById('exportContent').value;
+  const blob = new Blob([content], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = exportFmt === 'yaml' ? 'automation.yaml' : 'test_automation.py';
+  a.click();
+}
+
+function showDocs() { document.getElementById('docsModal').className = 'modal show'; }
+function showAdvanced() { document.getElementById('advModal').className = 'modal show'; }
+function showParamModal() { document.getElementById('paramModal').className = 'modal show'; }
+function showConvertModal() { document.getElementById('convertModal').className = 'modal show'; }
+function closeModal(id) { document.getElementById(id).className = 'modal'; }
+
+function showGifPreview(taskId) {
+  document.getElementById('gifPreviewTitle').textContent = '📹 ' + taskId;
+  document.getElementById('gifPreviewImg').src = '/traces/' + taskId + '/recording.gif?' + Date.now();
+  document.getElementById('gifCaption').textContent = '/traces/' + taskId + '/recording.gif';
+  document.getElementById('gifPreviewModal').className = 'modal show';
+}
+
+function applyParam() {
+  const old = document.getElementById('paramOld').value;
+  const nv = document.getElementById('paramNew').value;
+  if (!old || !nv) return;
+  const ta = document.getElementById('nlpDsl');
+  ta.value = ta.value.split(old).join(nv);
+  closeModal('paramModal');
+}
+
+function convertPW() {
+  const src = document.getElementById('pwInput').value;
+  const lines = [];
+  src.split('\n').forEach(line => {
+    const t = line.trim();
+    if (t.includes('goto(')) { const m = t.match(/goto\(['"](.+?)['"]/); if(m) lines.push('打开 '+m[1]); }
+    else if (t.includes('wait_for_load_state')) lines.push('等待加载完成');
+    else if (t.includes('screenshot(')) lines.push('截图');
+    else if (t.includes('.fill(')) { const m = t.match(/locator\(['"](.+?)['"]\).*\.fill\(['"](.+?)['"]\)/); if(m) lines.push(`输入 ${m[1]} ${m[2]}`); }
+    else if (t.includes('.click()')) { const m = t.match(/locator\(['"](.+?)['"]\)/); if(m) lines.push(`点击 ${m[1]}`); }
+    else if (t.includes('keyboard.press(')) { const m = t.match(/press\(['"](.+?)['"]\)/); if(m) lines.push(`按键 ${m[1]}`); }
+    else if (t.includes('keyboard.type(')) { const m = t.match(/type\(['"](.+?)['"]\)/); if(m) lines.push(`输入文字 ${m[1]}`); }
+    else if (t.includes('select_option(')) { const m = t.match(/locator\(['"](.+?)['"]\).*select_option\(['"](.+?)['"]\)/); if(m) lines.push(`选择 ${m[1]} ${m[2]}`); }
+    else if (t.includes('.check()')) { const m = t.match(/locator\(['"](.+?)['"]\)/); if(m) lines.push(`勾选 ${m[1]}`); }
+    else if (t.includes('scrollBy')) lines.push('滚动 下');
+    else if (t.includes('go_back()')) lines.push('返回');
+    else if (t.includes('go_forward()')) lines.push('前进');
+    else if (t.includes('reload()')) lines.push('刷新');
+    else if (t.includes('new_page()')) lines.push('新标签页');
+    else if (t.includes('hover()')) { const m = t.match(/locator\(['"](.+?)['"]\)/); if(m) lines.push(`悬停 ${m[1]}`); }
+  });
+  if (lines.length) {
+    document.getElementById('nlpDsl').value = lines.join('\n');
+    closeModal('convertModal');
+  } else {
+    alert('未能识别到有效的 Playwright 操作，请检查脚本格式。');
+  }
+}
+
+document.querySelectorAll('.modal').forEach(m => {
+  m.addEventListener('click', e => { if(e.target === m) m.className = 'modal'; });
+});
+
+init();
+</script>
+</body>
+</html>

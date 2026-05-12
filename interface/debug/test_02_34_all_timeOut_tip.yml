@@ -1,0 +1,34 @@
+config:
+  name: 在线_v6
+  parameters: #卡迪尔 参数
+     y: ["1", "2","3","4"]
+
+
+teststeps:
+-
+  name: 超时提示-按整体设置-开启客服超时提醒，客户超时提醒
+#  skip: 跑完接口-再次查看超时转接-系统异常
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/doc/updateCompanyConfigDoc/4
+
+    data:
+      id: 30612
+      configId:
+      type: 0
+      serviceCustomerOutTimesScope: 0
+      customerOutTimes: ${y}
+      customerOutDoc: ${fake.text()}
+      serviceOutTimes: ${y}
+      serviceOutDoc: ${fake.text()}
+      customerOutTimesFlag: 1
+      serviceOutTimesFlag: 1
+      serviceOutCountRule: 0
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

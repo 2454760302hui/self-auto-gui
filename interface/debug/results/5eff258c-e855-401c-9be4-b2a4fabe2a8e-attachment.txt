@@ -1,0 +1,21 @@
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:135 执行文件-> test_02_15_reception_methods.yml
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:136 base_url-> https://api-c.soboten.com
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:137 config variables-> {}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:139 运行用例-> teststeps
+[32mINFO    [0m pytest_yaml_yoyo.log:render_template_obj.py:58 取值表达式: get_temp_id, 取值结果：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiJiZGJlNTY2MGIyZWI0NTc1ODczOTUyN2ZkYTk3NDA5MSIsImFnZW50SWQiOiI4M2Q0MDM5MTg2ZDg0NTJiODhhNTk4NzNiZmNmMjA4NCIsInNlcnZpY2VFbWFpbCI6ImFwaUBzb2JvdC5jb20iLCJ6b25lIjoxLCJpc3MiOiJhcGlAc29ib3QuY29tIiwiZXhwIjoxNjk4OTc4NTI4LCJ0eXBlIjoiY29uc29sZSJ9.6R7lWeUOKCqqet9ng90MmGy1TMtFsyWntoBp2S1OcTk <class 'str'>
+[32mINFO    [0m pytest_yaml_yoyo.log:render_template_obj.py:58 取值表达式: x, 取值结果：4 <class 'str'>
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:342 --------  request info ----------
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:343 yml raw  -->: {'method': 'POST', 'url': '/text/chat-set/reception/updateScheme', 'headers': {'temp-id': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiJiZGJlNTY2MGIyZWI0NTc1ODczOTUyN2ZkYTk3NDA5MSIsImFnZW50SWQiOiI4M2Q0MDM5MTg2ZDg0NTJiODhhNTk4NzNiZmNmMjA4NCIsInNlcnZpY2VFbWFpbCI6ImFwaUBzb2JvdC5jb20iLCJ6b25lIjoxLCJpc3MiOiJhcGlAc29ib3QuY29tIiwiZXhwIjoxNjk4OTc4NTI4LCJ0eXBlIjoiY29uc29sZSJ9.6R7lWeUOKCqqet9ng90MmGy1TMtFsyWntoBp2S1OcTk'}, 'data': {'joinType': '4', 'serviceReceptionEditFlag': '1', 'id': 1678318845762019329}}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:344 method   -->: POST
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:345 url      -->: /text/chat-set/reception/updateScheme
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:350 headers  -->: {'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'temp-id': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiJiZGJlNTY2MGIyZWI0NTc1ODczOTUyN2ZkYTk3NDA5MSIsImFnZW50SWQiOiI4M2Q0MDM5MTg2ZDg0NTJiODhhNTk4NzNiZmNmMjA4NCIsInNlcnZpY2VFbWFpbCI6ImFwaUBzb2JvdC5jb20iLCJ6b25lIjoxLCJpc3MiOiJhcGlAc29ib3QuY29tIiwiZXhwIjoxNjk4OTc4NTI4LCJ0eXBlIjoiY29uc29sZSJ9.6R7lWeUOKCqqet9ng90MmGy1TMtFsyWntoBp2S1OcTk'}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:354 data     -->: {'joinType': '4', 'serviceReceptionEditFlag': '1', 'id': 1678318845762019329}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:359 ------  response info  200  ------ 
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:360 耗时     <--: 0.035773s
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:361 url      <--: https://api-c.soboten.com/text/chat-set/reception/updateScheme
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:362 headers  <--: {'Date': 'Thu, 02 Nov 2023 02:28:54 GMT', 'Content-Type': 'application/json;charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': '*', 'Access-Control-Max-Age': '7200', 'Access-Control-Expose-Headers': '*', 'Access-Control-Allow-Headers': 'bno,*'}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:363 cookies  <--: {}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:364 raw text <--: {"items":[],"retCode":"000000","retMsg":"操作成功"}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:250 validate 校验内容-> [{'eq': ['$..retMsg', '操作成功']}]
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:601 validate 校验结果-> eq: [操作成功, 操作成功]
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:293 export 导出全局变量：{'get_temp_id': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiJiZGJlNTY2MGIyZWI0NTc1ODczOTUyN2ZkYTk3NDA5MSIsImFnZW50SWQiOiI4M2Q0MDM5MTg2ZDg0NTJiODhhNTk4NzNiZmNmMjA4NCIsInNlcnZpY2VFbWFpbCI6ImFwaUBzb2JvdC5jb20iLCJ6b25lIjoxLCJpc3MiOiJhcGlAc29ib3QuY29tIiwiZXhwIjoxNjk4OTc4NTI4LCJ0eXBlIjoiY29uc29sZSJ9.6R7lWeUOKCqqet9ng90MmGy1TMtFsyWntoBp2S1OcTk', 'get_temp-id': None, 'get_config_id': '3b5f37a162bc482ab9cf2f56d2e6a095', 'get_id': '0fe72f7cff0b47818120439d5d05b9a2', 'get_channelFlag': 681, 'get_appId': '87dd481436844bc0b1b4a1fb7e8d6c7f', 'get_groupId': None, 'get_groupName': '兰金电子信息有限公司', 'groupName': None, 'get_item': '1719904380202827776'}

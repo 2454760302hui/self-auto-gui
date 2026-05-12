@@ -1,0 +1,43 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: [ "4","2","1","3" ] #人工优先，仅人工，仅机器人,机器人优先
+
+teststeps:
+-
+  name: 接待方案设置-默认桌面网站-转人工规则-关闭关键词转人工-关闭连续重复提问转人工-关闭客户情绪负向转人工-关闭转人工到客户系统-关闭转人工按钮常显-关闭转人工引导文案-机器人回答+机器人理解回答+机器人引导回答+机器人未知回答=不转人工
+
+#  sleep: 1
+  request:
+    method: POST
+    url: /text/chat-set/reception/updateScheme
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      robotDirectAnswer: '0'
+      robotUnderstand: '0'
+      robotUnderstandType: '1'
+      robotUnderstandCount: '2'
+      robotGuide: '0'
+      robotGuideType: '1'
+      robotGuideCount: '2'
+      robotUnknow: '0'
+      robotUnknowType: '1'
+      robotUnknowCount: '2'
+      showTurnManualBtn: '0'
+      isManualBtnFlag: '1'
+      keywordTransferFlag: '0'
+      repeatTransferFlag: '0'
+      negativeTransferFlag: '0'
+      isCustomSysFlag: '0'
+      manualBtnCount: '1'
+      customUrl: ${fake.uri()}
+      manualFlag: '0'
+      manualDoc: ${fake.text()}
+      transferManualInfo: '[{ "answerCount": 2,"companyId": "bdbe5660b2eb45758739527fda974091","countType": 1,"createId": "83d4039186d8452b88a59873bfcf2084","createTime": 1688977369140,"id": "f01e62fd086647509c31f30a31888065","schemeId": "1678318845762019329","transferSet": 0,"transferType": 1,"updateId": "83d4039186d8452b88a59873bfcf2084","updateTime": 1688977369140 },{ "answerCount": 2,"companyId": "bdbe5660b2eb45758739527fda974091","countType": 1,"createId": "83d4039186d8452b88a59873bfcf2084","createTime": 1688977369140,"id": "a174f2d2509849da8c9579acf229a0f7","schemeId": "1678318845762019329","transferSet": 0,"transferType": 2,"updateId": "83d4039186d8452b88a59873bfcf2084","updateTime": 1688977369140 },{ "answerCount": 2,"companyId": "bdbe5660b2eb45758739527fda974091","countType": 1,"createId": "83d4039186d8452b88a59873bfcf2084","createTime": 1688977369140,"id": "2f9154d819ef48628707ca03067ce92a","schemeId": "1678318845762019329","transferSet": 0,"transferType": 3,"updateId": "83d4039186d8452b88a59873bfcf2084","updateTime": 1688977369140 },{ "answerCount": 2,"companyId": "bdbe5660b2eb45758739527fda974091","countType": 1,"createId": "83d4039186d8452b88a59873bfcf2084","createTime": 1688977369140,"id": "46734473e6344d1a884802a372e05617","schemeId": "1678318845762019329","transferSet": 0,"transferType": 4,"updateId": "83d4039186d8452b88a59873bfcf2084","updateTime": 1688977369140 }]'
+      transferEditFlag: '1'
+      id: 1800441960215793664 #不清楚从何来
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']
+

@@ -1,0 +1,853 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+@variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/* ============================================
+   NextAgent - AI Automation Platform
+   ============================================
+   Design System:
+   - Dark-first, deep tech aesthetic
+   - Violet → Emerald gradient accent
+   - Glassmorphism with glow effects
+   - Smooth micro-animations
+   - Professional commercial product look
+   ============================================ */
+
+/* ============================================
+   NextAgent - Professional Design System
+   ============================================
+   Deep Violet + Emerald Color Scheme
+   Dark Theme (Default)
+   Commercial Product Quality
+   ============================================ */
+
+/* Light Theme - Clean Professional */
+:root {
+  --radius: 0.75rem;
+
+  /* Core Colors - Light Theme */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+
+  /* Primary - Deep Violet */
+  --primary: #5b21b6;
+  --primary-foreground: #ffffff;
+
+  /* Secondary - Slate */
+  --secondary: #e2e8f0;
+  --secondary-foreground: #334155;
+
+  /* Muted */
+  --muted: #e2e8f0;
+  --muted-foreground: #64748b;
+
+  /* Accent - Emerald (Success) */
+  --accent: #d1fae5;
+  --accent-foreground: #065f46;
+
+  /* Destructive */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Border & Input */
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #5b21b6;
+
+  /* Sidebar */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #5b21b6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5f3ff;
+  --sidebar-accent-foreground: #5b21b6;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #5b21b6;
+
+  /* Chart Colors */
+  --chart-1: #5b21b6;
+  --chart-2: #06b6d4;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.25);
+
+  /* Status Colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #06b6d4;
+}
+
+/* Dark Theme - Deep Space (Default) */
+.dark {
+  --background: #0c0f1a;
+  --foreground: #e2e8f0;
+  --card: #131929;
+  --card-foreground: #e2e8f0;
+  --popover: #131929;
+  --popover-foreground: #e2e8f0;
+
+  /* Primary - Deep Violet */
+  --primary: #7c3aed;
+  --primary-foreground: #ffffff;
+
+  /* Secondary - Slate */
+  --secondary: #1e293b;
+  --secondary-foreground: #e2e8f0;
+
+  /* Muted */
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+
+  /* Accent - Emerald (Success) */
+  --accent: #10b981;
+  --accent-foreground: #ecfdf5;
+
+  /* Destructive */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Border & Input */
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #7c3aed;
+
+  /* Sidebar */
+  --sidebar: #0c0f1a;
+  --sidebar-foreground: #e2e8f0;
+  --sidebar-primary: #7c3aed;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2e1065;
+  --sidebar-accent-foreground: #c4b5fd;
+  --sidebar-border: #1e293b;
+  --sidebar-ring: #7c3aed;
+
+  /* Chart Colors */
+  --chart-1: #7c3aed;
+  --chart-2: #06b6d4;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.7);
+
+  /* Status Colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #06b6d4;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+html {
+  color-scheme: light dark;
+}
+
+/* ============================================
+   Scrollbar - Minimal
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.5);
+}
+
+/* ============================================
+   AutoGLM Pro Animations
+   ============================================ */
+@keyframes breathe {
+  0%, 100% {
+    box-shadow: 0 0 4px rgba(124, 58, 237, 0.3), 0 0 12px rgba(91, 33, 182, 0.15), 0 0 24px rgba(91, 33, 182, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.6), 0 0 30px rgba(91, 33, 182, 0.3), 0 0 50px rgba(91, 33, 182, 0.15);
+  }
+}
+
+@keyframes breathe-ring {
+  0%, 100% {
+    box-shadow:
+      0 0 6px rgba(124, 58, 237, 0.4),
+      0 0 16px rgba(91, 33, 182, 0.2),
+      inset 0 0 6px rgba(124, 58, 237, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 12px rgba(124, 58, 237, 0.7),
+      0 0 36px rgba(91, 33, 182, 0.35),
+      0 0 60px rgba(91, 33, 182, 0.2),
+      inset 0 0 10px rgba(124, 58, 237, 0.2);
+  }
+}
+
+@keyframes breathe-border {
+  0%, 100% {
+    border-color: rgba(124, 58, 237, 0.3);
+  }
+  50% {
+    border-color: rgba(124, 58, 237, 0.6);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+.animate-breathe-ring {
+  animation: breathe-ring 3s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out forwards;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* Staggered children */
+.stagger-children > * {
+  animation: fadeIn 0.3s ease-out forwards;
+  opacity: 0;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 75ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 225ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 300ms; }
+
+/* NextAgent Glass & Glow Effects */
+.autoglm-glass {
+  background: rgba(19, 25, 41, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.autoglm-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.autoglm-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+.autoglm-card-glow {
+  background: var(--card);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: var(--radius);
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.15);
+  transition: all 0.3s ease;
+}
+
+.autoglm-card-glow:hover {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.25), var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Chat Bubbles */
+.chat-user {
+  background: linear-gradient(135deg, #7c3aed, #5b21b6);
+  color: #ffffff;
+  border-radius: 1rem;
+  border-top-right-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  max-width: 80%;
+}
+
+.chat-assistant {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border-radius: 1rem;
+  border-top-left-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  max-width: 80%;
+}
+
+/* ============================================
+   Status Indicators
+   ============================================ */
+.status-online {
+  background-color: #10b981;
+}
+
+.status-offline {
+  background-color: #64748b;
+}
+
+.status-busy {
+  background-color: #f59e0b;
+}
+
+.status-error {
+  background-color: #ef4444;
+}
+
+/* ============================================
+   Gradient Text - NextAgent Identity
+   ============================================ */
+.nexus-gradient-text {
+  background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.autoglm-gradient-text {
+  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Product Feature Cards
+   ============================================ */
+.feature-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #7c3aed, #06b6d4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-card:hover {
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.12);
+  transform: translateY(-2px);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+/* ============================================
+   Product Navbar
+   ============================================ */
+.product-nav {
+  background: rgba(12, 15, 26, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+}
+
+.product-nav-link {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.product-nav-link:hover {
+  color: #e2e8f0;
+  background: rgba(124, 58, 237, 0.1);
+}
+
+.product-nav-link.active {
+  color: #c4b5fd;
+  background: rgba(124, 58, 237, 0.15);
+}
+
+/* ============================================
+   Module Badge Colors
+   ============================================ */
+.module-badge-browser {
+  background: rgba(124, 58, 237, 0.15);
+  color: #a78bfa;
+  border: 1px solid rgba(124, 58, 237, 0.25);
+}
+
+.module-badge-api {
+  background: rgba(6, 182, 212, 0.15);
+  color: #67e8f9;
+  border: 1px solid rgba(6, 182, 212, 0.25);
+}
+
+.module-badge-security {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.module-badge-mobile {
+  background: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+/* ============================================
+   Badges
+   ============================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-success {
+  background-color: #d1fae5;
+  color: #047857;
+}
+
+.dark .badge-success {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+}
+
+.badge-warning {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.dark .badge-warning {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+}
+
+.badge-error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.dark .badge-error {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+}
+
+.badge-info {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.dark .badge-info {
+  background-color: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+}
+
+/* ============================================
+   Layout Utilities
+   ============================================ */
+.container-center {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* ============================================
+   Selection
+   ============================================ */
+::selection {
+  background-color: rgba(99, 102, 241, 0.2);
+}
+
+/* ============================================
+   Focus Ring
+   ============================================ */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+/* ============================================
+   Button Ripple Effect
+   ============================================ */
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%) scale(0);
+  animation: ripple 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+.dark .ripple-effect {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Button hover glow effect */
+button[data-slot="button"]:hover,
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+}
+
+.dark button[data-slot="button"]:hover,
+.dark .btn-glow:hover {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+}
+
+/* Button press feedback */
+button[data-slot="button"]:active {
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+
+
+/* ============================================
+   Enhanced Button Effects
+   ============================================ */
+
+/* Button success feedback */
+.btn-success-feedback {
+  animation: successPulse 0.6s ease-out;
+}
+
+@keyframes successPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+/* Button error feedback */
+.btn-error-feedback {
+  animation: errorShake 0.4s ease-out;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* Button loading state */
+.btn-loading {
+  position: relative;
+  color: transparent;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Copy button feedback */
+.btn-copy-success {
+  animation: copySuccess 0.5s ease-out;
+}
+
+@keyframes copySuccess {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Run button glow */
+.btn-run-active {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.5), 0 0 40px rgba(124, 58, 237, 0.25);
+  animation: runGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes runGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.5), 0 0 40px rgba(124, 58, 237, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.7), 0 0 60px rgba(124, 58, 237, 0.4);
+  }
+}
+
+/* Toast animations */
+@keyframes toastSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.toast-enter {
+  animation: toastSlideIn 0.3s ease-out;
+}
+
+.toast-exit {
+  animation: toastSlideOut 0.3s ease-out;
+}
+
+/* ============================================
+   Output Display Enhancements
+   ============================================ */
+
+.output-success {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
+  border-left: 4px solid #10b981;
+}
+
+.output-error {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.02));
+  border-left: 4px solid #ef4444;
+}
+
+.output-code {
+  background: #1f2937;
+  color: #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.dark .output-code {
+  background: #111827;
+  color: #f3f4f6;
+}
+
+/* ============================================
+   Smooth Transitions
+   ============================================ */
+
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-fast {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-slow {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   NextAgent Logo Breathing Glow Animation
+   ============================================ */
+@keyframes logo-breathe-outer {
+  0%, 100% {
+    opacity: 0.1;
+    transform: scale(1);
+    filter: blur(8px);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.2);
+    filter: blur(14px);
+  }
+}
+
+@keyframes logo-breathe-mid {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.1);
+    filter: blur(7px);
+  }
+}
+
+@keyframes logo-breathe-core {
+  0%, 100% {
+    box-shadow:
+      0 0 10px rgba(139, 92, 246, 0.5),
+      0 0 25px rgba(139, 92, 246, 0.3),
+      0 0 50px rgba(6, 182, 212, 0.15),
+      0 0 80px rgba(139, 92, 246, 0.1),
+      inset 0 0 10px rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(139, 92, 246, 0.8),
+      0 0 50px rgba(139, 92, 246, 0.45),
+      0 0 100px rgba(6, 182, 212, 0.25),
+      0 0 140px rgba(139, 92, 246, 0.15),
+      inset 0 0 15px rgba(255, 255, 255, 0.1);
+  }
+}
+
+.animate-logo-breathe-outer {
+  animation: logo-breathe-outer 3s ease-in-out infinite;
+}
+
+.animate-logo-breathe-mid {
+  animation: logo-breathe-mid 3s ease-in-out infinite 0.3s;
+}
+
+.animate-logo-breathe-core {
+  animation: logo-breathe-core 3s ease-in-out infinite 0.5s;
+}
+
+/* ============================================
+   NextAgent Gradient Text
+   ============================================ */
+.nextagent-gradient-text {
+  background: linear-gradient(135deg, #818cf8 0%, #7c3aed 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nextagent-text {
+  color: #e2e8f0;
+}

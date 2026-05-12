@@ -1,0 +1,535 @@
+[
+  {
+    "id": "cdfaac34",
+    "indexId": 0,
+    "nodePath": "0-0-0-0-0",
+    "nodeHashId": "cdfaac34",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<h1>"
+    },
+    "center": [
+      640,
+      67
+    ],
+    "content": "todos",
+    "rect": {
+      "left": 546,
+      "top": 19,
+      "width": 188,
+      "height": 95,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "fbc2d002",
+    "nodePath": "0-0-0-1-0",
+    "nodeHashId": "fbc2d002",
+    "locator": "[_midscene_retrieve_task_id='fbc2d002']",
+    "nodeType": "FORM_ITEM Node",
+    "indexId": 1,
+    "attributes": {
+      "class": ".new-todo",
+      "id": "todo-input",
+      "type": "text",
+      "data-testid": "text-input",
+      "placeholder": "What needs to be done?",
+      "htmlTagName": "<input>",
+      "nodeType": "FORM_ITEM Node"
+    },
+    "content": "Learn English",
+    "rect": {
+      "left": 365,
+      "top": 130,
+      "width": 550,
+      "height": 65,
+      "zoom": 1
+    },
+    "center": [
+      640,
+      163
+    ],
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "70941b96",
+    "indexId": 2,
+    "nodePath": "0-0-0-1-1-0",
+    "nodeHashId": "70941b96",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<label>"
+    },
+    "center": [
+      960,
+      140
+    ],
+    "content": "New Todo Input",
+    "rect": {
+      "left": 914,
+      "top": 131,
+      "width": 91,
+      "height": 17,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "7688696b",
+    "nodePath": "0-0-1-0-0",
+    "nodeHashId": "7688696b",
+    "locator": "[_midscene_retrieve_task_id='7688696b']",
+    "nodeType": "FORM_ITEM Node",
+    "indexId": 3,
+    "attributes": {
+      "class": ".toggle-all",
+      "type": "checkbox",
+      "data-testid": "toggle-all",
+      "htmlTagName": "<input>",
+      "nodeType": "FORM_ITEM Node"
+    },
+    "content": "on",
+    "rect": {
+      "left": 369,
+      "top": 133,
+      "width": 40,
+      "height": 60,
+      "zoom": 1
+    },
+    "center": [
+      389,
+      163
+    ],
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "8349e4a7",
+    "nodePath": "0-0-1-1-0-0-0",
+    "nodeHashId": "8349e4a7",
+    "locator": "[_midscene_retrieve_task_id='8349e4a7']",
+    "nodeType": "FORM_ITEM Node",
+    "indexId": 4,
+    "attributes": {
+      "class": ".toggle",
+      "type": "checkbox",
+      "data-testid": "todo-item-toggle",
+      "htmlTagName": "<input>",
+      "nodeType": "FORM_ITEM Node"
+    },
+    "content": "on",
+    "rect": {
+      "left": 365,
+      "top": 205,
+      "width": 40,
+      "height": 40,
+      "zoom": 1
+    },
+    "center": [
+      385,
+      225
+    ],
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "c1fb39ce",
+    "indexId": 5,
+    "nodePath": "0-0-1-1-0-0-1-0",
+    "nodeHashId": "c1fb39ce",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<label>"
+    },
+    "center": [
+      497,
+      225
+    ],
+    "content": "Learn Python",
+    "rect": {
+      "left": 425,
+      "top": 211,
+      "width": 143,
+      "height": 28,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "a2b47f27",
+    "nodePath": "0-0-1-1-1-0-0",
+    "nodeHashId": "a2b47f27",
+    "locator": "[_midscene_retrieve_task_id='a2b47f27']",
+    "nodeType": "FORM_ITEM Node",
+    "indexId": 6,
+    "attributes": {
+      "class": ".toggle",
+      "type": "checkbox",
+      "data-testid": "todo-item-toggle",
+      "htmlTagName": "<input>",
+      "nodeType": "FORM_ITEM Node"
+    },
+    "content": "on",
+    "rect": {
+      "left": 365,
+      "top": 265,
+      "width": 40,
+      "height": 40,
+      "zoom": 1
+    },
+    "center": [
+      385,
+      285
+    ],
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "14b20d09",
+    "indexId": 7,
+    "nodePath": "0-0-1-1-1-0-1-0",
+    "nodeHashId": "14b20d09",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<label>"
+    },
+    "center": [
+      484,
+      285
+    ],
+    "content": "Learn Rust",
+    "rect": {
+      "left": 425,
+      "top": 271,
+      "width": 117,
+      "height": 28,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "1b33e5dd",
+    "indexId": 8,
+    "nodePath": "0-0-1-1-1-0-2",
+    "nodeHashId": "1b33e5dd",
+    "nodeType": "BUTTON Node",
+    "locator": "[_midscene_retrieve_task_id='1b33e5dd']",
+    "attributes": {
+      "class": ".destroy",
+      "data-testid": "todo-item-button",
+      "htmlTagName": "<div>",
+      "nodeType": "BUTTON Node"
+    },
+    "content": "×",
+    "rect": {
+      "left": 865,
+      "top": 265,
+      "width": 40,
+      "height": 40,
+      "zoom": 1
+    },
+    "center": [
+      885,
+      285
+    ],
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "d2ddfb14",
+    "nodePath": "0-0-1-1-2-0-0",
+    "nodeHashId": "d2ddfb14",
+    "locator": "[_midscene_retrieve_task_id='d2ddfb14']",
+    "nodeType": "FORM_ITEM Node",
+    "indexId": 9,
+    "attributes": {
+      "class": ".toggle",
+      "type": "checkbox",
+      "data-testid": "todo-item-toggle",
+      "htmlTagName": "<input>",
+      "nodeType": "FORM_ITEM Node"
+    },
+    "content": "on",
+    "rect": {
+      "left": 365,
+      "top": 325,
+      "width": 40,
+      "height": 40,
+      "zoom": 1
+    },
+    "center": [
+      385,
+      345
+    ],
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "3277d35f",
+    "indexId": 10,
+    "nodePath": "0-0-1-1-2-0-1-0",
+    "nodeHashId": "3277d35f",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<label>"
+    },
+    "center": [
+      470,
+      345
+    ],
+    "content": "Learn AI",
+    "rect": {
+      "left": 425,
+      "top": 331,
+      "width": 89,
+      "height": 28,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "3bbb210c",
+    "indexId": 11,
+    "nodePath": "0-0-2-1-0-0-0",
+    "nodeHashId": "3bbb210c",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<a>"
+    },
+    "center": [
+      565,
+      395
+    ],
+    "content": "All",
+    "rect": {
+      "left": 558,
+      "top": 386,
+      "width": 14,
+      "height": 18,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "e5eeb9be",
+    "indexId": 12,
+    "nodePath": "0-0-2-1-1-0-0",
+    "nodeHashId": "e5eeb9be",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<a>"
+    },
+    "center": [
+      613,
+      395
+    ],
+    "content": "Active",
+    "rect": {
+      "left": 594,
+      "top": 386,
+      "width": 38,
+      "height": 18,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "8dfa7ce5",
+    "indexId": 13,
+    "nodePath": "0-0-2-1-2-0-0",
+    "nodeHashId": "8dfa7ce5",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<a>"
+    },
+    "center": [
+      688,
+      395
+    ],
+    "content": "Completed",
+    "rect": {
+      "left": 653,
+      "top": 386,
+      "width": 69,
+      "height": 18,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "69e78b5a",
+    "indexId": 14,
+    "nodePath": "0-0-2-2",
+    "nodeHashId": "69e78b5a",
+    "nodeType": "BUTTON Node",
+    "locator": "[_midscene_retrieve_task_id='69e78b5a']",
+    "attributes": {
+      "class": ".clear-completed",
+      "htmlTagName": "<footer>",
+      "nodeType": "BUTTON Node"
+    },
+    "content": "Clear completed",
+    "rect": {
+      "left": 797,
+      "top": 385,
+      "width": 103,
+      "height": 19,
+      "zoom": 1
+    },
+    "center": [
+      849,
+      395
+    ],
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "9cfdb53c",
+    "indexId": 15,
+    "nodePath": "0-1-0-0",
+    "nodeHashId": "9cfdb53c",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<p>"
+    },
+    "center": [
+      640,
+      486
+    ],
+    "content": "Double-click to edit a todo",
+    "rect": {
+      "left": 580,
+      "top": 479,
+      "width": 120,
+      "height": 13,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "36d8d211",
+    "indexId": 16,
+    "nodePath": "0-1-1-0",
+    "nodeHashId": "36d8d211",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<p>"
+    },
+    "center": [
+      640,
+      508
+    ],
+    "content": "Created by the TodoMVC Team",
+    "rect": {
+      "left": 568,
+      "top": 501,
+      "width": 144,
+      "height": 13,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "071998ac",
+    "indexId": 17,
+    "nodePath": "0-1-2-0",
+    "nodeHashId": "071998ac",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<p>"
+    },
+    "center": [
+      616,
+      530
+    ],
+    "content": "Part of",
+    "rect": {
+      "left": 599,
+      "top": 523,
+      "width": 33,
+      "height": 13,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  },
+  {
+    "id": "bf9f443c",
+    "indexId": 18,
+    "nodePath": "0-1-2-1-0",
+    "nodeHashId": "bf9f443c",
+    "nodeType": "TEXT Node",
+    "locator": "",
+    "attributes": {
+      "nodeType": "TEXT Node",
+      "htmlTagName": "<a>"
+    },
+    "center": [
+      656,
+      530
+    ],
+    "content": "TodoMVC",
+    "rect": {
+      "left": 632,
+      "top": 523,
+      "width": 48,
+      "height": 13,
+      "zoom": 1
+    },
+    "zoom": 1,
+    "screenWidth": 1280,
+    "screenHeight": 720
+  }
+]

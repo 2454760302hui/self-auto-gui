@@ -1,0 +1,51 @@
+# config:
+#   name: 在线_v6
+#   variables:
+#      head_office: 9e6df20cd49a4166b59787f77fd223dc
+
+# teststeps:
+
+# -
+#   name: 修改技能组的组织架构为总公司
+#   request:
+#     method: POST
+#     url: /text/basic-public/group/updateGroupInfoConfirm
+#     headers:
+#       temp-id: ${get_temp_id}
+#     data:
+#       groupId: ${get_groupId}
+#       groupName: ${get_groupName}
+#       viewFlag: 0
+#       allVisibleFlag: 0
+#       departId: ${head_office} 
+#       flag: 1
+
+#   extract:
+#     get_createServiceId: $.item.createServiceId
+#     get_groupId: $.item.groupId
+
+#   export:
+#     - get_createServiceId
+#     - get_groupId
+
+
+#   validate:
+#     - eq: [ $..retCode, '000000']
+
+
+# -
+#   name: 删除技能组
+# #  skip: 结合其他场景综合执行-先以console-技能组-客服上线为主
+#   request:
+#     method: POST
+#     url: /text/chat-set/deleteGroupInfo/4
+#     headers:
+#       temp-id: ${get_temp_id}
+#     data:
+#       groupId: ${get_groupId}
+
+
+
+
+#   validate:
+#     - eq: [ $..retCode, '000000']

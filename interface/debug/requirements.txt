@@ -1,0 +1,12 @@
+pytest>=7.3.1
+allure-pytest
+requests
+jmespath
+jsonpath-ng
+faker
+jinja2
+requests-toolbelt
+websocket-client
+pymysql
+redis
+jsonschema

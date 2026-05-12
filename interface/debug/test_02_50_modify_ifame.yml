@@ -1,0 +1,32 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 修改对接页面-勾选会话记录页,修改标题和url，状态为停用
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/basic-config-service/updateIframeConfig
+
+    data:
+      iframeTitle: ${fake.text(max_nb_chars=100)}
+      iframeUrl: ${fake.uri()}
+      openTarget: 0
+      modelFlag: 8
+      iframeStatus: 0
+      iframeId: ${get_iframeId}
+  extract:
+    get_iframeId: $..iframeId
+  export:
+    - get_iframeId
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+    - eq: [ $..iframeId,'${get_iframeId}']
+
+

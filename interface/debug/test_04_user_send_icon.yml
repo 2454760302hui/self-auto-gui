@@ -1,0 +1,22 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 用户发送icon消息
+#  skip: 引用有问题，导致会话id不对-处理中
+  request:
+    method: POST
+    url: text/chat-web/message/user/send.action #/text/chat-input/user/input/v2.action
+    data:
+      puid: ${get_puid}
+      cid: ${get_cid}
+      uid: ${get_uid}
+      content: ❤😘😒🤣🤞👍
+      objMsgType:
+      msgType: 0
+      fileName: undefinded
+
+  validate:
+    - eq: [ status_code, 200 ]

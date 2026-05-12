@@ -1,0 +1,58 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 对接渠道设置-添加白名单
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/updateConfigDomain/4
+    data:
+      channelScene: 0
+      channelType: 0
+      configId: b781e06ab97b46ce9a22d3188ca6b4c4 #默认渠道-configId写死
+      domainWhiteList: ${fake.uri()}
+
+  extract:
+    get_config_id: $..configId
+
+  export:
+    - get_config_id
+
+  validate:
+    - eq: [ $..retMsg, '成功' ]
+    - eq: [ $..retCode,'000000' ]
+
+
+
+#-
+#  name: 对接渠道设置-删除白名单
+#  request:
+#    method: POST
+#    headers:
+#      temp-id: ${get_temp_id}
+#    url: https://api-c.soboten.com/text/chat-set/rest/updateConfigInSettings/4
+#    data:
+#      channelScene: 0
+#      whiteListFlag: 0
+##      channelMark: 作品大学使用认为.首页如果可以相关为了全国更新状态. 商品个人应该介绍一种部分中心专业.标题感觉网络一些女人选择. 数据得到发生完全生产时候.具有任何地址东西现在. 他的汽车规定来源而且因此经营.看到在线您的简介. 一下继续直接一切也是.社区可是工作电话. 还是如果那个安全部分. 可是只有北京社会有限那么.一种管理文件密码决定网站.
+#      managerType: 1
+#      departmentId:
+#      operateFlag: 0
+#      channelType: 0
+#      configId: 3b5f37a162bc482ab9cf2f56d2e6a095 #先写死，默认桌面渠道
+#      id: ${get_id}
+#
+#  extract:
+#    get_config_id: $..configId
+#
+#  export:
+#    - get_config_id
+#
+#  validate:
+#    - eq: [ $..retMsg, '成功' ]
+#    - eq: [ $..retCode,'000000' ]
+#

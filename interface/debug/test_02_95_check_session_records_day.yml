@@ -1,0 +1,38 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 根据今日查询会话记录
+  request:
+    method: post
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-statistics/sessionRecordMsg/querySessionListVer2
+
+    json:
+      aiClassificationStates: null
+      page: 1
+      size: 15
+      searchWay: 2
+      allViewFlag:
+      startDateTs:  ${current_time_0()}  #'{{current_time_0()}}' # #ms 0点-引入自定义函数-处理中-
+      endDateTs: ${current_finaly_time()} #'{{current_time_23()}}' # #ms 23：59-
+      departIdsParam:
+      reqType:
+
+  extract:
+    get_uname: $.item.0.uname
+  export:
+    - get_uname
+
+
+  validate:
+
+    - eq: [ $..retCode,'000000' ]
+    - eq: [ $.item.0.uname, '${get_uname}']
+
+

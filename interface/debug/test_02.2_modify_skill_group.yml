@@ -1,0 +1,31 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 修改-技能组-ing
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+
+    url: /text/basic-public/group/updateGroupInfoConfirm
+
+    data:
+      groupName: ${get_groupName}
+      viewFlag: 0
+      allVisibleFlag: 1
+      departId: ''
+      groupId: ${get_groupId}
+      flag: 1
+
+
+  extract:
+    get_groupId: $..groupId
+
+#  export:
+#    - get_groupId
+
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']

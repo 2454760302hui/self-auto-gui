@@ -1,0 +1,36 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 获取【专家】渠道组id ，其中专家为测试数据-如有替换场景-需处理
+  request:
+    method: get
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/chat/config/getTicketToMsgConfig/4?leaveType=2&groupId=71fc30c2e6bb429b8d7417c6071f3dd9
+
+    data:
+      leaveType: 2
+      groupId: 719596005bda4ce7b228461468ee4883 #专家
+  extract:
+    get_leave_professional_id: $..id
+#    get_ticketDeployName: $..ticketDeployName
+  export:
+    - get_leave_professional_id
+#    - get_ticketDeployName
+
+  validate:
+
+    - eq: [ $..retCode,'000000' ]
+    - eq: [$..id,'${get_leave_professional_id}' ]
+#    - eq: [ $..ticketDeployId, '${get_ticketDeployId}']
+#    - eq: [ $..ticketDeployName,'默认插件' ]
+#    - eq: [ $.items.0.fieldName,"客户标签"]
+#    - eq: [ $..iframeId,'${get_iframeId}']
+
+
+

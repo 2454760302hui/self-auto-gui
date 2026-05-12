@@ -1,0 +1,45 @@
+# iOS 登录测试示例
+
+config:
+  name: iOS 登录测试
+  platform: ios
+  device: "localhost:8100"
+  app: com.example.iosapp
+
+locators:
+  用户名输入框:
+    primary: "aid=username_field"
+    fallback:
+      - "predicate=name == 'username'"
+  密码输入框:
+    primary: "aid=password_field"
+    fallback:
+      - "predicate=name == 'password'"
+  登录按钮:
+    primary: "aid=login_button"
+    fallback:
+      - "text=登录"
+
+test_login:
+  - name: 启动应用
+    launch_app:
+      package: com.example.iosapp
+
+  - name: 输入用户名
+    input:
+      element: 用户名输入框
+      value: test@example.com
+
+  - name: 输入密码
+    input:
+      element: 密码输入框
+      value: password123
+
+  - name: 点击登录
+    tap:
+      element: 登录按钮
+
+  - name: 验证首页可见
+    assert:
+      element: 登录按钮
+      visible: false

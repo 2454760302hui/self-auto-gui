@@ -1,0 +1,22 @@
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:135 执行文件-> test_02.18_del_mobile_channel.yml
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:136 base_url-> https://api-c.soboten.com
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:137 config variables-> {}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:139 运行用例-> teststeps
+[32mINFO    [0m pytest_yaml_yoyo.log:render_template_obj.py:58 取值表达式: get_temp_id, 取值结果：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiJiZGJlNTY2MGIyZWI0NTc1ODczOTUyN2ZkYTk3NDA5MSIsImFnZW50SWQiOiI4M2Q0MDM5MTg2ZDg0NTJiODhhNTk4NzNiZmNmMjA4NCIsInNlcnZpY2VFbWFpbCI6ImFwaUBzb2JvdC5jb20iLCJ6b25lIjoxLCJpc3MiOiJhcGlAc29ib3QuY29tIiwiZXhwIjoxNjk4OTc4NTI4LCJ0eXBlIjoiY29uc29sZSJ9.6R7lWeUOKCqqet9ng90MmGy1TMtFsyWntoBp2S1OcTk <class 'str'>
+[32mINFO    [0m pytest_yaml_yoyo.log:render_template_obj.py:58 取值表达式: get_config_id, 取值结果：4b8ec259c1934ce7b88fe3d78638c178 <class 'str'>
+[32mINFO    [0m pytest_yaml_yoyo.log:render_template_obj.py:58 取值表达式: get_channelFlag, 取值结果：681 <class 'int'>
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:342 --------  request info ----------
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:343 yml raw  -->: {'method': 'POST', 'headers': {'temp-id': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiJiZGJlNTY2MGIyZWI0NTc1ODczOTUyN2ZkYTk3NDA5MSIsImFnZW50SWQiOiI4M2Q0MDM5MTg2ZDg0NTJiODhhNTk4NzNiZmNmMjA4NCIsInNlcnZpY2VFbWFpbCI6ImFwaUBzb2JvdC5jb20iLCJ6b25lIjoxLCJpc3MiOiJhcGlAc29ib3QuY29tIiwiZXhwIjoxNjk4OTc4NTI4LCJ0eXBlIjoiY29uc29sZSJ9.6R7lWeUOKCqqet9ng90MmGy1TMtFsyWntoBp2S1OcTk'}, 'url': '/text/chat-set/rest/delConfigInfo/4', 'data': {'configId': '4b8ec259c1934ce7b88fe3d78638c178', 'channelFlag': 681}}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:344 method   -->: POST
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:345 url      -->: /text/chat-set/rest/delConfigInfo/4
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:350 headers  -->: {'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'temp-id': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiJiZGJlNTY2MGIyZWI0NTc1ODczOTUyN2ZkYTk3NDA5MSIsImFnZW50SWQiOiI4M2Q0MDM5MTg2ZDg0NTJiODhhNTk4NzNiZmNmMjA4NCIsInNlcnZpY2VFbWFpbCI6ImFwaUBzb2JvdC5jb20iLCJ6b25lIjoxLCJpc3MiOiJhcGlAc29ib3QuY29tIiwiZXhwIjoxNjk4OTc4NTI4LCJ0eXBlIjoiY29uc29sZSJ9.6R7lWeUOKCqqet9ng90MmGy1TMtFsyWntoBp2S1OcTk'}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:354 data     -->: {'configId': '4b8ec259c1934ce7b88fe3d78638c178', 'channelFlag': 681}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:359 ------  response info  200  ------ 
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:360 耗时     <--: 0.053148s
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:361 url      <--: https://api-c.soboten.com/text/chat-set/rest/delConfigInfo/4
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:362 headers  <--: {'Date': 'Thu, 02 Nov 2023 02:28:49 GMT', 'Content-Type': 'application/json;charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': '*', 'Access-Control-Max-Age': '7200', 'Access-Control-Expose-Headers': '*', 'Access-Control-Allow-Headers': 'bno,*'}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:363 cookies  <--: {}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:364 raw text <--: {"retCode":"000000"}
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:250 validate 校验内容-> [{'eq': ['$..retCode', '000000']}]
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:601 validate 校验结果-> eq: [000000, 000000]
+[32mINFO    [0m pytest_yaml_yoyo.log:runner.py:293 export 导出全局变量：{'get_temp_id': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiJiZGJlNTY2MGIyZWI0NTc1ODczOTUyN2ZkYTk3NDA5MSIsImFnZW50SWQiOiI4M2Q0MDM5MTg2ZDg0NTJiODhhNTk4NzNiZmNmMjA4NCIsInNlcnZpY2VFbWFpbCI6ImFwaUBzb2JvdC5jb20iLCJ6b25lIjoxLCJpc3MiOiJhcGlAc29ib3QuY29tIiwiZXhwIjoxNjk4OTc4NTI4LCJ0eXBlIjoiY29uc29sZSJ9.6R7lWeUOKCqqet9ng90MmGy1TMtFsyWntoBp2S1OcTk', 'get_temp-id': None, 'get_config_id': '4b8ec259c1934ce7b88fe3d78638c178', 'get_id': '0fe72f7cff0b47818120439d5d05b9a2', 'get_channelFlag': 681}

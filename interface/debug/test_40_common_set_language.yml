@@ -1,0 +1,59 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 语言设置-中文
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/modifyAdminConfig.action
+    data:
+      languageFlag: 1 #中文
+      tid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rI0hoH5dRpzblhA9rIQ135n
+  validate:
+    - eq: [$..status,1]
+
+-
+  name: 语言设置-繁体
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/modifyAdminConfig.action
+    data:
+      languageFlag: 2 #繁体
+      tid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rI0hoH5dRpzblhA9rIQ135n
+  validate:
+    - eq: [$..status,1]
+
+-
+  name: 语言设置-英文
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/modifyAdminConfig.action
+    data:
+      languageFlag: 3 #英文
+      tid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rI0hoH5dRpzblhA9rIQ135n
+  validate:
+    - eq: [$..status,1]
+
+-
+  name: 语言设置-阿拉伯文
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/modifyAdminConfig.action
+    data:
+      languageFlag: 4 #阿拉伯文
+      tid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rI0hoH5dRpzblhA9rIQ135n
+  validate:
+    - eq: [$..status,1]
+
+
+-
+  name: 语言设置-切回中文
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/modifyAdminConfig.action
+    data:
+      languageFlag: 1 #中文
+      tid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rI0hoH5dRpzblhA9rIQ135n
+  validate:
+    - eq: [$..status,1]

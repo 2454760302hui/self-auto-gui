@@ -1,0 +1,28 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 开启postmsg
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/chat/config/updateWbConfig/4
+
+    data:
+      iframeFlag: 1
+#  extract:
+#    get_key: $..secretKey
+#  export:
+#    - get_key
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..secretKey,'${get_key}']
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

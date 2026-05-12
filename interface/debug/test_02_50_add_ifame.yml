@@ -1,0 +1,31 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 添加对接页面-勾选客服工作台对接页面，会话监控，会话记录页，状态为启用
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/basic-config-service/addIframeConfig
+
+    data:
+      iframeTitle: ${fake.text(max_nb_chars=100)}
+      iframeUrl: ${fake.uri()}
+      openTarget: 0
+      modelFlag: 1,7,8
+      iframeStatus: 1
+  extract:
+    get_iframeId: $..iframeId
+  export:
+    - get_iframeId
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+    - eq: [ $..iframeId,'${get_iframeId}']
+
+

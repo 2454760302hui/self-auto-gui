@@ -1,0 +1,29 @@
+config:
+  name: 在线_v6
+  variables:
+    name: 11
+    desc: 22
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 客户分配策略-修改智能路由名称和备注
+#  skip: 不清楚ID从何来-修改是必填参数-跳过-说明deciId==serviceId==createId
+  request:
+    method: POST
+    url: /text/chat-set/smartRoute/updateSmartRouteInfo/4
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      routeInfo: '{"srName": "${name}","srDesc": "${desc}","srStatus": 1,"srId": "${get_srId}" }'
+      allCondRel: '[{ "companyId": "${get_companyId}","condId": "2","conditionRelStatus": 1,"deciId": "21","id": "${get_Id}","logicRel": "AND","optionId": "-1","optionValue": "全部","sortNo": 0,"srId": "${get_srId}" }]'
+      anyCondRel: '[ ]'
+      actionRel: '[{ "actionId": "1","actionRelStatus": 1,"actionType": "to_service","companyId": "${get_companyId}","deciId": "${get_serverId}","deciValue": "api","optionId": "2","optionValue": "不溢出","spillValue": "","srId": "${get_srId}" }]'
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

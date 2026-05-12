@@ -1,0 +1,86 @@
+config:
+  name: 在线_v6
+
+teststeps:
+
+-
+  name: 添加成员至特需组
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+      content-type: application/x-www-form-urlencoded
+    url: /text/basic-public/group/saveGroupServicesInfo
+    data:
+      groupId: ${get_items_0_groupId}
+      strServiceId: ${get_items_0_createServiceId}
+      groupName: 特需
+      flag: 1
+
+  validate:
+    - eq: [ $..retMsg,'操作成功' ]
+
+-
+  
+  name: 修改console-技能组内的客服-接待上线-至100
+  request:
+    method: GET
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/updateServiceMaxAcceecpt/4?groupId=${get_items_0_groupId}&serviceIds=${get_items_0_createServiceId}&maxNum=100
+
+    
+
+  extract:
+    get_createServiceId: $..createServiceId #客服id
+    get_serviceEmail: $..serviceEmail #客服邮箱
+    # get_faceImg: $..faceImg #客服头像
+    # get_phoneNo: $..phoneNo #客服电话
+    get_maxAccept: $..maxAccept #最大上线-
+
+  export:
+    - get_createServiceId
+    - get_maxAccept
+    # - get_phoneNo
+    # - get_faceImg
+    - get_serviceEmail
+    - get_createServiceId
+
+  validate:
+    - eq: [ $..retMsg,'操作成功' ]
+    - eq: [ $..maxAccept,'${get_maxAccept}' ] 
+
+
+-
+  
+  name: 修改console-技能组内的客服-技能组为20
+  request:
+    method: post
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/basic-public/agent/updateSkillNumBatch
+
+    data: 
+      groupId: ${get_items_0_groupId}
+      serviceId: ${get_items_0_createServiceId}
+      skillNum: 22 #${fake.random_int(min=0, max=100}
+
+  # extract:
+  #   get_createServiceId: $..createServiceId #客服id
+  #   get_serviceEmail: $..serviceEmail #客服邮箱
+  #   # get_faceImg: $..faceImg #客服头像
+  #   # get_phoneNo: $..phoneNo #客服电话
+  #   get_maxAccept: $..maxAccept #最大上线-
+
+  # export:
+  #   - get_createServiceId
+  #   - get_maxAccept
+  #   # - get_phoneNo
+  #   # - get_faceImg
+  #   - get_serviceEmail
+  #   - get_createServiceId
+
+  validate:
+    - eq: [ $..retMsg,'操作成功' ]
+    # - eq: [ $..maxAccept,'${get_maxAccept}' ] 
+

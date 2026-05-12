@@ -1,0 +1,47 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 基础信息-勾选自定义昵称+地区+月份+日期+随机数，显示客服真实姓名，开启锁定会话，不勾选自动锁定，开启创建工单，开启服务总结，开启转接客户确认，开启会话消息提醒，开启会话首消息标识，开启客服撤回消息，开启浏览轨迹，开启客户进线消息，勾选显示接待序号，开启系统消息显示，开启坐席翻译助手，显示客服所在技能组的排队，勾选点击客户消息直接触发智能回复检索，开启语音转文字
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/chat/config/updateWbConfig/4
+
+    data:
+      nickFlag: 1
+      showStaffNameFlag: 1
+      chatSessionLockFlag: 0
+      hideTicketFlag: 0
+      openSummaryFlag: 1
+      transferAuditFlag: 1
+      chatOverTimeFlag: 0
+      msgRemindFlag: 1
+      firstMsgFlag: 1
+      msgRevokeFlag: 1
+      scanPathFlag: 1
+      windowFlag: 1
+      sysMsgFlag: 1
+      translateFlag: 1
+      waitUserFlag: 1
+      autoReplyCheckFlag: 0
+      voiceToTextFlag: 1
+      chatSessionAutoLockFlag: 1
+      displaySerialFlag: 1
+      transferAuditScopeFlag: 0
+      customizeNick: address,month,date,number
+#  extract:
+#    get_iframeId: $..iframeId
+#  export:
+#    - get_iframeId
+
+  validate:
+    - eq: [ $..retCode,'000000' ]
+#    - eq: [ $..iframeId,'${get_iframeId}']
+
+

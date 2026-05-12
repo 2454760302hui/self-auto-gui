@@ -1,0 +1,39 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 客服设置-修改客服状态-培训-由关闭至开启
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/basic-public/agent/updateOnlineServiceStatus
+    data:
+      statusList: 10292
+      modelFlag: 1
+
+  validate:
+#    #    - eq: [ $..cid,'${get_cid}']
+#    #    - eq: [$..realname,'${get_realname}']
+#    - eq: [ $..retMsg, '操作成功' ]
+    - eq: [ $..retCode,'000000' ]
+
+
+-
+  name: 客服设置-修改客服状态-培训-由开启至关闭
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: https://api-c.soboten.com/text/basic-public/agent/updateOnlineServiceStatus
+
+    data:
+      statusList: ''
+      modelFlag: 1
+#
+  validate:
+#    - eq: [ $..cid,'${get_cid}']
+#    - eq: [$..realname,'${get_realname}']
+    - eq: [ $..retMsg, '操作成功']
+#    - eq: [$..retCode,'000000']

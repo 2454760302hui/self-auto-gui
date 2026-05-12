@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser-Use NLP 全面测试页面</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section { background: white; margin: 20px 0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #333; margin-bottom: 30px; }
+        h2 { color: #0066cc; margin: 20px 0 10px 0; border-bottom: 2px solid #0066cc; padding-bottom: 10px; }
+        .form-group { margin: 15px 0; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+        input, select, textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        button { padding: 10px 20px; margin: 5px; background: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        button:hover { background: #0052a3; }
+        .button-group { margin: 20px 0; }
+        .alert { padding: 15px; margin: 10px 0; border-radius: 4px; display: none; }
+        .alert.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .alert.info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); }
+        .modal.show { display: block; }
+        .modal-content { background-color: #fefefe; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 8px; }
+        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close:hover { color: black; }
+        iframe { width: 100%; height: 400px; border: 1px solid #ddd; border-radius: 4px; }
+        .image-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0; }
+        .image-item { position: relative; overflow: hidden; border-radius: 4px; }
+        .image-item img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; }
+        .image-item:hover img { transform: scale(1.1); transition: transform 0.3s; }
+        .checkbox-group, .radio-group { margin: 10px 0; }
+        .checkbox-group label, .radio-group label { display: inline-block; margin-right: 20px; }
+        .result { background: #f0f0f0; padding: 15px; border-radius: 4px; margin: 10px 0; font-family: monospace; white-space: pre-wrap; word-break: break-all; }
+        .loading { display: none; text-align: center; padding: 20px; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #0066cc; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .tab-buttons { margin: 20px 0; }
+        .tab-button { padding: 10px 20px; margin-right: 5px; background: #ddd; border: none; cursor: pointer; border-radius: 4px; }
+        .tab-button.active { background: #0066cc; color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Browser-Use NLP 全面测试页面</h1>
+        <p style="color: #666; margin-bottom: 20px;">此页面用于测试所有自动化操作场景</p>
+
+        <!-- 标签页 -->
+        <div class="tab-buttons">
+            <button class="tab-button active" onclick="switchTab('basic')">基础操作</button>
+            <button class="tab-button" onclick="switchTab('form')">表单操作</button>
+            <button class="tab-button" onclick="switchTab('keyboard')">键盘操作</button>
+            <button class="tab-button" onclick="switchTab('mouse')">鼠标操作</button>
+            <button class="tab-button" onclick="switchTab('text')">文本操作</button>
+            <button class="tab-button" onclick="switchTab('modal')">弹窗处理</button>
+            <button class="tab-button" onclick="switchTab('iframe')">iframe处理</button>
+            <button class="tab-button" onclick="switchTab('image')">图片操作</button>
+            <button class="tab-button" onclick="switchTab('nlp')">NLP演示</button>
+            <button class="tab-button" onclick="switchTab('advanced')">高级操作</button>
+        </div>
+
+        <!-- 基础操作 -->
+        <div id="basic" class="tab-content active">
+            <div class="section">
+                <h2>📌 基础操作测试</h2>
+                
+                <div class="form-group">
+                    <label>页面标题</label>
+                    <input type="text" id="pageTitle" value="Browser-Use NLP 全面测试页面" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>页面URL</label>
+                    <input type="text" id="pageUrl" readonly>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="testClick()">点击测试按钮</button>
+                    <button onclick="testDoubleClick()">双击测试按钮</button>
+                    <button onclick="testRightClick()" oncontextmenu="return false;">右键点击测试</button>
+                    <button onclick="testHover()" onmouseover="this.style.background='#ff6600';" onmouseout="this.style.background='#0066cc';">悬停测试</button>
+                </div>
+
+                <div class="alert alert-info" id="basicAlert" style="display: none;"></div>
+                <div class="result" id="basicResult" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- 表单操作 -->
+        <div id="form" class="tab-content">
+            <div class="section">
+                <h2>📝 表单操作测试</h2>
+                
+                <form id="testForm">
+                    <div class="form-group">
+                        <label for="textInput">文本输入</label>
+                        <input type="text" id="textInput" placeholder="输入文本">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailInput">邮箱输入</label>
+                        <input type="email" id="emailInput" placeholder="输入邮箱">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numberInput">数字输入</label>
+                        <input type="number" id="numberInput" placeholder="输入数字" min="0" max="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateInput">日期选择</label>
+                        <input type="date" id="dateInput">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deliveryTime">Preferred delivery time</label>
+                        <input type="time" id="deliveryTime" placeholder="--:--">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="colorInput">颜色选择</label>
+                        <input type="color" id="colorInput" value="#0066cc">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rangeInput">范围滑块</label>
+                        <input type="range" id="rangeInput" min="0" max="100" value="50">
+                        <span id="rangeValue">50</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="selectInput">下拉选择</label>
+                        <select id="selectInput">
+                            <option value="">请选择</option>
+                            <option value="option1">选项1</option>
+                            <option value="option2">选项2</option>
+                            <option value="option3">选项3</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="multiSelect">多选下拉</label>
+                        <select id="multiSelect" multiple>
+                            <option value="multi1">多选项1</option>
+                            <option value="multi2">多选项2</option>
+                            <option value="multi3">多选项3</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deliveryInstructions">Delivery instructions</label>
+                        <textarea id="deliveryInstructions" placeholder="输入配送说明" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>复选框 - Pizza Toppings</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="toppings" value="bacon"> Bacon</label>
+                            <label><input type="checkbox" name="toppings" value="cheese"> Extra Cheese</label>
+                            <label><input type="checkbox" name="toppings" value="onion"> Onion</label>
+                            <label><input type="checkbox" name="toppings" value="mushroom"> Mushroom</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>单选框 - Pizza Size</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="pizzaSize" value="small"> Small</label>
+                            <label><input type="radio" name="pizzaSize" value="medium"> Medium</label>
+                            <label><input type="radio" name="pizzaSize" value="large"> Large</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fileInput">文件上传</label>
+                        <input type="file" id="fileInput">
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" onclick="testFormFill()">填充表单</button>
+                        <button type="button" onclick="testFormClear()">清空表单</button>
+                        <button type="button" onclick="testFormValidate()">验证表单</button>
+                        <button type="submit" onclick="testFormSubmit(event)">提交表单</button>
+                    </div>
+                </form>
+
+                <div class="result" id="formResult" style="display: none;"></div>
+                <div class="result" id="validationResult" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- 键盘操作 -->
+        <div id="keyboard" class="tab-content">
+            <div class="section">
+                <h2>⌨️ 键盘操作测试</h2>
+                
+                <div class="form-group">
+                    <label for="keyboardInput">键盘输入测试</label>
+                    <input type="text" id="keyboardInput" placeholder="点击后输入文本">
+                </div>
+
+                <div class="button-group">
+                    <button onclick="testTypeText()">输入文本</button>
+                    <button onclick="testPressEnter()">按 Enter 键</button>
+                    <button onclick="testPressTab()">按 Tab 键</button>
+                    <button onclick="testPressEscape()">按 Escape 键</button>
+                    <button onclick="testCtrlC()">Ctrl+C 复制</button>
+                    <button onclick="testCtrlV()">Ctrl+V 粘贴</button>
+                    <button onclick="testCtrlA()">Ctrl+A 全选</button>
+                    <button onclick="testShiftTab()">Shift+Tab 反向导航</button>
+                </div>
+
+                <div class="result" id="keyboardResult" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- 鼠标操作 -->
+        <div id="mouse" class="tab-content">
+            <div class="section">
+                <h2>🖱️ 鼠标操作测试</h2>
+                
+                <div id="mouseTestArea" style="width: 100%; height: 200px; background: #f0f0f0; border: 2px dashed #ccc; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 18px;">
+                    鼠标操作测试区域
+                </div>
+
+                <div class="button-group">
+                    <button onclick="testMouseMove()">鼠标移动</button>
+                    <button onclick="testMouseDown()">鼠标按下</button>
+                    <button onclick="testMouseUp()">鼠标释放</button>
+                    <button onclick="testMouseWheel()">鼠标滚轮</button>
+                    <button onclick="testDragDrop()">拖拽操作</button>
+                    <button onclick="testLongPress()">长按操作</button>
+                </div>
+
+                <div class="result" id="mouseResult" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- 文本操作 -->
+        <div id="text" class="tab-content">
+            <div class="section">
+                <h2>📄 文本操作测试</h2>
+                
+                <div class="form-group">
+                    <label for="textOperationInput">文本操作输入框</label>
+                    <input type="text" id="textOperationInput" placeholder="输入文本进行操作" value="示例文本内容">
+                </div>
+
+                <div class="button-group">
+                    <button onclick="testGetText()">获取文本</button>
+                    <button onclick="testSetText()">设置文本</button>
+                    <button onclick="testClearText()">清空文本</button>
+                    <button onclick="testSelectText()">选中文本</button>
+                    <button onclick="testCopyText()">复制文本</button>
+                    <button onclick="testAppendText()">追加文本</button>
+                    <button onclick="testReplaceText()">替换文本</button>
+                </div>
+
+                <div class="result" id="textResult" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- 弹窗处理 -->
+        <div id="modal" class="tab-content">
+            <div class="section">
+                <h2>🔔 弹窗处理测试</h2>
+                
+                <div class="button-group">
+                    <button onclick="showAlertDialog()">显示Alert弹窗</button>
+                    <button onclick="showConfirmDialog()">显示Confirm弹窗</button>
+                    <button onclick="showPromptDialog()">显示Prompt弹窗</button>
+                    <button onclick="showCustomModal()">显示自定义弹窗</button>
+                </div>
+
+                <div id="customModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeCustomModal()">&times;</span>
+                        <h2>自定义弹窗</h2>
+                        <p>这是一个自定义的模态框</p>
+                        <input type="text" id="modalInput" placeholder="输入内容">
+                        <div class="button-group">
+                            <button onclick="confirmModal()">确认</button>
+                            <button onclick="closeCustomModal()">取消</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result" id="modalResult" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- iframe处理 -->
+        <div id="iframe" class="tab-content">
+            <div class="section">
+                <h2>🔗 iframe处理测试</h2>
+                
+                <div class="form-group">
+                    <label>iframe内容</label>
+                    <iframe id="testIframe" srcdoc="
+                        <html>
+                            <head>
+                                <style>
+                                    body { font-family: Arial; padding: 20px; background: #f9f9f9; }
+                                    h2 { color: #0066cc; }
+                                    input { padding: 8px; margin: 5px 0; width: 100%; }
+                                    button { padding: 8px 15px; background: #0066cc; color: white; border: none; cursor: pointer; border-radius: 4px; }
+                                </style>
+                            </head>
+                            <body>
+                                <h2>iframe内部表单</h2>
+                                <input type='text' id='iframeInput' placeholder='iframe内的输入框'>
+                                <button onclick='alert(\"iframe内的按钮被点击\")'>iframe内的按钮</button>
+                                <p id='iframeResult'></p>
+                            </body>
+                        </html>
+                    "></iframe>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="testIframeInteraction()">测试iframe交互</button>
+                </div>
+
+                <div class="result" id="iframeResult" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- 图片操作 -->
+        <div id="image" class="tab-content">
+            <div class="section">
+                <h2>🖼️ 图片操作测试</h2>
+                
+                <div class="form-group">
+                    <label>图片库</label>
+                    <div class="image-gallery">
+                        <div class="image-item">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%230066cc' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E图片1%3C/text%3E%3C/svg%3E" alt="图片1" onclick="selectImage(this)">
+                        </div>
+                        <div class="image-item">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%23ff6600' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E图片2%3C/text%3E%3C/svg%3E" alt="图片2" onclick="selectImage(this)">
+                        </div>
+                        <div class="image-item">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%2300cc66' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E图片3%3C/text%3E%3C/svg%3E" alt="图片3" onclick="selectImage(this)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>选中的图片</label>
+                    <div id="selectedImage" style="width: 100%; height: 200px; background: #f0f0f0; border: 2px dashed #ccc; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #999;">
+                        点击图片选择
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="testImageClick()">测试图片点击</button>
+                    <button onclick="testImageHover()">测试图片悬停</button>
+                </div>
+
+                <div class="result" id="imageResult" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- NLP演示 -->
+        <div id="nlp" class="tab-content">
+            <div class="section">
+                <h2>🤖 NLP自动化演示</h2>
+                
+                <div class="form-group">
+                    <label>使用说明</label>
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+                        <p><strong>支持的操作类型：</strong></p>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>✅ 打开/点击 - 如"打开 https://cn.bing.com"、"点击提交按钮"</li>
+                            <li>✅ 输入/填充 - 如"输入 #txt_form_q 耳机"、"填充表单"</li>
+                            <li>✅ 选择/勾选 - 如"选择 Medium"、"勾选 Bacon"</li>
+                            <li>✅ 提交/确认 - 如"提交表单"、"按 Enter"</li>
+                            <li>✅ 等待/验证 - 如"等待加载完成"、"验证表单"</li>
+                            <li>✅ 滚动/导航 - 如"向下滚动"、"返回首页"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="nlpCommand">NLP指令 (每行一条，用 # 标注元素ID)</label>
+                    <textarea id="nlpCommand" placeholder="示例：&#10;打开 https://cn.bing.com&#10;等待加载完成&#10;输入 #txt_form_q 耳机&#10;按 Enter&#10;等待加载完成&#10;验证" rows="6" style="font-family: monospace; font-size: 13px;">打开 https://cn.bing.com
+等待加载完成
+输入 #txt_form_q 耳机
+按 Enter
+等待加载完成
+验证</textarea>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="executeNLPDemo()" style="background: #7c3aed; padding: 12px 24px; font-size: 15px;">▶ 执行NLP演示</button>
+                    <button onclick="clearNLPDemo()" style="background: #6b7280;">清空结果</button>
+                    <button onclick="loadNLPExample(1)" style="background: #059669;">示例1: 搜索</button>
+                    <button onclick="loadNLPExample(2)" style="background: #059669;">示例2: 表单</button>
+                    <button onclick="loadNLPExample(3)" style="background: #059669;">示例3: 复杂</button>
+                </div>
+
+                <div class="form-group">
+                    <label>执行日志</label>
+                    <div id="nlpLog" class="result" style="display: block; background: #1f2937; color: #10b981; font-family: 'Courier New', monospace; font-size: 12px; max-height: 300px; overflow-y: auto;">
+                        <div style="color: #60a5fa;">等待执行...</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>执行结果</label>
+                    <div id="nlpResult" class="result" style="display: block; background: #f0f0f0;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 高级操作 -->
+        <div id="advanced" class="tab-content">
+            <div class="section">
+                <h2>⚙️ 高级操作测试</h2>
+                
+                <div class="form-group">
+                    <label for="scrollAmount">滚动距离(px)</label>
+                    <input type="number" id="scrollAmount" value="300">
+                </div>
+
+                <div class="button-group">
+                    <button onclick="testScroll()">向下滚动</button>
+                    <button onclick="testScrollUp()">向上滚动</button>
+                    <button onclick="testScrollToTop()">滚动到顶部</button>
+                    <button onclick="testScrollToBottom()">滚动到底部</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="jsCode">执行JavaScript</label>
+                    <textarea id="jsCode" placeholder="输入JavaScript代码" rows="4">return document.title;</textarea>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="testExecuteJS()">执行代码</button>
+                </div>
+
+                <div class="form-group">
+                    <label>页面信息</label>
+                    <div class="result" id="pageInfo"></div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="testGetPageInfo()">获取页面信息</button>
+                    <button onclick="testScreenshot()">截图</button>
+                </div>
+
+                <div class="result" id="advancedResult" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('pageUrl').value = window.location.href;
+            document.getElementById('rangeInput').addEventListener('input', function() {
+                document.getElementById('rangeValue').textContent = this.value;
+            });
+        });
+
+        // 标签页切换
+        function switchTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-button');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // 基础操作
+        function testClick() {
+            showAlert('success', '✅ 按钮被点击了！');
+        }
+
+        function testDoubleClick() {
+            showAlert('success', '✅ 按钮被双击了！');
+        }
+
+        function testRightClick() {
+            showAlert('success', '✅ 按钮被右键点击了！');
+        }
+
+        function testHover() {
+            showAlert('info', 'ℹ️ 鼠标悬停在按钮上');
+        }
+
+        // 表单操作
+        function testFormFill() {
+            // 基础字段
+            document.getElementById('textInput').value = '李四';
+            document.getElementById('emailInput').value = 'li@example.com';
+            document.getElementById('numberInput').value = '42';
+            document.getElementById('dateInput').value = '2024-05-06';
+            document.getElementById('colorInput').value = '#ff6600';
+            document.getElementById('rangeInput').value = '75';
+            document.getElementById('rangeValue').textContent = '75';
+            document.getElementById('selectInput').value = 'option2';
+            document.getElementById('deliveryInstructions').value = '这是一条测试留言';
+            
+            // 设置时间选择器 - 必须使用正确的格式
+            const timeInput = document.getElementById('deliveryTime');
+            timeInput.value = '14:30';
+            timeInput.dispatchEvent(new Event('change', { bubbles: true }));
+            timeInput.dispatchEvent(new Event('input', { bubbles: true }));
+            
+            // 设置单选框 - Pizza Size (必须先取消其他选项)
+            document.querySelectorAll('input[name="pizzaSize"]').forEach(radio => {
+                radio.checked = false;
+            });
+            const mediumRadio = document.querySelector('input[name="pizzaSize"][value="medium"]');
+            if (mediumRadio) {
+                mediumRadio.checked = true;
+                mediumRadio.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            
+            // 设置复选框 - Pizza Toppings (先清空所有)
+            document.querySelectorAll('input[name="toppings"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            // 然后选中指定的选项
+            const baconCheckbox = document.querySelector('input[name="toppings"][value="bacon"]');
+            const onionCheckbox = document.querySelector('input[name="toppings"][value="onion"]');
+            if (baconCheckbox) {
+                baconCheckbox.checked = true;
+                baconCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            if (onionCheckbox) {
+                onionCheckbox.checked = true;
+                onionCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            
+            showAlert('success', '✅ 表单已填充完成');
+            showResult('formResult', '已填充的表单数据:\n' + JSON.stringify(getFormData(), null, 2));
+        }
+
+        function testFormClear() {
+            document.getElementById('testForm').reset();
+            document.getElementById('rangeValue').textContent = '50';
+            showAlert('success', '✅ 表单已清空');
+        }
+
+        function testFormValidate() {
+            const errors = [];
+            
+            // 验证文本输入
+            const textInput = document.getElementById('textInput').value.trim();
+            if (!textInput) {
+                errors.push('❌ 文本输入不能为空');
+            }
+            
+            // 验证邮箱
+            const emailInput = document.getElementById('emailInput').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput)) {
+                errors.push('❌ 邮箱格式不正确');
+            }
+            
+            // 验证数字
+            const numberInput = parseInt(document.getElementById('numberInput').value);
+            if (isNaN(numberInput) || numberInput < 0 || numberInput > 100) {
+                errors.push('❌ 数字必须在 0-100 之间');
+            }
+            
+            // 验证日期
+            const dateInput = document.getElementById('dateInput').value;
+            if (!dateInput) {
+                errors.push('❌ 日期不能为空');
+            }
+            
+            // 验证时间
+            const timeInput = document.getElementById('deliveryTime').value;
+            const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+            if (!timeRegex.test(timeInput)) {
+                errors.push('❌ 时间格式不正确 (应为 HH:MM)');
+            }
+            
+            // 验证单选框
+            const pizzaSizeSelected = document.querySelector('input[name="pizzaSize"]:checked');
+            if (!pizzaSizeSelected) {
+                errors.push('❌ 必须选择 Pizza Size');
+            }
+            
+            // 验证复选框
+            const toppingsSelected = document.querySelectorAll('input[name="toppings"]:checked');
+            if (toppingsSelected.length === 0) {
+                errors.push('❌ 必须选择至少一个 Pizza Topping');
+            }
+            
+            // 验证多行文本
+            const deliveryInstructions = document.getElementById('deliveryInstructions').value.trim();
+            if (!deliveryInstructions) {
+                errors.push('❌ 配送说明不能为空');
+            }
+            
+            // 显示验证结果
+            if (errors.length === 0) {
+                showAlert('success', '✅ 表单验证通过！所有字段都有效');
+                showResult('validationResult', '✅ 验证结果: 所有字段都有效\n\n' + JSON.stringify(getFormData(), null, 2));
+            } else {
+                showAlert('error', '❌ 表单验证失败');
+                showResult('validationResult', '❌ 验证错误:\n' + errors.join('\n'));
+            }
+        }
+
+        function getFormData() {
+            return {
+                '文本输入': document.getElementById('textInput').value,
+                '邮箱': document.getElementById('emailInput').value,
+                '数字': document.getElementById('numberInput').value,
+                '日期': document.getElementById('dateInput').value,
+                '时间': document.getElementById('deliveryTime').value,
+                '颜色': document.getElementById('colorInput').value,
+                '范围': document.getElementById('rangeInput').value,
+                '下拉选择': document.getElementById('selectInput').value,
+                'Pizza Size': document.querySelector('input[name="pizzaSize"]:checked')?.value || '未选择',
+                'Pizza Toppings': Array.from(document.querySelectorAll('input[name="toppings"]:checked')).map(cb => cb.value),
+                '配送说明': document.getElementById('deliveryInstructions').value
+            };
+        }
+
+        function testFormSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(document.getElementById('testForm'));
+            const data = Object.fromEntries(formData);
+            showResult('formResult', '表单提交数据:\n' + JSON.stringify(data, null, 2));
+            showAlert('success', '✅ 表单已提交');
+        }
+
+        // 弹窗处理
+        function showAlertDialog() {
+            alert('这是一个Alert弹窗');
+            showAlert('success', '✅ Alert弹窗已处理');
+        }
+
+        function showConfirmDialog() {
+            const result = confirm('这是一个Confirm弹窗，请选择');
+            showAlert('success', '✅ Confirm弹窗已处理，结果: ' + result);
+        }
+
+        function showPromptDialog() {
+            const result = prompt('这是一个Prompt弹窗，请输入内容');
+            showAlert('success', '✅ Prompt弹窗已处理，输入: ' + result);
+        }
+
+        function showCustomModal() {
+            document.getElementById('customModal').classList.add('show');
+        }
+
+        function closeCustomModal() {
+            document.getElementById('customModal').classList.remove('show');
+        }
+
+        function confirmModal() {
+            const input = document.getElementById('modalInput').value;
+            showAlert('success', '✅ 自定义弹窗已确认，输入: ' + input);
+            closeCustomModal();
+        }
+
+        // iframe操作
+        function testIframeInteraction() {
+            showAlert('success', '✅ iframe交互测试完成');
+            showResult('iframeResult', 'iframe交互:\n- 访问iframe内的元素\n- 在iframe中执行操作\n- 获取iframe内的数据');
+        }
+
+        // 图片操作
+        function selectImage(img) {
+            const selectedDiv = document.getElementById('selectedImage');
+            selectedDiv.innerHTML = '<img src="' + img.src + '" style="max-width: 100%; max-height: 100%; object-fit: contain;">';
+            showAlert('success', '✅ 图片已选中: ' + img.alt);
+        }
+
+        function testImageClick() {
+            showAlert('success', '✅ 图片点击测试完成');
+        }
+
+        function testImageHover() {
+            showAlert('info', 'ℹ️ 图片悬停测试完成');
+        }
+
+        // 高级操作
+        function testScroll() {
+            const amount = parseInt(document.getElementById('scrollAmount').value);
+            window.scrollBy(0, amount);
+            showAlert('success', '✅ 已向下滚动 ' + amount + 'px');
+        }
+
+        function testScrollUp() {
+            const amount = parseInt(document.getElementById('scrollAmount').value);
+            window.scrollBy(0, -amount);
+            showAlert('success', '✅ 已向上滚动 ' + amount + 'px');
+        }
+
+        function testScrollToTop() {
+            window.scrollTo(0, 0);
+            showAlert('success', '✅ 已滚动到顶部');
+        }
+
+        function testScrollToBottom() {
+            window.scrollTo(0, document.body.scrollHeight);
+            showAlert('success', '✅ 已滚动到底部');
+        }
+
+        function testExecuteJS() {
+            try {
+                const code = document.getElementById('jsCode').value;
+                const result = eval(code);
+                showResult('advancedResult', '执行结果:\n' + JSON.stringify(result, null, 2));
+                showAlert('success', '✅ JavaScript已执行');
+            } catch (e) {
+                showAlert('error', '❌ 执行出错: ' + e.message);
+            }
+        }
+
+        function testGetPageInfo() {
+            const info = {
+                '页面标题': document.title,
+                '页面URL': window.location.href,
+                '页面宽度': window.innerWidth,
+                '页面高度': window.innerHeight,
+                '滚动位置': window.scrollY,
+                '文档元素数': document.querySelectorAll('*').length,
+                '用户代理': navigator.userAgent.substring(0, 50) + '...'
+            };
+            document.getElementById('pageInfo').textContent = JSON.stringify(info, null, 2);
+            showAlert('success', '✅ 页面信息已获取');
+        }
+
+        function testScreenshot() {
+            showAlert('success', '✅ 截图已生成');
+        }
+
+        // 辅助函数
+        function showAlert(type, message) {
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-' + type;
+            alert.textContent = message;
+            alert.style.display = 'block';
+            
+            const container = document.querySelector('.section');
+            container.appendChild(alert);
+            
+            setTimeout(() => alert.remove(), 3000);
+        }
+
+        function showResult(elementId, content) {
+            const element = document.getElementById(elementId);
+            element.textContent = content;
+            element.style.display = 'block';
+        }
+
+        // 键盘操作
+        function testTypeText() {
+            const input = document.getElementById('keyboardInput');
+            input.focus();
+            input.value = '自动输入的文本';
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            showAlert('success', '✅ 文本已输入');
+            showResult('keyboardResult', '输入的文本: ' + input.value);
+        }
+
+        function testPressEnter() {
+            const input = document.getElementById('keyboardInput');
+            const event = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true });
+            input.dispatchEvent(event);
+            showAlert('success', '✅ Enter 键已按下');
+            showResult('keyboardResult', '✅ Enter 键事件已触发');
+        }
+
+        function testPressTab() {
+            const event = new KeyboardEvent('keydown', { key: 'Tab', bubbles: true });
+            document.activeElement.dispatchEvent(event);
+            showAlert('success', '✅ Tab 键已按下');
+            showResult('keyboardResult', '✅ Tab 键事件已触发');
+        }
+
+        function testPressEscape() {
+            const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true });
+            document.dispatchEvent(event);
+            showAlert('success', '✅ Escape 键已按下');
+            showResult('keyboardResult', '✅ Escape 键事件已触发');
+        }
+
+        function testCtrlC() {
+            const input = document.getElementById('keyboardInput');
+            input.focus();
+            input.select();
+            const event = new KeyboardEvent('keydown', { key: 'c', ctrlKey: true, bubbles: true });
+            input.dispatchEvent(event);
+            showAlert('success', '✅ Ctrl+C 已执行');
+            showResult('keyboardResult', '✅ Ctrl+C 复制事件已触发');
+        }
+
+        function testCtrlV() {
+            const input = document.getElementById('keyboardInput');
+            input.focus();
+            const event = new KeyboardEvent('keydown', { key: 'v', ctrlKey: true, bubbles: true });
+            input.dispatchEvent(event);
+            showAlert('success', '✅ Ctrl+V 已执行');
+            showResult('keyboardResult', '✅ Ctrl+V 粘贴事件已触发');
+        }
+
+        function testCtrlA() {
+            const input = document.getElementById('keyboardInput');
+            input.focus();
+            const event = new KeyboardEvent('keydown', { key: 'a', ctrlKey: true, bubbles: true });
+            input.dispatchEvent(event);
+            input.select();
+            showAlert('success', '✅ Ctrl+A 已执行');
+            showResult('keyboardResult', '✅ Ctrl+A 全选事件已触发');
+        }
+
+        function testShiftTab() {
+            const event = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true });
+            document.activeElement.dispatchEvent(event);
+            showAlert('success', '✅ Shift+Tab 已执行');
+            showResult('keyboardResult', '✅ Shift+Tab 反向导航事件已触发');
+        }
+
+        // 鼠标操作
+        function testMouseMove() {
+            const area = document.getElementById('mouseTestArea');
+            const event = new MouseEvent('mousemove', { bubbles: true, clientX: 100, clientY: 100 });
+            area.dispatchEvent(event);
+            showAlert('success', '✅ 鼠标移动已执行');
+            showResult('mouseResult', '✅ 鼠标移动事件已触发\n坐标: (100, 100)');
+        }
+
+        function testMouseDown() {
+            const area = document.getElementById('mouseTestArea');
+            const event = new MouseEvent('mousedown', { bubbles: true, button: 0 });
+            area.dispatchEvent(event);
+            showAlert('success', '✅ 鼠标按下已执行');
+            showResult('mouseResult', '✅ 鼠标按下事件已触发');
+        }
+
+        function testMouseUp() {
+            const area = document.getElementById('mouseTestArea');
+            const event = new MouseEvent('mouseup', { bubbles: true, button: 0 });
+            area.dispatchEvent(event);
+            showAlert('success', '✅ 鼠标释放已执行');
+            showResult('mouseResult', '✅ 鼠标释放事件已触发');
+        }
+
+        function testMouseWheel() {
+            const area = document.getElementById('mouseTestArea');
+            const event = new WheelEvent('wheel', { bubbles: true, deltaY: 100 });
+            area.dispatchEvent(event);
+            showAlert('success', '✅ 鼠标滚轮已执行');
+            showResult('mouseResult', '✅ 鼠标滚轮事件已触发\n滚动距离: 100');
+        }
+
+        function testDragDrop() {
+            const area = document.getElementById('mouseTestArea');
+            const dragStartEvent = new DragEvent('dragstart', { bubbles: true });
+            const dragEndEvent = new DragEvent('dragend', { bubbles: true });
+            area.dispatchEvent(dragStartEvent);
+            area.dispatchEvent(dragEndEvent);
+            showAlert('success', '✅ 拖拽操作已执行');
+            showResult('mouseResult', '✅ 拖拽操作事件已触发');
+        }
+
+        function testLongPress() {
+            const area = document.getElementById('mouseTestArea');
+            const mouseDownEvent = new MouseEvent('mousedown', { bubbles: true });
+            area.dispatchEvent(mouseDownEvent);
+            setTimeout(() => {
+                const mouseUpEvent = new MouseEvent('mouseup', { bubbles: true });
+                area.dispatchEvent(mouseUpEvent);
+            }, 1000);
+            showAlert('success', '✅ 长按操作已执行 (1秒)');
+            showResult('mouseResult', '✅ 长按操作事件已触发\n持续时间: 1000ms');
+        }
+
+        // 文本操作
+        function testGetText() {
+            const input = document.getElementById('textOperationInput');
+            const text = input.value;
+            showAlert('success', '✅ 文本已获取');
+            showResult('textResult', '获取的文本:\n' + text);
+        }
+
+        function testSetText() {
+            const input = document.getElementById('textOperationInput');
+            input.value = '新设置的文本内容';
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            showAlert('success', '✅ 文本已设置');
+            showResult('textResult', '设置的文本:\n' + input.value);
+        }
+
+        function testClearText() {
+            const input = document.getElementById('textOperationInput');
+            input.value = '';
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            showAlert('success', '✅ 文本已清空');
+            showResult('textResult', '✅ 文本已清空');
+        }
+
+        function testSelectText() {
+            const input = document.getElementById('textOperationInput');
+            input.focus();
+            input.select();
+            showAlert('success', '✅ 文本已选中');
+            showResult('textResult', '✅ 文本已选中\n选中内容: ' + input.value);
+        }
+
+        function testCopyText() {
+            const input = document.getElementById('textOperationInput');
+            input.focus();
+            input.select();
+            document.execCommand('copy');
+            showAlert('success', '✅ 文本已复制');
+            showResult('textResult', '✅ 文本已复制到剪贴板\n内容: ' + input.value);
+        }
+
+        function testAppendText() {
+            const input = document.getElementById('textOperationInput');
+            input.value += ' (追加的文本)';
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            showAlert('success', '✅ 文本已追加');
+            showResult('textResult', '追加后的文本:\n' + input.value);
+        }
+
+        function testReplaceText() {
+            const input = document.getElementById('textOperationInput');
+            input.value = input.value.replace('示例', '替换后的');
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            showAlert('success', '✅ 文本已替换');
+            showResult('textResult', '替换后的文本:\n' + input.value);
+        }
+    </script>
+</body>
+</html>

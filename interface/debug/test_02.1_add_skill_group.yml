@@ -1,0 +1,32 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 添加-技能组
+#  sleep: 1
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/basic-public/group/addGroupInfoConfirm
+
+    data:
+      groupName: ${fake.company()}
+      viewFlag: 0
+      allVisibleFlag: 1
+      departId: ''
+      groupType: 1
+
+
+  extract:
+    get_groupId: $..groupId
+    get_groupName: $..groupName
+
+  export:
+    - get_groupId
+    - get_groupName
+
+
+  validate:
+    - eq: [$..retCode,'000000']

@@ -1,0 +1,27 @@
+config:
+  name: 在线_v6
+  parameters: #卡迪尔 参数
+    y: [ "1", "2","3","4","5" ]
+
+
+teststeps:
+
+-
+  name: 用户完成评价
+  request:
+    method: POST
+    url: /text/chat-web/user/comment.action
+    data:
+      visitorId: ${get_uid}  # 是uid
+      cid: ${get_cid}
+      solved: -1
+      commentType: 0
+      remark: ${fake.text(max_nb_chars=100)}
+      tag: ''
+      score: ${y}   #${fake.random_int(min=1, max=5} 
+      print: "输出->${y}"
+      type: 1
+      scoreFlag: 0
+      scoreExplain: 非常满意，完美
+  validate:
+    - eq: [status_code, 200]

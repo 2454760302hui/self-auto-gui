@@ -1,0 +1,15 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 已创建工单标识-开启
+  request:
+    method: POST
+    url: /text/chat-kwb/admin/modifyAdminConfig.action
+    data:
+      ticketFlag: 1
+      tid: H1hz6lTjZ2u7SGkPrC88N67X0o6hPSKwPvoa4Nb30rJQ8L+3Db1D3YY4I+A7049D
+
+  validate:
+    - eq: [ status_code,200 ]

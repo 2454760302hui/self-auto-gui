@@ -1,0 +1,21 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 客户分配策略-删除智能路由
+  request:
+    method: POST
+    url: /text/chat-set/smartRoute/deleteSmartRoute/4
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      srId: ${get_srId}
+  validate:
+    - eq: [ $..retMsg, '操作成功']
+#    - eq: [ $..keyword, '${del_keyWord}']
+#  deciId": "83d4039186d8452b88a59873bfcf2084 == 客服列表 对应的是serviceId=客服列表
+

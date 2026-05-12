@@ -1,0 +1,37 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 获取移动渠道留言id
+  request:
+    method: get
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/chat/config/getTicketToMsgConfig/4?leaveType=1&channelType=1&channelFlag=1
+
+    data:
+      leaveType: 1
+      channelType: 1 #表示桌面，1表示移动
+      channelFlag: 1
+  extract:
+    get_leave_mobile_id: $..id
+#    get_ticketDeployName: $..ticketDeployName
+  export:
+    - get_leave_mobile_id
+#    - get_ticketDeployName
+
+  validate:
+
+    - eq: [ $..retCode,'000000' ]
+    - eq: [$..id,'${get_leave_mobile_id}' ]
+#    - eq: [ $..ticketDeployId, '${get_ticketDeployId}']
+#    - eq: [ $..ticketDeployName,'默认插件' ]
+#    - eq: [ $.items.0.fieldName,"客户标签"]
+#    - eq: [ $..iframeId,'${get_iframeId}']
+
+
+

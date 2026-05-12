@@ -1,0 +1,29 @@
+config:
+  name: 在线_v6
+#  parameters: #卡迪尔 参数
+#    x: "${get_ksid}"
+
+
+teststeps:
+-
+  name: 获取schemd_id
+  request:
+    method: GET
+    url: /text/chat-set/reception/getSchemeList?status=2&name=&page=1&pageSize=999999
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      status: '2'
+      name: ''
+      page: '1'
+      pageSize: 999999
+  extract:
+    get_scheme_id_1: $.items.0.id
+
+  export:
+    - get_scheme_id_1
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']
+#    - eq: [ $..keyword, '${del_keyWord}']
+

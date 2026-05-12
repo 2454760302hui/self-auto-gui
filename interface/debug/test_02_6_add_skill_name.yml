@@ -1,0 +1,31 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 添加技能组
+#  skip: 结合其他场景综合执行-先以console-技能组-客服上线为主
+  request:
+    method: POST
+    url: /text/basic-public/group/addGroupInfoConfirm
+    headers:
+      temp-id: ${get_temp_id}
+    data:
+      groupName: ${fake.text(max_nb_chars=100)}
+      viewFlag: 0
+      allVisibleFlag: 1
+      departId: 
+      groupType: 1
+
+
+  extract:
+    get_groupName: $.item.groupName
+    get_groupId: $.item.groupId
+
+  export:
+    - get_groupName
+    - get_groupId
+
+
+  validate:
+    - eq: [ $..retMsg, '操作成功']

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "files": {
+    "ignore": [
+      "node_modules/**",
+      "**/midscene_run",
+      ".nx",
+      "**/dist",
+      "test-data/**",
+      "dist",
+      "__ai_responses__",
+      "ai-data/**",
+      "**/doc_build",
+      "*-dump.json",
+      "test-results/**",
+      "script_get_all_texts.tmp.js",
+      "**/playwright-report/**",
+      "**/todo-report.spec.ts-snapshots/**",
+      "**/visualizer/scripts/fixture/*",
+      "**/unpacked-extension/*"
+    ]
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "useKeyWithClickEvents": "off",
+        "useValidAnchor": "off"
+      },
+      "style": {
+        "noParameterAssign": "off",
+        "noNonNullAssertion": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      },
+      "complexity": {
+        "noForEach": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off",
+        "noImplicitAnyLet": "off"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "include": ["*.ts", "*.d.ts", "*.tsx"],
+      "ignore": [".nx"],
+      "linter": {
+        "rules": {}
+      }
+    }
+  ],
+  "vcs": {
+    "defaultBranch": "main"
+  },
+  "formatter": {
+    "lineWidth": 80,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf"
+  }
+}

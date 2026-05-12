@@ -1,0 +1,31 @@
+config:
+  name: 在线_v6
+
+teststeps:
+-
+  name: 删除-技能组
+#  skip: 测试其他流程先跳过
+  request:
+    method: POST
+    headers:
+      temp-id: ${get_temp_id}
+    url: /text/chat-set/deleteGroupInfo/4
+
+    data:
+      groupId: ${get_groupId}
+
+
+
+  extract:
+    get_groupId: $..groupId
+    get_groupName: $..groupName
+
+  export:
+    - get_groupId
+    - groupName
+
+
+  validate:
+
+    - eq: [$..retCode,'000000']
+    - eq: [status_code, 200]
